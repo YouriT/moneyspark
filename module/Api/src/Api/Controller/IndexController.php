@@ -7,15 +7,17 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application\Controller;
+namespace Api\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
+use Extend\Action;
 
-class IndexController extends AbstractActionController
+class IndexController extends Action
 {
     public function indexAction()
     {
-        return new ViewModel();
+    	$arr = array('test'=>'test');
+        return new JsonModel($arr);
     }
 }

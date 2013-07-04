@@ -7,12 +7,13 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application\Controller;
+namespace Front\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Extend\Action;
 
-class IndexController extends AbstractActionController
+class IndexController extends Action
 {
     public function indexAction()
     {

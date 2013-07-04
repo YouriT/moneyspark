@@ -16,7 +16,8 @@
         "psr-0": {
             "Front": "module/Front/src",
             "Api": "module/Api/src",
-            "Account": "module/Account/src"
+            "Account": "module/Account/src",
+            "Extend": "module/Extend/src"
         }
     }
 }

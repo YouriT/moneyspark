@@ -16,7 +16,7 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
+                        'controller' => 'front_index',
                         'action'     => 'index',
                     ),
                 ),
@@ -70,7 +70,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'front_index' => 'Front\Controller\IndexController'
         ),
     ),
     'view_manager' => array(

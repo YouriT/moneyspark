@@ -7,10 +7,11 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application;
+namespace Api;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\Http\Hostname;
 
 class Module
 {
@@ -20,6 +21,13 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+//         $route = Hostname::factory(array(
+//         		'route' => 'api.moneyspark',
+//         		'defaults' => array(
+//         				'type' => 'json',
+//         		),
+//         ));
+//         $e->getRouter()->addRoute('api', $route);
     }
 
     public function getConfig()
