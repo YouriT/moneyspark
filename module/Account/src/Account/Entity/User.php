@@ -96,7 +96,7 @@ class User
 	private $authTokens;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Account\Entity\Investments", mappedBy="user")
+	 * @ORM\OneToMany(targetEntity="Account\Entity\Investment", mappedBy="user")
 	 */
 	private $investments;
 
