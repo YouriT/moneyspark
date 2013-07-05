@@ -62,7 +62,12 @@ return array(
         'invokables' => array(
             'Api\Index' => 'Api\Controller\IndexController',
         	'Api\Error' => 'Api\Controller\ErrorController',
-        	'Api\Auth' => 'Api\Controller\AuthController'
+        	'Api\Auth' => 'Api\Controller\AuthController',
+        	'Api\Investment' => 'Api\Controller\InvestmentController',
+        	'Api\Lockbox' => 'Api\Controller\LockboxController',
+        	'Api\Product' => 'Api\Controller\ProductController',
+        	'Api\Profile' => 'Api\Controller\ProfileController'
+        		
         ),
     ),
 	'controller_plugins' => array(

@@ -383,4 +383,33 @@ class Product
 	
 	    return $this;
 	}
+	
+	
+	/**
+	 * @param String $locale
+	 * @return ProductTranslate
+	 */
+	public function getTranslation($locale){
+		$translations = $this->getTranslations();
+		$ex = explode('_', $locale);
+		$langUser = $ex[0];
+		$def = null;
+		$best = null;
+		/* @var $t ProductTranslate */
+		foreach ($translations as $t){
+			$ex = explode('_', $t->getLocale());
+			$lang = $ex[0];
+			if($t->isDefault())
+				$def = $t;
+			if($lang == $langUser)
+				$best = $t;
+		}
+		$best == null ? $r = $def : $r = $best;
+		return $r;
+	}
+	
+	public function toArray(){
+		return get_object_vars($this);
+	}
+	
 }

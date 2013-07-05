@@ -2,6 +2,8 @@
 
 namespace Account\Model;
 
+use Account\Entity\Product;
+
 use Account\Entity\Investment;
 
 use Account\Entity\User;
@@ -46,6 +48,20 @@ class InvestmentRepository extends EntityRepository
 					setParameter("ended", false)->setParameter("idUser", $u->getId());
 		return $q->getQuery()->getResult();
 	}
+	
+	/**
+	 * Get Current Invested Amount for a product
+	 * @return double
+	 */
+	public function getSumInvestedAmounts(Product $p)
+	{
+		$q = $this->createQueryBuilder("I")->
+					select("SUM(I.amount)")->
+					where("I.product = :idProduct")->
+					setParameter("idProduct", $p->getId());
+		return $q->getQuery()->getSingleScalarResult();
+	}
+	
 	
 	
 	

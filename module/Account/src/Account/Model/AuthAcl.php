@@ -39,9 +39,19 @@ class AuthAcl extends AbstractPlugin
         $acl->addResource(new Resource('api_error'));
         $acl->addResource(new Resource('api_auth'));
         $acl->addResource(new Resource('api_index'));
+        $acl->addResource(new Resource('api_cyril'));
+        $acl->addResource(new Resource('api_investment'));
+        $acl->addResource(new Resource('api_lockbox'));
+        $acl->addResource(new Resource('api_product'));
+        $acl->addResource(new Resource('api_profile'));
         
         $acl->allow(User::USER_ROLE_GUEST, 'api_error', null);
         $acl->allow(User::USER_ROLE_GUEST, 'api_auth', null);
+        $acl->allow(User::USER_ROLE_GUEST, 'api_cyril', null);
+        $acl->allow(User::USER_ROLE_GUEST, 'api_investment', null);
+        $acl->allow(User::USER_ROLE_GUEST, 'api_lockbox', null);
+        $acl->allow(User::USER_ROLE_GUEST, 'api_product', null);
+        $acl->allow(User::USER_ROLE_GUEST, 'api_profile', null);
         
 //         $acl->allow('anonymous', 'Login', 'view');
          

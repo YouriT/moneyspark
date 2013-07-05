@@ -138,4 +138,9 @@ class ProductTranslate
 	    $this->default = $default ? true : false;
 	    return $this;
 	}
+	
+	public function toArray(){
+		return get_object_vars($this);
+	}
+	
 }
