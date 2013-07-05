@@ -118,10 +118,12 @@ class User
 	    return $this->id;
 	}
 	
-	
+	/**
+	 *
+	 * @return User
+	 */
 	public function setId($id) {
 	    $this->id = $id;
-	
 	    return $this;
 	}
 
@@ -130,7 +132,10 @@ class User
 	    return $this->clientNumber;
 	}
 	
-	
+	/**
+	 *
+	 * @return User
+	 */
 	public function setClientNumber($clientNumber) {
 	    $this->clientNumber = $clientNumber;
 	
@@ -142,10 +147,12 @@ class User
 	    return $this->role;
 	}
 	
-	
+	/**
+	 *
+	 * @return User
+	 */
 	public function setRole($role) {
 	    $this->role = $role;
-	
 	    return $this;
 	}
 
@@ -154,10 +161,12 @@ class User
 	    return $this->firstName;
 	}
 	
-	
+	/**
+	 *
+	 * @return User
+	 */	
 	public function setFirstName($firstName) {
 	    $this->firstName = $firstName;
-	
 	    return $this;
 	}
 
@@ -166,10 +175,12 @@ class User
 	    return $this->lastName;
 	}
 	
-	
+	/**
+	 *
+	 * @return User
+	 */	
 	public function setLastName($lastName) {
 	    $this->lastName = $lastName;
-	
 	    return $this;
 	}
 
@@ -178,10 +189,12 @@ class User
 	    return $this->phone;
 	}
 	
-	
+	/**
+	 *
+	 * @return User
+	 */	
 	public function setPhone($phone) {
 	    $this->phone = $phone;
-	
 	    return $this;
 	}
 
@@ -191,7 +204,10 @@ class User
 	    return $this->email;
 	}
 	
-	
+	/**
+	 *
+	 * @return User
+	 */
 	public function setEmail($email) {
 	    $this->email = $email;
 	
@@ -203,7 +219,10 @@ class User
 	    return $this->password;
 	}
 	
-	
+	/**
+	 *
+	 * @return User
+	 */
 	public function setPassword($password) {
 	    $this->password = $password;
 	
@@ -219,10 +238,10 @@ class User
 	
 	/**
 	 * @param \DateTime $registerDate
+	 * @return User
 	 */
 	public function setRegisterDate(\DateTime $registerDate) {
 	    $this->registerDate = $registerDate;
-	
 	    return $this;
 	}
 
@@ -231,10 +250,12 @@ class User
 	    return $this->verified;
 	}
 	
-	
+	/**
+	 *
+	 * @return User
+	 */
 	public function setVerified($verified) {
 	    $this->verified = $verified ? true : false;
-	
 	    return $this;
 	}
 
@@ -243,10 +264,12 @@ class User
 	    return $this->validationCode;
 	}
 	
-	
+	/**
+	 *
+	 * @return User
+	 */
 	public function setValidationCode($validationCode) {
 	    $this->validationCode = $validationCode;
-	
 	    return $this;
 	}
 
@@ -259,10 +282,10 @@ class User
 	
 	/**
 	 * @param \Date $newbirthDate
+	 * @return User
 	 */
 	public function setBirthDate(\Date $birthDate) {
 	    $this->birthDate = $birthDate;
-	
 	    return $this;
 	}
 
@@ -271,10 +294,12 @@ class User
 	    return $this->locale;
 	}
 	
-	
+	/**
+	 *
+	 * @return User
+	 */
 	public function setLocale($locale) {
 	    $this->locale = $locale;
-	
 	    return $this;
 	}
 
@@ -283,10 +308,12 @@ class User
 	    return $this->lockboxAmount;
 	}
 	
-	
+	/**
+	 *
+	 * @return User
+	 */
 	public function setLockboxAmount($lockboxAmount) {
 	    $this->lockboxAmount = $lockboxAmount;
-	
 	    return $this;
 	}
 
@@ -299,6 +326,7 @@ class User
 	
 	/**
 	 * @param BankAccount
+	 * @return User
 	 */
 	public function addBankAccount(BankAccount $bankAccount) {
 	    $this->bankAccounts->add($bankAccount);
@@ -315,10 +343,10 @@ class User
 	
 	/**
 	 * @param AuthToken
+	 * @return User
 	 */
 	public function addAuthToken(AuthToken $authToken) {
 	    $this->authTokens->add($authToken);
-	
 	    return $this;
 	}
 
@@ -331,10 +359,31 @@ class User
 	
 	/**
 	 * @param Investment
+	 * @return User
 	 */
 	public function setInvestments(Investment $investment) {
 	    $this->investments->add($investment);
-	
 	    return $this;
 	}
-}
+
+	/**
+	 * 
+	 * @return ArrayCollection
+	 */
+	public function getBankHistory()
+	{
+	    return $this->bankHistory;
+	}
+
+	/**
+	 * 
+	 * @param $bankHistory
+	 * @return User
+	 */
+	public function addBankHistory(BankAccountHistory $bankHistory)
+	{
+		$this->bankHistory->add($bankHistory);
+	}
+	    
+	    
+} 

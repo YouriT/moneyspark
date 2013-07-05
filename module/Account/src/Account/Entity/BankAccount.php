@@ -51,7 +51,10 @@ class BankAccount
 	    return $this->id;
 	}
 	
-	
+	/**
+	 * 
+	 * @return BankAccount
+	 */
 	public function setId($id) {
 	    $this->id = $id;
 	
@@ -67,6 +70,7 @@ class BankAccount
 	
 	/**
 	 * @param User
+	 * @return BankAccount
 	 */
 	public function setUser(User $user) {
 	    $this->user = $user;
@@ -79,7 +83,10 @@ class BankAccount
 	    return $this->iban;
 	}
 	
-	
+	/**
+	 * 
+	 * @return BankAccount
+	 */
 	public function setIban($iban) {
 	    $this->iban = $iban;
 	
@@ -91,7 +98,10 @@ class BankAccount
 	    return $this->verified;
 	}
 	
-	
+	/**
+	 *
+	 * @return BankAccount
+	 */
 	public function setVerified($verified) {
 	    $this->verified = $verified ? true : false;
 	
@@ -103,7 +113,10 @@ class BankAccount
 	    return $this->deleted;
 	}
 	
-	
+	/**
+	 *
+	 * @return BankAccount
+	 */
 	public function setDeleted($deleted) {
 	    $this->deleted = $deleted ? true : false;
 	
@@ -117,7 +130,10 @@ class BankAccount
 	    return $this->history;
 	}
 	
-	
+	/**
+	 *
+	 * @return BankAccount
+	 */
 	public function addHistory(BankAccountHistory $history) {
 	    $this->history->add($history);
 	

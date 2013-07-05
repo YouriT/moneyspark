@@ -20,7 +20,7 @@ class BankAccountHistory
 	private $id;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Account\Entity\User", inversedBy="bankAccounts")
+	 * @ORM\ManyToOne(targetEntity="Account\Entity\User", inversedBy="bankHistory")
 	 */
 	private $user;
 
@@ -54,7 +54,9 @@ class BankAccountHistory
 	    return $this->id;
 	}
 	
-	
+	/**
+	 * @return BankAccountHistory
+	 */
 	public function setId($id) {
 	    $this->id = $id;
 	
@@ -70,6 +72,7 @@ class BankAccountHistory
 	
 	/**
 	 * @param User
+	 * @return BankAccountHistory
 	 */
 	public function setUser(User $user) {
 	    $this->user = $user;
@@ -86,6 +89,7 @@ class BankAccountHistory
 	
 	/**
 	 * @param \DateTime
+	 * @return BankAccountHistory
 	 */
 	public function setDate(\DateTime $date) {
 	    $this->date = $date;
@@ -98,7 +102,9 @@ class BankAccountHistory
 	    return $this->action;
 	}
 	
-	
+	/**
+	 * @return BankAccountHistory
+	 */
 	public function setAction($action) {
 	    $this->action = $action;
 	
@@ -110,7 +116,9 @@ class BankAccountHistory
 	    return $this->amount;
 	}
 	
-	
+	/**
+	 * @return BankAccountHistory
+	 */	
 	public function setAmount($amount) {
 	    $this->amount = $amount;
 	
@@ -142,6 +150,7 @@ class BankAccountHistory
 	
 	/**
 	 * @param Investment $newinvestment
+	 * @return BankAccountHistory
 	 */
 	public function setInvestment(Investment $investment) {
 	    $this->investment = $investment;

@@ -17,7 +17,7 @@ class AuthToken
 	private $id;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Account\Entity\User", inversedBy="bankAccounts")
+	 * @ORM\ManyToOne(targetEntity="Account\Entity\User", inversedBy="authTokens")
 	 */
 	private $user;
 
@@ -41,7 +41,10 @@ class AuthToken
 	    return $this->id;
 	}
 	
-	
+	/**
+	 *
+	 * @return AuthToken
+	 */
 	public function setId($id) {
 	    $this->id = $id;
 	
@@ -57,10 +60,10 @@ class AuthToken
 	
 	/**
 	 * @param User
+	 * @return AuthToken
 	 */
 	public function setUser(User $user) {
 	    $this->user = $user;
-	
 	    return $this;
 	}
 
@@ -73,10 +76,10 @@ class AuthToken
 	
 	/**
 	 * @param \DateTime
+	 * @return AuthToken
 	 */
 	public function setDate(\DateTime $date) {
 	    $this->date = $date;
-	
 	    return $this;
 	}
 
@@ -85,7 +88,10 @@ class AuthToken
 	    return $this->token;
 	}
 	
-	
+	/**
+	 * 
+	 * @return AuthToken
+	 */
 	public function setToken($token) {
 	    $this->token = $token;
 	
@@ -97,7 +103,10 @@ class AuthToken
 	    return $this->valid;
 	}
 	
-	
+	/**
+	 *
+	 * @return AuthToken
+	 */
 	public function setValid($valid) {
 	    $this->valid = $valid ? true : false;
 	
