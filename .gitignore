@@ -7,3 +7,4 @@ nbproject
 .project
 .settings
 composer.lock
+module/Api/src/Api/Controller/CyrilController.php

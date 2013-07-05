@@ -15,6 +15,9 @@ class Action extends AbstractActionController
 	 */
 	protected $identity;
 
+	/**
+	 * @return Doctrine\ORM\EntityManager
+	 */
 	public function getEntityManager()
 	{
 		if (null === $this->em) {
