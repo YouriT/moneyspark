@@ -10,29 +10,38 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {	
+	const USER_ROLE_BANNED = 0;
+	const USER_ROLE_NORMAL = 1;
+	const USER_ROLE_ADMIN  = 2;
+	
 	/**
 	 * @ORM\Id @ORM\Column(type="integer")
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
 	private $id;
-	
-	/**
-	 * @ORM\Column(type="boolean", nullable=true)
-	 */
-	private $locked = false;
-	
-	/**
-	 * @ORM\Column(type="string")
-	 */
-	private $role = 'user';
 
 	/**
 	 * @ORM\Column(type="string")
 	 */
-	private $fullName;
+	private $clientNumber;
+	
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	private $role;
 
 	/**
-	 * @ORM\Column(type="string", nullable=true)
+	 * @ORM\Column(type="string")
+	 */
+	private $firstName;
+
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	private $lastName;
+
+	/**
+	 * @ORM\Column(type="string")
 	 */
 	private $phone;
 
@@ -42,24 +51,14 @@ class User
 	private $email;
 	
 	/**
-	 * @ORM\Column(type="string", nullable=true)
+	 * @ORM\Column(type="string")
 	 */
 	private $password;
 
 	/**
-	 * @ORM\Column(type="datetime", nullable=true)
+	 * @ORM\Column(type="datetime")
 	 */
 	private $registerDate;
-	
-	/**
-	 * @ORM\Column(type="datetime", nullable=true)
-	 */
-	private $lastLogin;
-
-	/**
-	 * @ORM\Column(type="string", nullable=true)
-	 */
-	private $paymillId;
 
 	/**
 	 * @ORM\Column(type="boolean")
@@ -70,45 +69,272 @@ class User
 	 * @ORM\Column(type="string")
 	 */
 	private $validationCode;
+
+	/**
+	 * @ORM\Column(type="date")
+	 */
+	private $birthDate;
+
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	private $locale;
+
+	/**
+	 * @ORM\Column(type="decimal", precision=10, scale=2)
+	 */
+	private $lockboxAmount = 0.00;
 	
 	/**
-	 * @ORM\Column(type="boolean")
+	 * @ORM\OneToMany(targetEntity="Account\Entity\BankAccount", mappedBy="user")
 	 */
-	private $phoneVerified = false;
+	private $bankAccounts;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Account\Entity\AuthToken", mappedBy="user")
+	 */
+	private $authTokens;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Account\Entity\Investments", mappedBy="user")
+	 */
+	private $investments;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Account\Entity\BankAccountHistory", mappedBy="user")
+	 */
+	private $bankHistory;
+	
+	public function __construct()
+	{
+		$this->bankAccounts = new ArrayCollection();
+		$this->authTokens = new ArrayCollection();
+		$this->investments = new ArrayCollection();
+		$this->bankHistory = new ArrayCollection();
+	}
+
+	
+	public function getId() {
+	    return $this->id;
+	}
+	
+	
+	public function setId($id) {
+	    $this->id = $id;
+	
+	    return $this;
+	}
+
+	
+	public function getClientNumber() {
+	    return $this->clientNumber;
+	}
+	
+	
+	public function setClientNumber($clientNumber) {
+	    $this->clientNumber = $clientNumber;
+	
+	    return $this;
+	}
+
+	
+	public function getRole() {
+	    return $this->role;
+	}
+	
+	
+	public function setRole($role) {
+	    $this->role = $role;
+	
+	    return $this;
+	}
+
+	
+	public function getFirstName() {
+	    return $this->firstName;
+	}
+	
+	
+	public function setFirstName($firstName) {
+	    $this->firstName = $firstName;
+	
+	    return $this;
+	}
+
+	
+	public function getLastName() {
+	    return $this->lastName;
+	}
+	
+	
+	public function setLastName($lastName) {
+	    $this->lastName = $lastName;
+	
+	    return $this;
+	}
+
+	
+	public function getPhone() {
+	    return $this->phone;
+	}
+	
+	
+	public function setPhone($phone) {
+	    $this->phone = $phone;
+	
+	    return $this;
+	}
+
+
+	
+	public function getEmail() {
+	    return $this->email;
+	}
+	
+	
+	public function setEmail($email) {
+	    $this->email = $email;
+	
+	    return $this;
+	}
+
+	
+	public function getPassword() {
+	    return $this->password;
+	}
+	
+	
+	public function setPassword($password) {
+	    $this->password = $password;
+	
+	    return $this;
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getRegisterDate() {
+	    return $this->registerDate;
+	}
 	
 	/**
-	 * @ORM\Column(type="string", nullable=true)
+	 * @param \DateTime $registerDate
 	 */
-	private $companyName;
+	public function setRegisterDate(\DateTime $registerDate) {
+	    $this->registerDate = $registerDate;
+	
+	    return $this;
+	}
+
+	
+	public function isVerified() {
+	    return $this->verified;
+	}
+	
+	
+	public function setVerified($verified) {
+	    $this->verified = $verified ? true : false;
+	
+	    return $this;
+	}
+
+	
+	public function getValidationCode() {
+	    return $this->validationCode;
+	}
+	
+	
+	public function setValidationCode($validationCode) {
+	    $this->validationCode = $validationCode;
+	
+	    return $this;
+	}
+
+	/**
+	 * @return \Date
+	 */
+	public function getBirthDate() {
+	    return $this->birthDate;
+	}
 	
 	/**
-	 * @ORM\Column(type="string", nullable=true)
+	 * @param \Date $newbirthDate
 	 */
-	private $companyAddress;
+	public function setBirthDate(\Date $birthDate) {
+	    $this->birthDate = $birthDate;
+	
+	    return $this;
+	}
+
+	
+	public function getLocale() {
+	    return $this->locale;
+	}
+	
+	
+	public function setLocale($locale) {
+	    $this->locale = $locale;
+	
+	    return $this;
+	}
+
+	
+	public function getLockboxAmount() {
+	    return $this->lockboxAmount;
+	}
+	
+	
+	public function setLockboxAmount($lockboxAmount) {
+	    $this->lockboxAmount = $lockboxAmount;
+	
+	    return $this;
+	}
+
+	/**
+	 * @return ArrayCollection
+	 */
+	public function getBankAccounts() {
+	    return $this->bankAccounts;
+	}
 	
 	/**
-	 * @ORM\Column(type="string", nullable=true)
+	 * @param BankAccount
 	 */
-	private $companyZip;
+	public function addBankAccount(BankAccount $bankAccount) {
+	    $this->bankAccounts->add($bankAccount);
+	
+	    return $this;
+	}
+
+	/**
+	 * @return ArrayCollection
+	 */
+	public function getAuthTokens() {
+	    return $this->authTokens;
+	}
 	
 	/**
-	 * @ORM\Column(type="string", nullable=true)
+	 * @param AuthToken
 	 */
-	private $companyCity;
+	public function addAuthToken(AuthToken $authToken) {
+	    $this->authTokens->add($authToken);
+	
+	    return $this;
+	}
+
+	/**
+	 * @return ArrayCollection
+	 */
+	public function getInvestments() {
+	    return $this->investments;
+	}
 	
 	/**
-	 * @ORM\Column(type="string", nullable=true)
+	 * @param Investment
 	 */
-	private $companyCountry;
+	public function setInvestments(Investment $investment) {
+	    $this->investments->add($investment);
 	
-	/**
-	 * @ORM\Column(type="string", nullable=true)
-	 */
-	private $companyVat;
-	
-	/**
-	 * @ORM\OneToMany(targetEntity="Payment\Entity\Bill", mappedBy="user")
-	 */
-	private $bills;
-	
+	    return $this;
+	}
 }
