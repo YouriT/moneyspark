@@ -10,37 +10,34 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProductTranslate
 {	
-	
-	
 	/**
+	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity="Account\Entity\Product", inversedBy="translations")
 	 */
 	private $product;
 	
 	/**
-	 * @ORM\Column(type="string", nullable=true)
+	 * @ORM\Column(type="string")
 	 */
 	private $title;
 	
 	/**
-	 * @ORM\Column(type="text", nullable=true)
+	 * @ORM\Column(type="text")
 	 */
 	private $description;
 	
 	
 	/**
-	 * @ORM\Column(type="string", nullable=true)
+	 * @ORM\Id
+	 * @ORM\Column(type="string")
 	 */
 	private $locale;
 	
 	
 	/**
-	 * @ORM\Column(type="boolean", nullable=true)
+	 * @ORM\Column(type="boolean")
 	 */
 	private $default = false;
-	
-	
-	
 
 	/**
 	 * 
@@ -76,7 +73,7 @@ class ProductTranslate
 	 * @param String $title
 	 * @return ProductTranslate
 	 */
-	public function setTitle(String $title)
+	public function setTitle($title)
 	{
 	    $this->title = $title;
 	    return $this;
@@ -96,7 +93,7 @@ class ProductTranslate
 	 * @param String $description
 	 * @return ProductTranslate
 	 */
-	public function setDescription(String $description)
+	public function setDescription($description)
 	{
 	    $this->description = $description;
 	    return $this;
@@ -116,7 +113,7 @@ class ProductTranslate
 	 * @param String $locale
 	 * @return ProductTranslate
 	 */
-	public function setLocale(String $locale)
+	public function setLocale($locale)
 	{
 	    $this->locale = $locale;
 	    return $this;
@@ -136,9 +133,9 @@ class ProductTranslate
 	 * @param boolean $default
 	 * @return ProductTranslate
 	 */
-	public function setDefault(boolean $default)
+	public function setDefault($default)
 	{
-	    $this->default = $default;
+	    $this->default = $default ? true : false;
 	    return $this;
 	}
 }

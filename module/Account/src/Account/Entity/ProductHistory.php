@@ -15,6 +15,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProductHistory
 {	
+	/**
+	 * @ORM\Id @ORM\Column(type="integer")
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 */
+	private $id;
 	
 	/**
 	 * @ORM\ManyToOne(targetEntity="Account\Entity\Product", inversedBy="investments")
@@ -23,15 +28,23 @@ class ProductHistory
 	
 	
 	/**
-	 * @ORM\Column(type="datetime", nullable=true)
+	 * @ORM\Column(type="datetime")
 	 */
 	private $date;
 	
 	/**
-	 * @ORM\Column(type="decimal", precision=3, scale=2, nullable=true)
+	 * @ORM\Column(type="decimal", precision=3, scale=2)
 	 */
 	private $currentRate;
 	
+	/**
+	 *
+	 * @return Integer
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
 	/**
 	 * 
@@ -55,7 +68,7 @@ class ProductHistory
 
 	/**
 	 * 
-	 * @return \Date
+	 * @return \DateTime
 	 */
 	public function getDate()
 	{
@@ -64,10 +77,10 @@ class ProductHistory
 
 	/**
 	 * 
-	 * @param \Date $date
+	 * @param \DateTime $date
 	 * @return ProductHistory
 	 */
-	public function setDate(\Date $date)
+	public function setDate(\DateTime $date)
 	{
 	    $this->date = $date;
 	    return $this;
@@ -87,7 +100,7 @@ class ProductHistory
 	 * @param Double $currentRate
 	 * @return ProductHistory
 	 */
-	public function setCurrentRate(Double $currentRate)
+	public function setCurrentRate($currentRate)
 	{
 	    $this->currentRate = $currentRate;
 	    return $this;

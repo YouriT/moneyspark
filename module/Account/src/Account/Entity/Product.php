@@ -38,12 +38,12 @@ class Product
 	private $lossRateExpected = 0;
 
 	/**
-	 * @ORM\Column(type="datetime", nullable=true)
+	 * @ORM\Column(type="datetime")
 	 */
 	private $dateBeginExpected;
 
 	/**
-	 * @ORM\Column(type="datetime", nullable=true)
+	 * @ORM\Column(type="datetime")
 	 */
 	private $dateEndExpected;
 
@@ -63,7 +63,7 @@ class Product
 	private $rentabilityAchieved;
 
 	/**
-	 * @ORM\Column(type="Integer")
+	 * @ORM\Column(type="integer")
 	 */
 	private $maxPeople = 99;
 
@@ -73,17 +73,17 @@ class Product
 	private $hedgefund;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Payment\Entity\ProductTranslate", mappedBy="product")
+	 * @ORM\OneToMany(targetEntity="Account\Entity\ProductTranslate", mappedBy="product")
 	 */
 	private $translations;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Payment\Entity\ProductHistory", mappedBy="history")
+	 * @ORM\OneToMany(targetEntity="Account\Entity\ProductHistory", mappedBy="history")
 	 */
 	private $history;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Payment\Entity\Investment", mappedBy="product")
+	 * @ORM\OneToMany(targetEntity="Account\Entity\Investment", mappedBy="product")
 	 */
 	private $investments;
 
@@ -118,7 +118,7 @@ class Product
 	 * @param $requiredAmount
 	 * @return Product
 	 */
-	public function setRequiredAmount(Double $requiredAmount)
+	public function setRequiredAmount($requiredAmount)
 	{
 		$this->requiredAmount = $requiredAmount;
 		return $this;
@@ -138,7 +138,7 @@ class Product
 	 * @param $profitsRateExpected
 	 * @return Product
 	 */
-	public function setProfitsRateExpected(Double $profitsRateExpected)
+	public function setProfitsRateExpected($profitsRateExpected)
 	{
 		$this->profitsRateExpected = $profitsRateExpected;
 		return $this;
@@ -158,7 +158,7 @@ class Product
 	 * @param $lossRateExpected
 	 * @return Product
 	 */
-	public function setLossRateExpected(Double $lossRateExpected)
+	public function setLossRateExpected($lossRateExpected)
 	{
 		$this->lossRateExpected = $lossRateExpected;
 		return $this;
@@ -166,7 +166,7 @@ class Product
 
 	/**
 	 *
-	 * @return \Date
+	 * @return \DateTime
 	 */
 	public function getDateBeginExpected()
 	{
@@ -177,10 +177,10 @@ class Product
 
 	/**
 	 *
-	 * @param \Date $dateBeginExpected
+	 * @param \DateTime $dateBeginExpected
 	 * @return Product
 	 */
-	public function setDateBeginExpected(\Date $dateBeginExpected)
+	public function setDateBeginExpected(\DateTime $dateBeginExpected)
 	{
 		$this->dateBeginExpected = $dateBeginExpected;
 		return $this;
@@ -188,7 +188,7 @@ class Product
 
 	/**
 	 *
-	 * @return \Date
+	 * @return \DateTime
 	 */
 	public function getDateEndExpected()
 	{
@@ -197,10 +197,10 @@ class Product
 
 	/**
 	 *
-	 * @param \Date $dateEndExpected
+	 * @param \DateTime $dateEndExpected
 	 * @return Product
 	 */
-	public function setDateEndExpected(\Date $dateEndExpected)
+	public function setDateEndExpected(\DateTime $dateEndExpected)
 	{
 		$this->dateEndExpected = $dateEndExpected;
 		return $this;
@@ -208,7 +208,7 @@ class Product
 
 	/**
 	 *
-	 * @return \Date
+	 * @return \DateTime
 	 */
 	public function getDateBeginReal()
 	{
@@ -217,10 +217,10 @@ class Product
 
 	/**
 	 *
-	 * @param \Date $dateBeginReal
+	 * @param \DateTime $dateBeginReal
 	 * @return Product
 	 */
-	public function setDateBeginReal(\Date $dateBeginReal)
+	public function setDateBeginReal(\DateTime $dateBeginReal)
 	{
 		$this->dateBeginReal = $dateBeginReal;
 		return $this;
@@ -228,7 +228,7 @@ class Product
 
 	/**
 	 *
-	 * @return \Date
+	 * @return \DateTime
 	 */
 	public function getDateEndReal()
 	{
@@ -237,10 +237,10 @@ class Product
 
 	/**
 	 *
-	 * @param \Date $dateEndReal
+	 * @param \DateTime $dateEndReal
 	 * @return Product
 	 */
-	public function setDateEndReal(\Date $dateEndReal)
+	public function setDateEndReal(\DateTime $dateEndReal)
 	{
 		$this->dateEndReal = $dateEndReal;
 		return $this;
@@ -260,7 +260,7 @@ class Product
 	 * @param $rentabilityAchieved
 	 * @return Hedgefund
 	 */
-	public function setRentabilityAchieved(Double $rentabilityAchieved)
+	public function setRentabilityAchieved($rentabilityAchieved)
 	{
 		$this->rentabilityAchieved = $rentabilityAchieved;
 		return $this;
@@ -280,7 +280,7 @@ class Product
 	 * @param $maxPeople
 	 * @return Product
 	 */
-	public function setMaxPeople(Integer $maxPeople)
+	public function setMaxPeople($maxPeople)
 	{
 		$this->maxPeople = $maxPeople;
 		return $this;
@@ -308,7 +308,7 @@ class Product
 
 	/**
 	 *
-	 * @return ProductTranslate
+	 * @return ArrayCollection
 	 */
 	public function getTranslations()
 	{
@@ -328,7 +328,7 @@ class Product
 
 	/**
 	 *
-	 * @return ProductHistory
+	 * @return ArrayCollection
 	 */
 	public function getHistory()
 	{
@@ -340,15 +340,15 @@ class Product
 	 * @param $history
 	 * @return Product
 	 */
-	public function setHistory(ProductHistory $history)
+	public function addHistory(ProductHistory $history)
 	{
-		$this->history = $history;
+		$this->history->add($history);
 		return $this;
 	}
 
 	/**
 	 *
-	 * @return Investment
+	 * @return ArrayCollection
 	 */
 	public function getInvestments()
 	{
@@ -360,9 +360,9 @@ class Product
 	 * @param Investment $investments
 	 * @return Product
 	 */
-	public function setInvestments(Investment $investments)
+	public function addInvestment(Investment $investment)
 	{
-		$this->investments = $investments;
+		$this->investments->add($investment);
 		return $this;
 	}
 }

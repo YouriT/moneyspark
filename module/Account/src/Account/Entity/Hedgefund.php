@@ -18,12 +18,12 @@ class Hedgefund
 	private $id;
 	
 	/**
-	 * @ORM\OneToMany(targetEntity="Payment\Entity\Product", mappedBy="hedgefund")
+	 * @ORM\OneToMany(targetEntity="Account\Entity\Product", mappedBy="hedgefund")
 	 */
 	private $products;
 	
 	/**
-	 * @ORM\Column(type="string", nullable=true)
+	 * @ORM\Column(type="string")
 	 */
 	private $title;
 	
@@ -33,7 +33,7 @@ class Hedgefund
 	private $description;
 	
 	/**
-	 * @ORM\Column(type="datetime", nullable=true)
+	 * @ORM\Column(type="datetime")
 	 */
 	private $regDate;
 	
@@ -67,9 +67,9 @@ class Hedgefund
 	 * @param Product $product
 	 * @return Hedgefund
 	 */
-	public function setProduct(Product $product)
+	public function addProduct(Product $product)
 	{
-	    $this->product = $product;
+	    $this->product->add($product);
 	    return $this;
 	}
 
@@ -87,7 +87,7 @@ class Hedgefund
 	 * @param String $title
 	 * @return Hedgefund
 	 */
-	public function setTitle(String $title)
+	public function setTitle($title)
 	{
 	    $this->title = $title;
 	    return $this;
@@ -107,7 +107,7 @@ class Hedgefund
 	 * @param String $description
 	 * @return Hedgefund
 	 */
-	public function setDescription(String $description)
+	public function setDescription($description)
 	{
 	    $this->description = $description;
 	    return $this;
@@ -115,7 +115,7 @@ class Hedgefund
 
 	/**
 	 * 
-	 * @return \Date 
+	 * @return \DateTime
 	 */
 	public function getRegDate()
 	{
@@ -125,9 +125,9 @@ class Hedgefund
 
 	/**
 	 * @return Hedgefund
-	 * @param \Date $regDate
+	 * @param \DateTime $regDate
 	 */
-	public function setRegDate(\Date $regDate)
+	public function setRegDate(\DateTime $regDate)
 	{
 	    $this->regDate = $regDate;
 	    return $this;

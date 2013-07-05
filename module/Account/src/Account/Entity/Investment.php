@@ -10,9 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Investment
 {	
+	/**
+	 * @ORM\Id @ORM\Column(type="integer")
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 */
+	private $id;
 	
 	/**
-	 * @ORM\OneToMany(targetEntity="Payment\Entity\BankAccountHistory", mappedBy="investment")
+	 * @ORM\OneToMany(targetEntity="Account\Entity\BankAccountHistory", mappedBy="investment")
 	 */
 	private $history;
 	
@@ -32,16 +37,14 @@ class Investment
 	private $amount = 0;
 	
 	/**
-	 * @ORM\Column(type="datetime", nullable=true)
+	 * @ORM\Column(type="datetime")
 	 */
 	private $date;
 	
-	
 	/**
-	 * @ORM\Column(type="boolean", nullable=true)
+	 * @ORM\Column(type="boolean")
 	 */
 	private $ended = false;
-	
 	
 	/**
 	 * @ORM\Column(type="decimal", precision=3, scale=2, nullable=true)
@@ -49,20 +52,26 @@ class Investment
 	private $rentabilityAchieved;
 	
 	/**
-	 * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+	 * @ORM\Column(type="decimal", precision=10, scale=2)
 	 */
 	private $fee;
-	
-	
 	
 	public function __construct(){
 		$this->history = new ArrayCollection();
 	}
 	
-
+	/**
+	 *
+	 * @return Integer
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+	
 	/**
 	 * 
-	 * @return BankAccountHistory
+	 * @return ArrayCollection
 	 */
 	public function getHistory()
 	{
@@ -74,9 +83,9 @@ class Investment
 	 * @param BankAccountHistory $history
 	 * @return Investment
 	 */
-	public function setHistory(BankAccountHistory $history)
+	public function addHistory(BankAccountHistory $history)
 	{
-	    $this->history = $history;
+	    $this->history->add($history);
 	    return $this;
 	}
 
@@ -133,7 +142,7 @@ class Investment
 	 * @param $amount
 	 * @return Investment
 	 */
-	public function setAmount(Double $amount)
+	public function setAmount($amount)
 	{
 	    $this->amount = $amount;
 	    return $this;
@@ -141,7 +150,7 @@ class Investment
 
 	/**
 	 * 
-	 * @return \Date
+	 * @return \DateTime
 	 */
 	public function getDate()
 	{
@@ -150,10 +159,10 @@ class Investment
 
 	/**
 	 * 
-	 * @param \Date $date
+	 * @param \DateTime $date
 	 * @return Investment
 	 */
-	public function setDate(\Date $date)
+	public function setDate(\DateTime $date)
 	{
 	    $this->date = $date;
 	    return $this;
@@ -175,7 +184,7 @@ class Investment
 	 */
 	public function setEnded(boolean $ended)
 	{
-	    $this->ended = $ended;
+	    $this->ended = $ended ? true: false;
 	    return $this;
 	}
 
@@ -193,7 +202,7 @@ class Investment
 	 * @param Double $rentabilityAchieved
 	 * @return Investment
 	 */
-	public function setRentabilityAchieved(Double $rentabilityAchieved)
+	public function setRentabilityAchieved($rentabilityAchieved)
 	{
 	    $this->rentabilityAchieved = $rentabilityAchieved;
 	    return $this;
@@ -213,7 +222,7 @@ class Investment
 	 * @param Double $fee
 	 * @return Investment
 	 */
-	public function setFee(Double $fee)
+	public function setFee($fee)
 	{
 	    $this->fee = $fee;
 	    return $this;
