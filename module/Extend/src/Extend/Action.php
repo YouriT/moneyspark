@@ -6,17 +6,17 @@ use Zend\Mvc\Controller\AbstractActionController;
 class Action extends AbstractActionController
 {
 	/**
-	 * @var Doctrine\ORM\EntityManager
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	protected $em;
 	
 	/**
-	 * @var Frontend\Entity\User
+	 * @var \Account\Entity\User
 	 */
 	protected $identity;
 
 	/**
-	 * @return Doctrine\ORM\EntityManager
+	 * @return \Doctrine\ORM\EntityManager
 	 */
 	public function getEntityManager()
 	{

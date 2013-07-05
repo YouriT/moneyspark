@@ -29,7 +29,7 @@ class User
 	/**
 	 * @ORM\Column(type="integer")
 	 */
-	private $role;
+	private $role = self::USER_ROLE_NORMAL;
 
 	/**
 	 * @ORM\Column(type="string")
@@ -275,7 +275,7 @@ class User
 	}
 
 	/**
-	 * @return \Date
+	 * @return \DateTime
 	 */
 	public function getBirthDate() {
 	    return $this->birthDate;
@@ -285,7 +285,7 @@ class User
 	 * @param \Date $newbirthDate
 	 * @return User
 	 */
-	public function setBirthDate(\Date $birthDate) {
+	public function setBirthDate(\DateTime $birthDate) {
 	    $this->birthDate = $birthDate;
 	    return $this;
 	}

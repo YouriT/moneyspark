@@ -13,12 +13,16 @@ use Account\Entity\User;
 class AuthAcl extends AbstractPlugin
 {
     protected $role;
+    /**
+     * @var MvcEvent
+     */
+    private $mvcEvent;
  
     private function getRole()
     {
         if (!$this->role) {
-        	if ($this->getController()->getServiceLocator()->get('AuthService')->hasIdentity())
-	            $this->role = $this->getController()->getServiceLocator()->get('AuthService')->getIdentity()->getRole();
+        	if ($this->getController()->getServiceLocator()->get('AuthServiceApi')->hasIdentity())
+        		$this->role = $this->getController()->getServiceLocator()->get('AuthServiceApi')->getIdentity()->getRole();
         	else
         		$this->role = User::USER_ROLE_GUEST;
         }
@@ -27,6 +31,7 @@ class AuthAcl extends AbstractPlugin
      
     public function doAuthorization(MvcEvent $e)
     {
+    	$this->mvcEvent = $e;
         $acl = new Acl();
         
         $acl->addRole(new Role(User::USER_ROLE_GUEST));
@@ -38,6 +43,7 @@ class AuthAcl extends AbstractPlugin
         $acl->addResource(new Resource('front'));
         $acl->addResource(new Resource('api_error'));
         $acl->addResource(new Resource('api_auth'));
+        $acl->addResource(new Resource('api_register'));
         $acl->addResource(new Resource('api_index'));
         $acl->addResource(new Resource('api_cyril'));
         $acl->addResource(new Resource('api_investment'));
@@ -47,6 +53,7 @@ class AuthAcl extends AbstractPlugin
         
         $acl->allow(User::USER_ROLE_GUEST, 'api_error', null);
         $acl->allow(User::USER_ROLE_GUEST, 'api_auth', null);
+        $acl->allow(User::USER_ROLE_GUEST, 'api_register', null);
         $acl->allow(User::USER_ROLE_GUEST, 'api_cyril', null);
         $acl->allow(User::USER_ROLE_GUEST, 'api_investment', null);
         $acl->allow(User::USER_ROLE_GUEST, 'api_lockbox', null);

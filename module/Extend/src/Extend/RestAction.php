@@ -6,15 +6,18 @@ use Zend\Mvc\Controller\AbstractRestfulController;
 abstract class RestAction extends AbstractRestfulController
 {
 	/**
-	 * @var Doctrine\ORM\EntityManager
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	protected $em;
 	
 	/**
-	 * @var Frontend\Entity\User
+	 * @var \Account\Entity\User
 	 */
 	protected $identity;
 
+	/**
+	 * @return \Doctrine\ORM\EntityManager
+	 */
 	public function getEntityManager()
 	{
 		if (null === $this->em) {
@@ -26,7 +29,12 @@ abstract class RestAction extends AbstractRestfulController
 	public function getIdentity()
 	{
 		if (!$this->identity)
-			$this->identity = $this->getServiceLocator()->get('AuthStorage')->read();
+			$this->identity = $this->getServiceLocator()->get('AuthServiceApi')->getIdentity();
 		return $this->identity;
+	}
+	
+	public function hasIdentity()
+	{
+		return $this->getServiceLocator()->get('AuthServiceApi')->hasIdentity();
 	}
 }

@@ -10,6 +10,7 @@ namespace Api;
 use Account\Model\AuthStorage;
 use DoctrineModule\Authentication\Adapter\ObjectRepository;
 use Zend\Authentication\AuthenticationService;
+use Account\Model\AuthServiceApi;
 return array(
     'router' => array(
         'routes' => array(
@@ -66,8 +67,9 @@ return array(
         	'Api\Investment' => 'Api\Controller\InvestmentController',
         	'Api\Lockbox' => 'Api\Controller\LockboxController',
         	'Api\Product' => 'Api\Controller\ProductController',
-        	'Api\Profile' => 'Api\Controller\ProfileController'
-        		
+        	'Api\Profile' => 'Api\Controller\ProfileController',
+        	'Api\Auth' => 'Api\Controller\AuthController',
+        	'Api\Register' => 'Api\Controller\RegisterController'
         ),
     ),
 	'controller_plugins' => array(
@@ -96,6 +98,9 @@ return array(
 				$authService = new AuthenticationService();
 				$authService->setAdapter($authAdapter)->setStorage($sm->get('AuthStorage'));
 				return $authService;
+			},
+			'AuthServiceApi' => function ($sm) {
+				return new AuthServiceApi($sm);
 			}
 		)
 	),

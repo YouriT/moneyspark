@@ -11,7 +11,7 @@ class Email extends Message
 {
 	public function __construct($model)
 	{
-		$this->addFrom("no-reply@befasty.com","Instatrading")
+		$this->addFrom("no-reply@befasty.com","Moneyspark")
 			->setEncoding('UTF-8');
 	}
 	
