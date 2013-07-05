@@ -4,7 +4,7 @@ namespace Api\Controller;
 use Zend\View\Model\JsonModel;
 use Extend\RestAction;
 
-class IndexController extends RestAction
+class AuthController extends RestAction
 {
 	public function getList()
 	{

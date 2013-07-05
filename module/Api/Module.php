@@ -11,7 +11,9 @@ namespace Api;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\Http\Hostname;
+use Account\Model\AuthStorage;
+use DoctrineModule\Authentication\Adapter\ObjectRepository;
+use Zend\Authentication\AuthenticationService;
 
 class Module
 {
@@ -21,13 +23,28 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-//         $route = Hostname::factory(array(
-//         		'route' => 'api.moneyspark',
-//         		'defaults' => array(
-//         				'type' => 'json',
-//         		),
-//         ));
-//         $e->getRouter()->addRoute('api', $route);
+        $eventManager->attach('route', array($this, 'loadConfiguration'), 2);
+    }
+
+    public function loadConfiguration(MvcEvent $e)
+    {
+    	$application   = $e->getApplication();
+    	$sm            = $application->getServiceManager();
+    	$sharedManager = $application->getEventManager()->getSharedManager();
+    
+    	$router = $sm->get('router');
+    	$request = $sm->get('request');
+   
+    	$matchedRoute = $router->match($request);
+    	
+    	if (null !== $matchedRoute) {
+    		$sharedManager->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH,
+    			function($e) use ($sm) {
+    				$sm->get('ControllerPluginManager')->get('AuthAcl')
+    				->doAuthorization($e);
+    			},100
+    		);
+    	}
     }
 
     public function getConfig()

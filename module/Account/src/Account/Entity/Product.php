@@ -66,6 +66,11 @@ class Product
 	 * @ORM\Column(type="integer")
 	 */
 	private $maxPeople = 99;
+	
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	private $prospectus;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="Account\Entity\Hedgefund", inversedBy="products")
@@ -364,5 +369,18 @@ class Product
 	{
 		$this->investments->add($investment);
 		return $this;
+	}
+
+	public function getProspectus() {
+	    return $this->prospectus;
+	}
+	
+	/**
+	 * @return Product
+	 */
+	public function setProspectus($prospectus) {
+	    $this->prospectus = $prospectus;
+	
+	    return $this;
 	}
 }

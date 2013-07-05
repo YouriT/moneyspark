@@ -10,9 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {	
-	const USER_ROLE_BANNED = 0;
-	const USER_ROLE_NORMAL = 1;
-	const USER_ROLE_ADMIN  = 2;
+	const USER_ROLE_GUEST  = 0;
+	const USER_ROLE_BANNED = 1;
+	const USER_ROLE_NORMAL = 2;
+	const USER_ROLE_ADMIN  = 3;
 	
 	/**
 	 * @ORM\Id @ORM\Column(type="integer")

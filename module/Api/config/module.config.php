@@ -7,6 +7,9 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 namespace Api;
+use Account\Model\AuthStorage;
+use DoctrineModule\Authentication\Adapter\ObjectRepository;
+use Zend\Authentication\AuthenticationService;
 return array(
     'router' => array(
         'routes' => array(
@@ -15,15 +18,34 @@ return array(
                 'options' => array(
                     'route'    => 'api.moneyspark',
                     'defaults' => array(
-                    	'__NAMESPACE__' => 'api_',
-                        'controller' => 'index',
-                        'action'     => 'index',
+                    	'__NAMESPACE__' => 'Api',
+                        'controller' => 'Error',
                     ),
                 ),
             	'may_terminate' => true,
             	'child_routes' => array(
             		'default' => array(
-            			'type' => 'Segment',
+            			'type' => 'literal',
+            			'options' => array(
+            				'route' => '/',
+            				'defaults' => array(
+            					'__NAMESPACE__' => 'Api',
+            					'controller' => 'Error',
+            				)
+            			)
+            		),
+            		'error' => array(
+            			'type' => 'literal',
+            			'options' => array(
+            				'route' => '/error',
+            				'defaults' => array(
+            					'__NAMESPACE__' => 'Api',
+            					'controller' => 'Error',
+            				)
+            			)
+            		),
+            		'rest' => array(
+            			'type' => 'segment',
             			'options' => array(
             				'route' => '[/:controller[/:id]]',
             				'constraints' => array(
@@ -38,23 +60,40 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'api_index' => 'Api\Controller\IndexController'
+            'Api\Index' => 'Api\Controller\IndexController',
+        	'Api\Error' => 'Api\Controller\ErrorController',
+        	'Api\Auth' => 'Api\Controller\AuthController'
         ),
     ),
-//     'doctrine' => array(
-//         'driver' => array(
-//             __NAMESPACE__ . '_driver' => array(
-//                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-//                 'cache' => 'array',
-//                 'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity'),
-//             ),
-//             'orm_default' => array(
-//                 'drivers' => array(
-//                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
-//                 ),
-//             ),
-//         ),
-//     ),
+	'controller_plugins' => array(
+		'invokables' => array(
+			'AuthAcl' => 'Account\Model\AuthAcl'
+		),
+	),
+	'service_manager' => array(
+		'factories' => array(
+			'AuthStorage' => function ($sm) {
+				return new AuthStorage('moneyspark');
+			},
+			'AuthService' => function ($sm) {
+				$em = $sm->get('doctrine.entitymanager.orm_default');
+				$authAdapter = new ObjectRepository(array(
+					'objectManager' => $em,
+					'objectRepository' => $em->getRepository('Account\Entity\User'),
+					'identityClass' => 'Account\Entity\User',
+					'identityProperty' => 'email',
+					'credentialProperty' => 'password',
+					'credentialCallable' => function ($identity, $cred)
+					{
+						return sha1($cred);
+					}
+				));
+				$authService = new AuthenticationService();
+				$authService->setAdapter($authAdapter)->setStorage($sm->get('AuthStorage'));
+				return $authService;
+			}
+		)
+	),
 	'view_manager' => array(
 		'strategies' => array(
 				'ViewJsonStrategy',

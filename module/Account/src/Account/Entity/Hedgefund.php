@@ -28,6 +28,11 @@ class Hedgefund
 	private $title;
 	
 	/**
+	 * @ORM\Column(type="string")
+	 */
+	private $logo;
+	
+	/**
 	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $description;
@@ -130,6 +135,19 @@ class Hedgefund
 	public function setRegDate(\DateTime $regDate)
 	{
 	    $this->regDate = $regDate;
+	    return $this;
+	}
+	
+	public function getLogo() {
+	    return $this->logo;
+	}
+	
+	/**
+	 * @return Hedgefund
+	 */
+	public function setLogo($logo) {
+	    $this->logo = $logo;
+	
 	    return $this;
 	}
 }
