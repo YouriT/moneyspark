@@ -152,6 +152,8 @@ class Hedgefund
 	}
 	
 	public function toArray(){
-		return get_object_vars($this);
+		$ar = get_object_vars($this);
+		unset($ar['__isInitialized__'], $ar['products']);
+		return $ar;
 	}
 }

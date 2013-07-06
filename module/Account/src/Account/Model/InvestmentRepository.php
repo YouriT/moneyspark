@@ -50,6 +50,17 @@ class InvestmentRepository extends EntityRepository
 	}
 	
 	/**
+	 * Get All Investments of an User
+	 * @return Investment
+	 */
+	public function getTotal(User $u)
+	{
+		$q = $this->createQueryBuilder("I")->
+		where("I.user = :idUser")->setParameter("idUser", $u->getId());
+		return $q->getQuery()->getResult();
+	}
+	
+	/**
 	 * Get Current Invested Amount for a product
 	 * @return double
 	 */

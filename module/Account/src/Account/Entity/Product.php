@@ -409,7 +409,9 @@ class Product
 	}
 	
 	public function toArray(){
-		return get_object_vars($this);
+		$ar = get_object_vars($this);
+		unset($ar['investments'], $ar['history'], $ar['hedgefund'], $ar['translations']);
+		return $ar;
 	}
 	
 }

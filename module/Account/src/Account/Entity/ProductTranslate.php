@@ -140,7 +140,9 @@ class ProductTranslate
 	}
 	
 	public function toArray(){
-		return get_object_vars($this);
+		$ar = get_object_vars($this);
+		unset($ar['product'], $ar['locale'], $ar['default']);
+		return $ar;
 	}
 	
 }

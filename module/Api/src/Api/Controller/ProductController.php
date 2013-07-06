@@ -19,16 +19,7 @@ class ProductController extends RestAction
 			//Info hedgefund
 			$hedgefund = $p->getHedgefund()->toArray();
 			$current["product"] = array_merge($details,$p->toArray(), $investedAmount);
-			unset($current['product']['product'], 
-				  $current['product']['translations'], 
-				  $current['product']['locale'], 
-				  $current['product']['default'],
-				  $current['product']['hedgefund'],
-				  $current['product']['history'],
-				  $current['product']['__isInitialized__']);
 			$current["hedgefund"] = $hedgefund;
-			unset($current['hedgefund']['products'],
-				  $current['hedgefund']['__isInitialized__']);
 			$total[] = $current;
 		}
 		return $json = new JsonModel($total);

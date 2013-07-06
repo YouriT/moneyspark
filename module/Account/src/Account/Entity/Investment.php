@@ -42,9 +42,9 @@ class Investment
 	private $date;
 	
 	/**
-	 * @ORM\Column(type="boolean")
+	 * @ORM\Column(type="datetime", nullable=true)
 	 */
-	private $ended = false;
+	private $ended;
 	
 	/**
 	 * @ORM\Column(type="decimal", precision=3, scale=2, nullable=true)
@@ -171,21 +171,32 @@ class Investment
 
 	/**
 	 * 
+	 * @return \DateTime
+	 */
+	public function getEnded()
+	{
+	    return $this->ended;
+	}
+	
+	/**
+	 *
 	 * @return boolean
 	 */
 	public function isEnded()
 	{
-	    return $this->ended;
+		return $this->ended != null ? true : false;
 	}
+	
+
 
 	/**
 	 * 
-	 * @param boolean $ended
+	 * @param \DateTime $ended
 	 * @return Investment
 	 */
-	public function setEnded(boolean $ended)
+	public function setEnded(\DateTime $ended)
 	{
-	    $this->ended = $ended ? true: false;
+		$this->ended = $ended;
 	    return $this;
 	}
 

@@ -1,6 +1,8 @@
 <?php
 namespace Api\Controller;
 
+use Account\Entity\ProductHistory;
+
 use Account\Entity\User;
 
 use Account\Model\Utilities;
@@ -18,7 +20,34 @@ class InvestmentController extends RestAction
 {
 	public function getList()
 	{
-		return new JsonModel();
+		/* @var $i Investment */
+		foreach($this->getEntityManager()->getRepository("Account\Entity\Investment")->getTotal($this->getIdentity()) as $i){
+			
+			/* @var $p Product */
+			$p = $i->getProduct();
+			
+			/* @var $lastKnownRentability ProductHistory */
+			if($i->getRentabilityAchieved() == null){
+				$lastKnownRentability = $this->getEntityManager()->getRepository("Account\Entity\ProductHistory")->getLast($p);
+				if($lastKnownRentability == null)
+					$array['rentability'] = 0;
+				else
+					$array['rentability'] = $lastKnownRentability->getCurrentRate();
+			}
+			else
+				$array['rentability'] = $i->getRentabilityAchieved();
+			
+			
+			$array['product'] = $p->getTranslation($this->getIdentity()->getLocale())->toArray();
+			$array['hedgefund'] = $hedgefund = $p->getHedgefund()->toArray();
+			$array['amount'] = $i->getAmount();
+			
+			if($i->isEnded())
+				$ret["ended"][] = $array;
+			else
+				$ret["current"][] = $array;
+		}
+		return new JsonModel($ret);
 	}
 	
 	public function get($id)
@@ -39,7 +68,7 @@ class InvestmentController extends RestAction
 		elseif($this->getIdentity()->getLockboxAmount() <  $data['amount'])
 			$ret['error'] = array('code'=>'403','message'=>'The balance is insufficient');
 		elseif($this->getEntityManager()->getRepository("Account\Entity\BankAccount")->findOneBy(array("user"=>$user->getId(), "verified"=>true)) == null)
-		$ret['error'] = array('code'=>'403','message'=>'User has no verified bank account');
+			$ret['error'] = array('code'=>'403','message'=>'User has no verified bank account');
 		else
 		{
 			/* @var $product Product */
