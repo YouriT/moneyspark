@@ -60,9 +60,9 @@ class InvestmentController extends RestAction
 		/* @var $user User */
 		$user = $this->getEntityManager()->merge($this->getIdentity());
 		if(!isset($data['idProduct']) || !isset($data['amount']))
-			$ret['error'] = array('code'=>'403','message'=>'required data missing');
+			$ret['error'] = array('code'=>'403','message'=>'Required data missing');
 		elseif(!is_numeric($data['amount']))
-			$ret['error'] = array('code'=>'403','message'=>'the amount is not a number (nAn)'." : ".$data["amount"]);
+			$ret['error'] = array('code'=>'403','message'=>'The amount is not a number (nAn)'." : ".$data["amount"]);
 		elseif($this->getEntityManager()->find("Account\Entity\Product", $data['idProduct']) == null)
 			$ret['error'] = array('code'=>'403','message'=>'This financial product does not exist');
 		elseif($this->getIdentity()->getLockboxAmount() <  $data['amount'])

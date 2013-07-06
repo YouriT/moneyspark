@@ -25,9 +25,9 @@ class LockboxController extends RestAction
 		/* @var $user User */
 		$user = $this->getEntityManager()->merge($this->getIdentity());
 		if(!isset($data['amount']))
-			$ret['error'] = array('code'=>'403','message'=>'required data missing');
+			$ret['error'] = array('code'=>'403','message'=>'Required data missing');
 		elseif(!is_numeric($data['amount']))
-			$ret['error'] = array('code'=>'403','message'=>'the amount is not a number (nAn)'." : ".$data["amount"]);
+			$ret['error'] = array('code'=>'403','message'=>'The amount is not a number (nAn)'." : ".$data["amount"]);
 		elseif($this->getIdentity()->getLockboxAmount() <  $data['amount'])
 			$ret['error'] = array('code'=>'403','message'=>'The balance is insufficient');
 		elseif($this->getEntityManager()->getRepository("Account\Entity\BankAccount")->findOneBy(array("user"=>$user->getId(), "verified"=>true)) == null)
