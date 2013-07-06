@@ -108,5 +108,8 @@ return array(
 		'strategies' => array(
 				'ViewJsonStrategy',
 		),
+		'template_path_stack' => array(
+			'api' => __DIR__ . '/../view',
+		)
 	),
 );

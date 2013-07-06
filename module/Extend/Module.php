@@ -11,6 +11,9 @@ namespace Extend;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Extend\Mail\Service\SmtpTransportFactory;
+use Extend\Mail\Service\MessageFactory;
+use Extend\Service\Mailer;
 
 class Module
 {
@@ -20,6 +23,25 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+    }
+    
+    public function getServiceConfig()
+    {
+    	return array(
+			'shared' => array(
+				'common.mailer.default_message' => false
+			),
+    		'factories'  => array(
+				'common.mailer.smtp_transport'  => new SmtpTransportFactory(),
+				'common.mailer.default_message' => new MessageFactory(),
+    			'common.service.mailer' => function ($sm)
+    			{
+    				$mailer = new Mailer();
+    				$mailer->setServiceManager($sm);
+    				return $mailer;
+    			}
+    		),
+    	);
     }
 
     public function getConfig()

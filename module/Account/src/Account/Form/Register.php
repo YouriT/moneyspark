@@ -25,7 +25,7 @@ class Register
 	 * @Form\Type("Zend\Form\Element\Text")
 	 * @Form\Required(true)
 	 * @Form\Filter({"name":"StripTags"})
-	 * @Form\Validator({"name":"Date"})
+	 * @Form\Validator({"name":"Date","options":{"patern":"/^\d{4}-\d{3}-\d{3}$/"}})
 	 */
 	public $birthDate;
 	
@@ -33,7 +33,7 @@ class Register
 	 * @Form\Type("Zend\Form\Element\Text")
 	 * @Form\Required(true)
 	 * @Form\Filter({"name":"StripTags"})
-	 * @Form\Validator({"name":"Regex","options":{"pattern":"/[a-z]{2}\_[A-Z]{2}/"}})
+	 * @Form\Validator({"name":"Regex","options":{"pattern":"/^[a-z]{2}\_[A-Z]{2}$/"}})
 	 */
 	public $locale;
 	
@@ -54,6 +54,13 @@ class Register
 	 * @Form\Validator({"name":"EmailAddress"})
 	 */
 	public $email;
+	
+	/**
+	 * @Form\Type("Zend\Form\Element\Text")
+	 * @Form\Required(true)
+	 * @Form\Filter({"name":"StripTags"})
+	 */
+	public $iban;
 	
 	/**
 	 * @Form\Type("Zend\Form\Element\Password")
