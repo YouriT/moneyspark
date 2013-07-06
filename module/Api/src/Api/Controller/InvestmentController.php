@@ -1,6 +1,16 @@
 <?php
 namespace Api\Controller;
 
+use Account\Entity\User;
+
+use Account\Model\Utilities;
+
+use Account\Entity\Product;
+
+use Account\Entity\Investment;
+
+use Account\Entity\BankAccountHistory;
+
 use Zend\View\Model\JsonModel;
 use Extend\RestAction;
 
@@ -18,7 +28,50 @@ class InvestmentController extends RestAction
 	
 	public function create($data)
 	{
-		return new JsonModel();
+		/* @var $user User */
+		$user = $this->getEntityManager()->merge($this->getIdentity());
+		if(!isset($data['idProduct']) || !isset($data['amount']))
+			$ret['error'] = array('code'=>'403','message'=>'required data missing');
+		elseif(!is_numeric($data['amount']))
+			$ret['error'] = array('code'=>'403','message'=>'the amount is not a number (nAn)'." : ".$data["amount"]);
+		elseif($this->getEntityManager()->find("Account\Entity\Product", $data['idProduct']) == null)
+			$ret['error'] = array('code'=>'403','message'=>'This financial product does not exist');
+		elseif($this->getIdentity()->getLockboxAmount() <  $data['amount'])
+			$ret['error'] = array('code'=>'403','message'=>'The balance is insufficient');
+		elseif($this->getEntityManager()->getRepository("Account\Entity\BankAccount")->findOneBy(array("user"=>$user->getId(), "verified"=>true)) == null)
+		$ret['error'] = array('code'=>'403','message'=>'User has no verified bank account');
+		else
+		{
+			/* @var $product Product */
+			$product = $this->getEntityManager()->find("Account\Entity\Product", $data['idProduct']);
+			$bankAccount = $this->getEntityManager()->getRepository("Account\Entity\BankAccount")->findOneBy(array("user"=>$user->getId(), "verified"=>true));
+			//Create an investment
+			$investment = new Investment();
+			$this->getEntityManager()->persist($investment);
+			//Create an output action
+			$history = new BankAccountHistory();
+			$this->getEntityManager()->persist($history);
+			$history->setAmount($data["amount"])->setAction(BankAccountHistory::BANK_OUTPUT)->setDate(new \DateTime())->setUser($user)->setInvestment($investment)->setBankAccount($bankAccount);
+			//How much fee ?
+			$sumOfInvestedAmounts = $this->getEntityManager()->getRepository("Account\Entity\Investment")->getSumInvestedAmounts($product);
+			$requiredAmount = $product->getRequiredAmount();
+			$ratioInvested = round($sumOfInvestedAmounts/$requiredAmount, 2);
+			if($ratioInvested>1)$ratioInvested=1;
+			$diff = Utilities::MAX_FEERATE-Utilities::MIN_FEERATE;
+			$feeRate = Utilities::MIN_FEERATE+($ratioInvested*$diff);
+			$b = round($data["amount"]/100)*0.01;
+			$feeRate-$b < Utilities::MIN_FEERATE ? $feeRate = Utilities::MIN_FEERATE : $feeRate = $feeRate-$b;
+			$feeRate = round($feeRate,2);
+			$investment->setProduct($product)->setDate(new \DateTime())->setAmount($data["amount"])->setFee($feeRate)->setUser($user);
+			//Debit
+			$user->setLockboxAmount( ($user->getLockboxAmount()-$data['amount']) );
+			//Send Email
+			
+			$this->getEntityManager()->flush();
+			$ret["message"] = "successful invested";
+		}
+		
+		return new JsonModel($ret);
 	}
 	
 	public function update($id, $data)

@@ -52,7 +52,7 @@ class Investment
 	private $rentabilityAchieved;
 	
 	/**
-	 * @ORM\Column(type="decimal", precision=10, scale=2)
+	 * @ORM\Column(type="decimal", precision=3, scale=2)
 	 */
 	private $fee;
 	
@@ -101,11 +101,12 @@ class Investment
 	/**
 	 * 
 	 * @param Product $product
-	 * @return Product
+	 * @return Investment
 	 */
 	public function setProduct(Product $product)
 	{
 	    $this->product = $product;
+	    return $this;
 	}
 
 	/**

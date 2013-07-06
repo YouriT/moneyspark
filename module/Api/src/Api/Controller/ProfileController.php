@@ -1,6 +1,8 @@
 <?php
 namespace Api\Controller;
 
+use Account\Model\Utilities;
+
 use Zend\View\Model\JsonModel;
 use Extend\RestAction;
 
@@ -13,7 +15,16 @@ class ProfileController extends RestAction
 	
 	public function get($id)
 	{
-		return new JsonModel();
+		if($id=="me"){
+			$params["averageRentability"] = $this->getEntityManager()->getRepository("Account\Entity\Investment")->getRentabilityAverage($this->getIdentity());
+			$params["maxFeeRate"] = Utilities::MAX_FEERATE;
+			$params["minFeeRate"] = Utilities::MIN_FEERATE;
+		
+		return new JsonModel($params);
+		}
+		else
+			return new JsonModel();
+			
 	}
 	
 	public function create($data)

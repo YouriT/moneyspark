@@ -48,12 +48,11 @@ class BankAccountHistory
 	 * @ORM\ManyToOne(targetEntity="Account\Entity\Investment", inversedBy="history")
 	 */
 	private $investment;
-	
-	/**
-	 * @ORM\Column(type="boolean")
-	 */
-	private $executed=false;
 
+	/**
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	private $executed;
 	
 	public function getId() {
 	    return $this->id;
@@ -131,6 +130,11 @@ class BankAccountHistory
 	}
 	
 	public function isExecuted() {
+		$this->executed == null ? $r = true : $r = false;
+		return $r;
+	}
+	
+	public function getExecuted() {
 		return $this->executed;
 	}
 	

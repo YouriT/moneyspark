@@ -13,7 +13,7 @@ class ProductController extends RestAction
 		/* @var $p Product */
 		foreach($this->getEntityManager()->getRepository("Account\Entity\Product")->getDisplayable(false) as $p){
 			//Info translation
-			$details = $p->getTranslation("fr_BE")->toArray();
+			$details = $p->getTranslation($this->getIdentity()->getLocale())->toArray();
 			//Info investments
 			$investedAmount = array("sumInvestedAmounts"=>$this->getEntityManager()->getRepository("Account\Entity\Investment")->getSumInvestedAmounts($p));
 			//Info hedgefund
@@ -31,8 +31,8 @@ class ProductController extends RestAction
 				  $current['hedgefund']['__isInitialized__']);
 			$total[] = $current;
 		}
-		$json = new JsonModel($total);
-		return var_dump(json_decode($json->serialize()));
+		return $json = new JsonModel($total);
+		//return var_dump(json_decode($json->serialize()));
 	}
 	
 	public function get($id)

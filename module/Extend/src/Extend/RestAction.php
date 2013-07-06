@@ -1,6 +1,8 @@
 <?php
 namespace Extend;
 
+use Account\Entity\User;
+
 use Zend\Mvc\Controller\AbstractRestfulController;
 
 abstract class RestAction extends AbstractRestfulController
@@ -25,7 +27,9 @@ abstract class RestAction extends AbstractRestfulController
 		}
 		return $this->em;
 	}
-	
+	/**
+	 * @return User
+	 */
 	public function getIdentity()
 	{
 		if (!$this->identity)

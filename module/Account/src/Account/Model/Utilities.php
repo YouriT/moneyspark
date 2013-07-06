@@ -3,6 +3,9 @@ namespace Account\Model;
 
 class Utilities
 {
+	const MIN_FEERATE = 0.05;
+	const MAX_FEERATE = 0.15;
+	
 	private static function crypto_rand_secure($min, $max) {
 		$range = $max - $min;
 		if ($range < 0) return $min; // not so random...
