@@ -9,26 +9,26 @@ class ErrorController extends RestAction
 	public function getList()
 	{
 		$arr = array('error'=>"You're not logged in");
-		return new JsonModel($arr);
+		return $this->getJsonModel($arr);
 	}
 	
 	public function get($id)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function create($data)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function update($id, $data)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function delete($id)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 }

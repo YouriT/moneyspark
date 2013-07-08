@@ -10,35 +10,32 @@ class ProfileController extends RestAction
 {
 	public function getList()
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function get($id)
 	{
+		$params = array();
 		if($id=="me"){
 			$params["averageRentability"] = $this->getEntityManager()->getRepository("Account\Entity\Investment")->getRentabilityAverage($this->getIdentity());
 			$params["maxFeeRate"] = Utilities::MAX_FEERATE;
 			$params["minFeeRate"] = Utilities::MIN_FEERATE;
-		
-		return new JsonModel($params);
 		}
-		else
-			return new JsonModel();
-			
+		return $this->getJsonModel($params);
 	}
 	
 	public function create($data)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function update($id, $data)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function delete($id)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 }

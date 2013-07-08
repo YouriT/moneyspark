@@ -12,12 +12,12 @@ class LockboxController extends RestAction
 {
 	public function getList()
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function get($id)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function create($data)
@@ -44,16 +44,16 @@ class LockboxController extends RestAction
 			$this->getEntityManager()->flush();
 			$ret["message"] = "successful debited";
 		}
-		return new JsonModel($ret);
+		return $this->getJsonModel($ret);
 	}
 	
 	public function update($id, $data)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function delete($id)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 }

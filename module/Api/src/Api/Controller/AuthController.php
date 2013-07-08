@@ -84,26 +84,26 @@ class AuthController extends RestAction
 		else
 			$ret['error'] = array('code'=>'403','message'=>'Wrong identity');
 		
-		return new JsonModel($ret);
+		return $this->getJsonModel($ret);
 	}
 	
 	public function getList()
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function get($id)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function update($id, $data)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function delete($id)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 }

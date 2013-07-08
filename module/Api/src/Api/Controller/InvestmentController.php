@@ -47,12 +47,12 @@ class InvestmentController extends RestAction
 			else
 				$ret["current"][] = $array;
 		}
-		return new JsonModel($ret);
+		return $this->getJsonModel($ret);
 	}
 	
 	public function get($id)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function create($data)
@@ -100,16 +100,16 @@ class InvestmentController extends RestAction
 			$ret["message"] = "successful invested";
 		}
 		
-		return new JsonModel($ret);
+		return $this->getJsonModel($ret);
 	}
 	
 	public function update($id, $data)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function delete($id)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 }

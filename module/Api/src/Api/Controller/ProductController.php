@@ -22,27 +22,26 @@ class ProductController extends RestAction
 			$current["hedgefund"] = $hedgefund;
 			$total[] = $current;
 		}
-		return $json = new JsonModel($total);
-		//return var_dump(json_decode($json->serialize()));
+		return $this->getJsonModel($total);
 	}
 	
 	public function get($id)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function create($data)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function update($id, $data)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 	
 	public function delete($id)
 	{
-		return new JsonModel();
+		return $this->getJsonModel();
 	}
 }
