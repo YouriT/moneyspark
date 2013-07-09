@@ -20,7 +20,8 @@ class ProductController extends RestAction
 			
 			$details = $p->getTranslation($locale)->toArray();
 			//Info investments
-			$investedAmount = array("sumInvestedAmounts"=>$this->getEntityManager()->getRepository("Account\Entity\Investment")->getSumInvestedAmounts($p));
+			$sumInvAm = $this->getEntityManager()->getRepository("Account\Entity\Investment")->getSumInvestedAmounts($p);
+			$investedAmount = array("sumInvestedAmounts"=>$sumInvAm == null ? 0 : $sumInvAm);
 			//Info hedgefund
 			$hedgefund = $p->getHedgefund()->toArray();
 			$current["product"] = array_merge($details,$p->toArray(), $investedAmount);
