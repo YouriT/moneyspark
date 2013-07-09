@@ -13,7 +13,12 @@ class ProductController extends RestAction
 		/* @var $p Product */
 		foreach($this->getEntityManager()->getRepository("Account\Entity\Product")->getDisplayable(false) as $p){
 			//Info translation
-			$details = $p->getTranslation($this->getIdentity()->getLocale())->toArray();
+			if($this->getIdentity() == null)
+				$locale = $this->params()->fromQuery('locale',null);
+			else
+				$locale = $this->getIdentity()->getLocale();
+			
+			$details = $p->getTranslation($locale)->toArray();
 			//Info investments
 			$investedAmount = array("sumInvestedAmounts"=>$this->getEntityManager()->getRepository("Account\Entity\Investment")->getSumInvestedAmounts($p));
 			//Info hedgefund

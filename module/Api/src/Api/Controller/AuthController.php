@@ -89,7 +89,8 @@ class AuthController extends RestAction
 	
 	public function getList()
 	{
-		return $this->getJsonModel();
+		$ret['error'] = array('code'=>'403','message'=>'Params missing');
+		return $this->getJsonModel($ret);
 	}
 	
 	public function get($id)
