@@ -17,9 +17,8 @@ class ProfileController extends RestAction
 	{
 		$params = array();
 		if($id=="me"){
-			$params["averageRentability"] = $this->getEntityManager()->getRepository("Account\Entity\Investment")->getRentabilityAverage($this->getIdentity());
-			$params["maxFeeRate"] = Utilities::MAX_FEERATE;
-			$params["minFeeRate"] = Utilities::MIN_FEERATE;
+			$avgRenta = $this->getEntityManager()->getRepository("Account\Entity\Investment")->getRentabilityAverage($this->getIdentity());
+			$params["averageRentability"] = $avgRenta == null ? 0 : $avgRenta;
 			$params['lastName'] = $this->getIdentity()->getLastName();
 			$params['firstName'] = $this->getIdentity()->getFirstName();
 			$params['lockboxAmount'] = $this->getIdentity()->getLockboxAmount();

@@ -17,7 +17,7 @@ return array(
             'api' => array(
                 'type' => 'hostname',
                 'options' => array(
-                    'route'    => 'api.reonin.com',
+                    'route'    => 'api.moneyspark',
                     'defaults' => array(
                     	'__NAMESPACE__' => 'Api',
                         'controller' => 'Error',
