@@ -38,11 +38,14 @@ class RegisterController extends RestAction
 		$form = $this->getFormRegister();
 		$form->setData($data);
 		
+		if (!setlocale(LC_ALL, $form->get('locale')->getValue()) || !preg_match('/^[a-z]{2}\_[A-Z]{2}$/', $form->get('locale')->getValue()))
+			return $this->getJsonModel(array('error'=>array('code'=>'405','message'=>"This locale doesn't exists")));
+		
 		$countryCode = \Locale::getRegion($form->get('locale')->getValue());
 		$form->getInputFilter()->get('iban')->getValidatorChain()->addValidator(new Iban(array('country_code'=>$countryCode)));
 		
 		if ($countryCode == NULL)
-			return new JsonModel(array('error'=>array('code'=>'405','message'=>"This locale doesn't exists")));
+			return $this->getJsonModel(array('error'=>array('code'=>'405','message'=>"This locale doesn't exists")));
 		
 		if ($form->isValid())
 		{

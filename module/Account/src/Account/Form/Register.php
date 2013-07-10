@@ -25,7 +25,7 @@ class Register
 	 * @Form\Type("Zend\Form\Element\Text")
 	 * @Form\Required(true)
 	 * @Form\Filter({"name":"StripTags"})
-	 * @Form\Validator({"name":"Date","options":{"patern":"/^\d{4}-\d{3}-\d{3}$/"}})
+	 * @Form\Validator({"name":"Date","options":{"patern":"/^\d{4}-\d{2}-\d{2}$/"}})
 	 */
 	public $birthDate;
 	
