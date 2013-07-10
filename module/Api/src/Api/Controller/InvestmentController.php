@@ -69,6 +69,8 @@ class InvestmentController extends RestAction
 			$ret['error'] = array('code'=>'403','message'=>'The balance is insufficient');
 		elseif($this->getEntityManager()->getRepository("Account\Entity\BankAccount")->findOneBy(array("user"=>$user->getId(), "verified"=>true)) == null)
 			$ret['error'] = array('code'=>'403','message'=>'User has no verified bank account');
+		elseif($data['amount'] <= 0)
+			$ret['error'] = array('code'=>'403','message'=>'The amount is insufficient');
 		else
 		{
 			/* @var $product Product */

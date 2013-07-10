@@ -69,7 +69,8 @@ return array(
         	'Api\Product' => 'Api\Controller\ProductController',
         	'Api\Profile' => 'Api\Controller\ProfileController',
         	'Api\Auth' => 'Api\Controller\AuthController',
-        	'Api\Register' => 'Api\Controller\RegisterController'
+        	'Api\Register' => 'Api\Controller\RegisterController',
+        	'Api\Config' => 'Api\Controller\ConfigController'
         ),
     ),
 	'controller_plugins' => array(

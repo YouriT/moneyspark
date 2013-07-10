@@ -20,6 +20,9 @@ class ProfileController extends RestAction
 			$params["averageRentability"] = $this->getEntityManager()->getRepository("Account\Entity\Investment")->getRentabilityAverage($this->getIdentity());
 			$params["maxFeeRate"] = Utilities::MAX_FEERATE;
 			$params["minFeeRate"] = Utilities::MIN_FEERATE;
+			$params['lastName'] = $this->getIdentity()->getLastName();
+			$params['firstName'] = $this->getIdentity()->getFirstName();
+			$params['lockboxAmount'] = $this->getIdentity()->getLockboxAmount();
 		}
 		return $this->getJsonModel($params);
 	}
