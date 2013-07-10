@@ -10,6 +10,7 @@ class ProductController extends RestAction
 {
 	public function getList()
 	{
+		$total = array();
 		/* @var $p Product */
 		foreach($this->getEntityManager()->getRepository("Account\Entity\Product")->getDisplayable(false) as $p){
 			//Info translation
