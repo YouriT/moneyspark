@@ -12,11 +12,12 @@ return array(
     'router' => array(
         'routes' => array(
             'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Literal',
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'front_index',
+                    	'__NAMESPACE__' => 'Front',
+                        'controller' => 'Index',
                         'action'     => 'index',
                     ),
                 ),

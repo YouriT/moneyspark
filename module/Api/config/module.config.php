@@ -11,13 +11,19 @@ use Account\Model\AuthStorage;
 use DoctrineModule\Authentication\Adapter\ObjectRepository;
 use Zend\Authentication\AuthenticationService;
 use Account\Model\AuthServiceApi;
+
+if(preg_match("#local#", $_SERVER["HTTP_HOST"]))
+	$r = "api.reonin.com";
+else
+	$r = "api.moneyspark";
+
 return array(
     'router' => array(
         'routes' => array(
             'api' => array(
                 'type' => 'hostname',
                 'options' => array(
-                    'route'    => 'api.reonin.com',
+                    'route'    => $r,
                     'defaults' => array(
                     	'__NAMESPACE__' => 'Api',
                         'controller' => 'Error',

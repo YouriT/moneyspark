@@ -40,7 +40,7 @@ class AuthAcl extends AbstractPlugin
         $acl->addRole(new Role(User::USER_ROLE_ADMIN), User::USER_ROLE_NORMAL);
          
         $acl->addResource(new Resource('account'));
-        $acl->addResource(new Resource('front'));
+        $acl->addResource(new Resource('front_index'));
         $acl->addResource(new Resource('api_error'));
         $acl->addResource(new Resource('api_auth'));
         $acl->addResource(new Resource('api_register'));
@@ -52,6 +52,7 @@ class AuthAcl extends AbstractPlugin
         $acl->addResource(new Resource('api_profile'));
         $acl->addResource(new Resource('api_config'));
         
+        $acl->allow(User::USER_ROLE_GUEST, 'front_index', null);
         $acl->allow(User::USER_ROLE_GUEST, 'api_error', null);
         $acl->allow(User::USER_ROLE_GUEST, 'api_auth', null);
         $acl->allow(User::USER_ROLE_GUEST, 'api_register', null);

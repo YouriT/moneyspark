@@ -1,49 +1,50 @@
-<?php echo $this->doctype(); ?>
-
-<html lang="en">
+<html>
     <head>
-        <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
-
-        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
-
-        <!-- Le styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/images/favicon.ico'))
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
-                        ->prependStylesheet($this->basePath() . '/css/style.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
-
-        <!-- Scripts -->
-        <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-                                      ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-                                      ->prependFile($this->basePath() . '/js/jquery.min.js') ?>
-
+        <meta charset="utf-8" />
+        <!-- <meta name="format-detection" content="telephone=no" /> -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=0.5" />
+        <!-- Please don't add "maximum-scale=1" here. It's bad for accessibility. -->
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=0.5"> -->
+        <link id="mycss" rel="stylesheet" type="text/css" href="www/css/sitemoneyspark.css" />
+        <title>Moneyspark</title>
     </head>
-    <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Skeleton Application') ?></a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav">
-                            <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
+    <body class="bg2">
+        <div class="grad"></div>
+        <div class="container" style="padding-top:9%;z-index: 100;position: relative;">
+                <div class="text-site">
+                    <img src="www/img/logo-site.png" class="logo-site"/>
+                    <div class="clear"></div>
+                    <div class="border anim"></div>
+                    <div class="purpose">now... small capitals have access to big returns !</div>
+                    <div class="download">iOS</div>
+                    <div class="download" style="margin-right: 5%;">Android</div>
+                    <div class="clear"></div>
                 </div>
-            </div>
+                <div class="app-pic">
+                    <div class="app-site"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="menu-bottom">
+                    <a class="section">ABOUT</a>
+                    <a class="section">JOURNAL</a>
+                    <a><i class="section-i icon-facebook-sign"></i></a>
+                    <a href="https://twitter.com/Moneyspark"><i class="section-i icon-twitter"></i></a>
+                    <a><i class="section-i icon-linkedin"></i></a>
+                    <a><i class="section-i icon-google-plus"></i></a>
+                </div>
         </div>
-        <div class="container">
-            <?php echo $this->content; ?>
-            <hr>
-            <footer>
-                <p>&copy; 2005 - 2012 by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
-            </footer>
-        </div> <!-- /container -->
-        <?php echo $this->inlineScript() ?>
+        <script type="text/javascript" src="www/js/jquery.js"></script>
+
+        <!-- Only when compile on device !-->        
+        <script type="text/javascript">
+        $(window).load(function () {
+
+            var wdt = $('.purpose').width();
+            $('.border').width(wdt);
+
+        });   
+
+
+        </script>
     </body>
 </html>
