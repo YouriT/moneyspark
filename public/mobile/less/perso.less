@@ -1,0 +1,1461 @@
+
+@rose: #df1874;
+@blue: #21aecb;
+@grey: #666;
+@turquoise: #3acac6;
+@green: #82c729;
+@red:rgb(255,60,112);
+@font-size: 16;
+
+// mediaquiries pictures
+
+body {overflow: hidden;}
+
+@media screen and (min-width: 240px) {
+	body {font-size: @font-size/320*240px;}
+	.logo {
+		background-image: url("../img/240/240-app-header-logo.png"); 
+		width: 105px;
+		height: 26px;
+	}
+	.logo2 {
+		background-image: url("../img/240/240-app-header-logo-grey.png"); 
+		width: 105px;
+		height: 26px;
+	}
+	.logo-hf {
+		background-image: url("../img/240/240-hf.png");  
+		width: 18px;
+		height: 18px;
+		//margin-top: 4px;
+	}
+	.lock-icon {
+		background-image: url("../img/240/240-lock.png"); 
+		width: 18px;
+		height: 18px;
+		//margin-top: 6px;
+	}
+	.analyse {
+		background-image: url("../img/240/240-analyse.png"); 
+		width: 18px;
+		height: 18px;
+	}
+	.sportwatch-icon {
+		background-image: url("../img/240/240-chrono.png"); 
+		width: 18px;
+		height: 18px;
+	}
+	.buydeal {
+		background-image: url("../img/240/240-buybg.png");
+	}
+	.menu-bg {
+		background-image: url("../img/240/240-buybg.png");
+	}
+	body, .bg1 {
+		background-image: url("../img/240/240-bg.png") !important;
+	}
+	.user {
+		background-image: url("../img/240/240-userpicture.png");		
+		width: 83px;
+		height: 83px;
+	}
+	.user-little {
+		background-image: url("../img/240/240-userpicture.png");		
+		width:55px;
+		height:55px;
+	}
+}
+@media screen and (min-width: 320px) {
+	body {font-size: @font-size*1px;}
+	.logo {
+		background-image: url("../img/320/320-app-header-logo.png"); 
+		width: 140px;
+		height: 34px;
+	}
+	.logo2 {
+		background-image: url("../img/320/320-app-header-logo-grey.png"); 
+		width: 140px;
+		height: 34px;
+	}
+	.logo-hf {
+		background-image: url("../img/320/320-hf.png"); 
+		width: 25px;
+		height: 25px;
+	}
+	.lock-icon {
+		background-image: url("../img/320/320-lock.png"); 
+		width: 25px;
+		height: 25px;
+	}
+	.analyse {
+		background-image: url("../img/320/320-analyse.png"); 
+		width: 25px;
+		height: 25px;
+	}
+	.sportwatch-icon {
+		background-image: url("../img/320/320-chrono.png"); 
+		width: 25px;
+		height: 25px;
+	}
+	.buydeal {
+		background-image: url("../img/320/320-buybg.png");
+	}
+	.menu-bg {
+		background-image: url("../img/320/320-buybg.png");
+	}
+	body, .bg1 {
+		background-image: url("../img/320/320-bg.png") !important;
+	}
+	.bg2 {
+		background-image: url("../img/bg2.png") !important;
+	}
+	.user {
+		background-image: url("../img/320/320-userpicture.png");		
+		width: 111px;
+		height: 111px;
+	}
+	.user-little {
+		background-image: url("../img/320/320-userpicture.png");		
+		width: 73px;
+		height: 73px;
+	}
+}
+@media screen and (min-width: 360px) {
+	body {font-size: @font-size/320*360px;}
+	.logo {
+		background-image: url("../img/360/360-app-header-logo.png"); 
+		width: 157px;
+		height: 38px;
+	}
+	.logo2 {
+		background-image: url("../img/360/360-app-header-logo-grey.png"); 
+		width: 157px;
+		height: 38px;
+	}
+	.logo-hf {
+		background-image: url("../img/360/360-hf.png"); 
+		width: 28px;
+		height: 28px;
+	}
+	.lock-icon {
+		background-image: url("../img/360/360-lock.png"); 
+		width: 28px;
+		height: 28px;
+	}
+	.analyse {
+		background-image: url("../img/360/360-analyse.png"); 
+		width: 28px;
+		height: 28px;
+	}
+	.sportwatch-icon {
+		background-image: url("../img/360/360-chrono.png"); 
+		width: 28px;
+		height: 28px;
+	}
+	.buydeal {
+		background-image: url("../img/360/360-buybg.png");
+	}
+	.menu-bg {
+		background-image: url("../img/360/360-buybg.png");
+	}
+	body, .bg1 {
+		background-image: url("../img/360/360-bg.png") !important;
+	}
+	.user {
+		background-image: url("../img/360/360-userpicture.png");		
+		width: 125px;
+		height: 125px;
+	}
+	.user-little {
+		background-image: url("../img/360/360-userpicture.png");		
+		width: 83px;
+		height: 83px;
+	}
+
+}
+@media screen and (min-width: 480px) {
+	body {font-size: @font-size/320*480px;}
+	.logo {
+		background-image: url("../img/480/480-app-header-logo.png"); 
+		width: 210px;
+		height: 51px;
+	}
+	.logo2 {
+		background-image: url("../img/480/480-app-header-logo-grey.png"); 
+		width: 210px;
+		height: 51px;
+	}
+	.logo-hf {
+		background-image: url("../img/480/480-hf.png"); 
+		width: 37px;
+		height: 37px;
+	}
+	.lock-icon {
+		background-image: url("../img/480/480-lock.png"); 
+		width: 37px;
+		height: 37px;
+	}
+	.analyse {
+		background-image: url("../img/480/480-analyse.png"); 
+		width: 37px;
+		height: 37px;
+	}
+	.sportwatch-icon {
+		background-image: url("../img/480/480-chrono.png"); 
+		width: 37px;
+		height: 37px;
+	}
+	.buydeal {
+		background-image: url("../img/480/480-buybg.png");
+	}
+	.menu-bg {
+		background-image: url("../img/480/480-buybg.png");
+	}
+	body, .bg1 {
+		background-image: url("../img/480/480-bg.png") !important;
+	}
+	.user {
+		background-image: url("../img/480/480-userpicture.png");		
+		width: 166px;
+		height: 166px;
+	}
+	.user-little {
+		background-image: url("../img/480/480-userpicture.png");		
+		width: 110px;
+		height: 110px;
+	}
+}	
+@media screen and (min-width: 640px) {
+	body {font-size: @font-size/320*640px;}
+	.logo {
+		background-image: url("../img/640/640-app-header-logo.png"); 
+		width: 280px;
+		height: 69px;
+	}
+	.logo2 {
+		background-image: url("../img/640/640-app-header-logo-grey.png"); 
+		width: 280px;
+		height: 69px;
+	}
+	.logo-hf {
+		background-image: url("../img/640/640-hf.png"); 
+		width: 50px;
+		height: 50px;
+	}
+	.lock-icon {
+		background-image: url("../img/640/640-lock.png"); 
+		width: 50px;
+		height: 50px;
+	}
+	.analyse {
+		background-image: url("../img/640/640-analyse.png"); 
+		width: 50px;
+		height: 50px;
+	}
+	.sportwatch-icon {
+		background-image: url("../img/640/640-chrono.png"); 
+		width: 50px;
+		height: 50px;
+	}
+	.buydeal {
+		background-image: url("../img/640/640-buybg.png");
+	}
+	.menu-bg {
+		background-image: url("../img/640/640-buybg.png");
+	}
+	body, .bg1 {
+		background-image: url("../img/640/640-bg.png") !important;
+	}
+	.user {
+		background-image: url("../img/640/640-userpicture.png");		
+		width: 222px;
+		height: 222px;
+	}
+	.user-little {
+		background-image: url("../img/640/640-userpicture.png");		
+		width: 147px;
+		height: 147px;
+	}
+}
+@media screen and (min-width: 768px) {
+	body {font-size: @font-size/320*768px;}
+	.logo {
+		background-image: url("../img/768/768-app-header-logo.png"); 
+		width: 336px;
+		height: 82px;
+	}
+	.logo2 {
+		background-image: url("../img/768/768-app-header-logo-grey.png"); 
+		width: 336px;
+		height: 82px;
+	}
+	.logo-hf {
+		background-image: url("../img/768/768-hf.png"); 
+		width: 60px;
+		height: 60px;
+	}
+	.lock-icon {
+		background-image: url("../img/768/768-lock.png"); 
+		width: 60px;
+		height: 60px;
+	}
+	.analyse {
+		background-image: url("../img/768/768-analyse.png"); 
+		width: 60px;
+		height: 60px;
+	}
+	.sportwatch-icon {
+		background-image: url("../img/768/768-chrono.png"); 
+		width: 60px;
+		height: 60px;
+	}
+	.buydeal {
+		background-image: url("../img/768/768-buybg.png");
+	}
+	.menu-bg {
+		background-image: url("../img/768/768-buybg.png");
+	}
+	body, .bg1 {
+		background-image: url("../img/768/768-bg.png") !important;
+	}
+	.user {
+		background-image: url("../img/768/768-userpicture.png");		
+		width: 267px;
+		height: 267px;
+	}
+	.user-little {
+		background-image: url("../img/768/768-userpicture.png");		
+		width: 176px;
+		height: 176px;
+	}
+}
+@media screen and (min-width: 1080px) {
+	body {font-size: @font-size/320*1080px;}
+	.logo {
+		background-image: url("../img/1080/1080-app-header-logo.png"); 
+		width: 470px;
+		height: 115px;
+	}
+	.logo2 {
+		background-image: url("../img/1080/1080-app-header-logo-grey.png"); 
+		width: 470px;
+		height: 115px;
+	}
+	.logo-hf {
+		background-image: url("../img/1080/1080-hf.png"); 
+		width: 84px;
+		height: 84px;
+	}
+	.lock-icon {
+		background-image: url("../img/1080/1080-lock.png"); 
+		width: 84px;
+		height: 84px;
+	}
+	.analyse {
+		background-image: url("../img/1080/1080-analyse.png"); 
+		width: 84px;
+		height: 84px;
+	}
+	.sportwatch-icon {
+		background-image: url("../img/1080/1080-chrono.png"); 
+		width: 84px;
+		height: 84px;
+	}
+	.buydeal {
+		background-image: url("../img/1080/1080-buybg.png");
+	}
+	.menu-bg {
+		background-image: url("../img/1080/1080-buybg.png");
+	}
+	body, .bg1 {
+		background-image: url("../img/1080/1080-bg.png") !important;
+	}
+	.user {
+		background-image: url("../img/1080/1080-userpicture.png");		
+		width: 373px;
+		height: 373px;
+	}
+	.user-little {
+		background-image: url("../img/1080/1080-userpicture.png");		
+		width: 246px;
+		height: 246px;
+	}
+}
+
+
+// A FAIRE !!!!
+@media screen and (min-width: 1536px) {
+	//body {font-size: @font-size/320*1536px;}
+	.logo {
+		background-image: url("../img/1080/1080-app-header-logo.png"); 
+		width: 470px;
+		height: 115px;
+	}
+	.logo {
+		background-image: url("../img/1080/1080-app-header-logo-grey.png"); 
+		width: 470px;
+		height: 115px;
+	}
+	.logo-hf {
+		background-image: url("../img/1080/1080-hf.png"); 
+		width: 84px;
+		height: 84px;
+	}
+	.lock-icon {
+		background-image: url("../img/1080/1080-lock.png"); 
+		width: 84px;
+		height: 84px;
+	}
+	.analyse {
+		background-image: url("../img/1080/1080-analyse.png"); 
+		width: 84px;
+		height: 84px;
+	}
+	.sportwatch-icon {
+		background-image: url("../img/1080/1080-chrono.png"); 
+		width: 84px;
+		height: 84px;
+	}
+	.buydeal {
+		background-image: url("../img/1080/1080-buybg.png");
+	}
+	.menu-bg {
+		background-image: url("../img/1080/1080-buybg.png");
+	}
+	body, .bg1 {
+		background-image: url("../img/1536/1536-bg.png") !important;
+	}
+	.user {
+		background-image: url("../img/1080/1080-userpicture.png");		
+		width: 373px;
+		height: 373px;
+	}
+	.user-little {
+		background-image: url("../img/1080/1080-userpicture.png");		
+		width: 246px;
+		height: 246px;
+	}
+}
+
+.placeholder-color(@color) {
+	&::-webkit-input-placeholder {
+	   color: @color;
+	}
+
+	&:-moz-placeholder {
+	   color: @color;  
+	}
+
+	&::-moz-placeholder {
+	   color: @color;  
+	}
+
+	&:-ms-input-placeholder {  
+	   color: @color;  
+	}
+}
+
+// usefull class
+
+.zeroauto {
+	margin: 0 auto;
+}
+
+.mr10 {
+	margin-right: 10/16em;
+}
+
+.mt4 {
+	margin-top: 4/16em;
+}
+
+.ml12 {
+	margin-left: 12/16em;
+}
+
+.attention {
+	text-decoration: underline;
+}
+
+.light {
+	color: #888;
+}
+
+#page {
+	.css3hack();
+}
+
+.cambria {
+	font-style: italic;
+	font-family: Cambria;	
+}
+
+.iconback {
+	position: absolute;
+	top: 0;
+	left: 0;
+	//margin-top: 11/16em !important;
+	margin-left: 3%;
+	//opacity: 0.7;
+	cursor: pointer;
+	//color: rgba(102,102,102,0.6);
+	color: rgba(0, 0, 0, 0.4);
+	line-height: 27/16em !important;
+	&.text {
+		float: left;
+		line-height: 2.85em !important;
+		margin-left: 8%;
+		color: rgba(0, 0, 0, 0.5);
+		font-size: 1.2em;
+		font-family: helvetica neue;
+		font-weight: lighter;
+	}
+}
+
+.button-bg2 {
+	background-color: rgba(0, 0, 0, 0.3);
+	text-align: center;
+	color: #fff;
+	font-weight: lighter;
+	font-family: ProximaNovaLight;
+	border-radius: 0.125em;
+	line-height: 2.5em;
+	font-size: 1.05em;
+	border: 0;
+	width: 80%;
+	cursor: pointer;
+	//.box-shadow(inset 0px 0px 10px rgba(0,0,0,0.1));
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.4);
+	}	
+}
+
+// Homepage
+
+.logo {
+	margin: 0 auto;
+	padding-bottom: 7/16em;
+	margin: 0 auto;
+	padding-top: 13/16em;
+	background-repeat: no-repeat;
+	background-position-y: 13/16em;
+}
+
+.logo2 {
+	margin: 0 auto;
+	margin-top: 13/16em;
+	margin-bottom: 7/16em;
+	opacity: 0.5;
+	position: absolute;
+	bottom: 10px;
+	left: 30%;
+}
+
+.launch {
+	background-image: url("../img/launch.png");	
+}
+
+.deal {
+	padding: 4%;
+	.border-radius(0/16em);
+	//.box-shadow(0 1/16em 2/16em rgba(0,0,0,0.3));
+	.box-shadow(0 1/16em 2/16em rgba(0,0,0,0.4));
+	background-color: rgba(255,255,255,0.60);
+	.title {
+		font-family: ProximaNovaLight;
+		font-size: 1.1em;
+		text-align: center;
+		color: #666;
+		padding-bottom: 4/16em;
+		border-bottom: 1/16em solid rgba(94,101,109,0.6);
+	}
+	.subtitle {
+		font-size: 0.75em;
+		color: rgba(94, 101, 109, 0.9);
+		float: left;
+		line-height: 30/16em;
+		//font-weight: normal;
+		//font-family: Proxima Nova;
+	}
+	.content {
+		border-top: 1/16em solid #fff;
+		padding-top: 12/16em;
+	}
+}
+
+.logo-hf {
+	float: left;
+	margin-left: 5/16em;
+}
+
+.hf-name {
+	float: left;
+	margin-left: 5/16em;
+	line-height: 30/16em;
+	font-family: ProximaNovaRegular;
+	font-weight: normal;
+	font-size: 0.95em;
+	margin-left: 7/16em;
+	line-height: 30/16em;
+	color: #666;
+}
+
+.lock-icon {
+	float: left;
+	margin-top: 3/16em;
+}
+
+.lock-time {
+	line-height: 30/16em;
+	font-size: 0.95em;
+	color: #666;
+}
+
+.progress-mt {
+	margin-top: 10/16em;
+}
+
+.progress-bar-hover {
+	background-color: #aaa;
+	height: 13/16em;
+	width: 85%;
+	margin-left: 0%;
+	margin-top: -14/16em;
+	//box-shadow: inset -1/16em 1/16em 6/16em rgba(0, 0, 0, 0.9);;
+}
+
+.progress-bar-layout {
+	height: 13/16em;
+	width: 85%;
+	#gradient > .horizontal(@blue, @rose);
+	border-bottom: 1/16em solid rgba(255,255,255,0.95);
+}
+
+.progress-number {
+	color: @grey;
+	float: left;
+	font-size: 0.9em;
+}
+
+.imin {
+	display: block;
+	width: 90%;
+	height: 35/16em;
+	text-align: center;
+	color: #fff !important;
+	background-color: @green;
+	//text-shadow: 0 -1/16em 1/16em rgba(0,0,0,0.4);
+	//box-shadow: 0 1/16em 2/16em rgba(0,0,0,0.3),inset 0 1/16em 1/16em rgba(255,255,255,0.3);
+	border-radius: 3/16em;
+	line-height: 35/16em;
+	font-size: 0.9em;
+	font-weight: normal !important;
+	cursor: pointer;
+	text-decoration: none !important;
+	//border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+	//border: 1/16em solid #ccc;
+	&:hover {
+		background-color: darken(@green, 5%);
+	}	
+}
+
+.maybe {
+	font-family: cambria;
+	font-style: italic;
+}
+
+.bordertop {
+	width: 100%;
+	margin-top: 12/16em;
+	background-color: rgba(94,101,109,0.5);
+	height: 1/16em;
+}
+
+.borderbottom {
+	width: 100%;
+	margin-bottom: 10/16em;
+	background-color: rgba(255,255,255,0.6);
+	height: 1/16em;
+}
+
+.text {
+	font-family: ProximaNovaRegular;
+	font-weight: normal;
+	color: #666;
+	font-size: 0.75em;
+	line-height: 1.3;
+	display: block;
+	text-align: justify;
+	&.se {
+		font-size: 1em;
+		line-height: 24/16em;
+	}
+}
+
+.ana {
+	margin-top: 6/16em;
+}
+
+.analyse {
+	float: left;
+	margin-right: 7/16em;
+}
+
+.seemore {
+	margin-left: 6/16em;
+	color: #444;
+}
+
+.circle {
+	text-align: center;
+	color: @green;
+	font-size: 1em;
+	width: 60/16em;
+	height: 60/16em;
+	//background-color: @green;
+	border-radius: 50%;
+	margin-top: 20/16em;
+	font-weight: normal;
+	padding-top: 18/16em;
+	//text-shadow: 0 1/16em 1/16em rgba(0,0,0,0.4);
+	background-image: url("../img/circle.png");
+
+}
+
+.circle-time {
+	text-align: center;
+	color: #fff;
+	font-size: 1em;
+}
+
+.opportunity-bar-layout {
+	height: 13/16em;
+	width: 100%;
+	.gradient-percent(left, @red, 10%, @green, 40%);
+	//.background-image: linear-gradient(left, #ff3c70 50%, #82c729 51%);
+	border-bottom: 1/16em solid rgba(255,255,255,0.95);
+	opacity: 0.8;
+}
+
+.sportwatch-icon {
+	margin: 0 auto;
+}
+
+.sportwatch-time {
+	line-height: 25/16em;
+	font-size: 0.95em;
+	color: #666;
+	text-align: center;
+}
+
+.chrono-pt {
+	padding-top: 17/16em;
+}
+
+.ensemble-pagenum {
+	width: 72/16em;
+	height: 14/16em;
+	margin-top: 15/16em;
+	margin-bottom: 15/16em;
+	z-index: 1000;
+}
+
+.pagenum {
+	display: block;
+	width: 7/16em;
+	height: 7/16em;
+	border: 2/16em solid rgba(255, 255, 255, 0.65);
+	margin-bottom: 5/16em;
+	.border-radius(50%) !important;
+	float: left;
+	box-shadow: 0 1/16em 2/16em rgba(0, 0, 0, 0.3);
+	&.active {
+		background-color: rgba(255, 255, 255, 0.65);
+	}
+	&.center {
+		margin-right: 15/16em;
+		margin-left: 15/16em;
+	}	
+}
+
+.header {
+	margin-top: 5/16em;
+}
+
+.container {
+	width: 94%;
+	margin: 0 auto;
+}
+
+.clear {
+	clear: both;
+}
+
+
+// Buydeal
+
+.buydeal {
+	.css3hack();
+	margin-top: -1%;
+	.accordion(0.3s);
+	.box-shadow(inset 0px 0px 13px rgba(0,0,0,0.5));
+	// width: 245/16em;
+	// margin-left: -4%;
+	// margin-right: -4%;
+
+	//.box-shadow(inset 0/16em 0/16em 4/16em rgba(0,0,0,0.5));
+	
+	padding-left: 10%;
+	padding-right: 10%;
+	//.box-shadow(0/16em 0/16em 4/16em rgba(0,0,0,0.5));
+	&.active {
+		margin-top: -10/16em;
+		padding-top: 20/16em;
+		padding-bottom: 20/16em;
+		height: 146/16-40/16em;
+		margin-bottom: 10/16em;
+	}
+}
+
+.amount {
+	font-family: ProximaNovaLight;
+	color: #fff;
+	font-size: 1em;
+	//text-shadow: 0 1/16em 1/16em rgba(0,0,0,0.4);
+	line-height: 30/16em;
+}
+
+.input {
+	background-color: #eee;
+	color: #666;
+	text-align: center;
+	border-radius: 4/16em;
+	box-shadow: inset 0/16em 0/16em 3/16em #000;
+	font-family: ProximaNovaLight;
+	font-size: 1em;
+	line-height: 30/16em;
+	padding-left: 10/16em;
+	padding-right: 10/16em;
+	margin-right: 10/16em;
+	width: 20%;
+	border: 0;
+}
+
+.fees {
+	font-family: ProximaNovaLight;
+	color: #999;
+	font-size: 0.8em;
+}
+
+.letsgo {
+	margin: 0 auto;
+	line-height: 28/16em;
+	text-align: center;
+	background-color: rgba(0,0,0,0.4);
+	border-radius: 3/16em;
+	color: #999;
+	margin-top: 7/16em;
+	border: 1/16em solid #444;
+	.box-shadow(inset 0/16em 0/16em 4/16em rgba(0,0,0,0.5));
+	cursor: pointer;
+	width: 100%;
+	&:hover {
+		background-color: rgba(0,0,0,0.6);
+	}
+}
+
+
+// connection
+
+.user {
+	border-radius: 50%;
+	.box-shadow(inset 0/16em 0/16em 10/16em rgba(0,0,0,0.8));
+	border: 4/16em solid #fff;
+	margin: 0 auto;
+}
+
+.user-little {
+	border-radius: 50%;
+	.box-shadow(inset 0/16em 0/16em 5/16em rgba(0,0,0,0.8));
+	margin: 0 auto;
+	background-size: 100%;
+}
+
+.userinfo {
+	.placeholder-color(#666);
+	background-color: rgba(255,255,255,0.6);
+	margin-left: 10%;
+	margin-right: 10%;
+	text-align: center;
+	color: #666;
+	font-weight: lighter;
+	font-family: ProximaNovaLight;
+	border-radius: 2/16em;
+	line-height: 3em;
+	font-size: 1.05em;
+	border: 0px;
+	width: 80%;
+	.box-shadow(0 1/16em 2/16em rgba(0, 0, 0, 0.4));
+}
+
+.signin {
+	background-color: rgba(0,0,0,0.5);
+	margin-left: 10%;
+	margin-right: 10%;
+	text-align: center;
+	color: #fff;
+	font-weight: lighter;
+	font-family: ProximaNovaLight;
+	border-radius: 2/16em;
+	line-height: 2.5em;
+	font-size: 1.05em;
+	border: 0;
+	width: 80%;
+	.box-shadow(0 1/16em 2/16em rgba(0, 0, 0, 0.4));
+	&:hover {
+		background-color: rgba(0,0,0,0.7);
+	}	
+}
+
+.password-forgot {
+	margin-top: 5%;
+	display: block;
+	text-align: center;
+	font-size: 0.9em;
+	color: #333;
+	text-decoration: underline;
+	margin-bottom: 5%;
+}
+
+//singin
+
+.check {
+	float: left;
+	width: 0.6em;
+	height: 0.6em;
+	margin-top: 11%;
+	border: 2/16em solid rgba(255, 255, 255, 0.65);
+	border-radius: 50%;
+	margin-right: 15/16em;
+	margin-left: 5/16em;
+	cursor: pointer;
+	&.active {
+		background-color: rgba(255, 255, 255, 0.65);
+	}
+}
+
+.check-text {
+	margin-top: 5%;
+	text-align: center;
+	font-size: 1em;
+	color: #fff;
+	text-decoration: underline;
+	margin-bottom: 5%;
+}
+
+// Cash Amount
+
+.cash-title {
+	font-family: ProximaNovaLight;
+	font-size: 1.3em;
+	text-align: center;
+	color: #666;
+	padding-top: 0.8em;
+}
+
+.my-cash {
+	font-size: 3.9em;
+	color: #666;
+	text-align: center;
+	font-weight: 100;
+	margin-top: 20%;
+	margin-bottom: 20%;
+}
+
+.plus {
+	height: 2.5125em;
+	width: 3.75em;
+	padding-top: 1.2375em;
+	cursor: pointer;
+	border: 0.07em solid #666666;
+	border-radius: 50%;
+	text-align: center;
+	color: #666;
+	font-size: 1.5em;
+	font-weight: normal;
+	&:hover {
+		background-color: rgba(102,102,102,0.1);
+	}
+}
+
+.min {
+	height: 2.5125em;
+	width: 3.75em;
+	padding-top: 1.2375em;
+	cursor: pointer;
+	border: 0.07em solid #666666;
+	border-radius: 50%;
+	text-align: center;
+	color: #666;
+	font-size: 1.5em;
+	font-weight: normal;
+	&:hover {
+		background-color: rgba(102,102,102,0.1);
+	}
+}
+
+.cash-explication {
+	color: #555;
+	font-size: 0.9em;
+	text-align: justify;
+	line-height: 1.5em;
+}
+
+.cash-subtitle {
+	margin-top: 9%;
+	text-decoration: underline;
+	color: #333;
+	font-family: ProximaNovaRegular;
+}
+
+.cash-info {
+	font-size: 0.8em;
+	line-height: 1.4em;
+	padding-left: 6%;
+	text-align: justify;
+	margin-top: 4%;
+	color: #555;
+	li {
+		margin-bottom: 5%;
+	}
+}
+
+// Confirmation deal
+
+.check-little-grey {
+	float: left;
+	width: 0.35em;
+	height: 0.35em;
+	margin-top: 2/16em;
+	border: 2/16em solid #666;
+	border-radius: 50%;
+	margin-right: 11/16em;
+	margin-left: 1/16em;
+	cursor: pointer;
+	&.active {
+		background-color: rgba(102,102,102,0.7);
+	}
+}
+
+.check-text-little-grey {
+	font-size: 0.8em;
+	color: #666;
+	line-height: 1.1em;
+	padding-left: 23/16em;
+}
+
+
+.confirmation-deal {
+	font-family: ProximaNovaRegular;
+	font-weight: normal;
+	color: #666;
+	font-size: 0.75em;
+	display: block;
+	line-height: 1.3em;
+	padding-left: 6%;
+	margin-top: 1%;
+	li {
+		margin-bottom: 5%;
+	}
+}
+
+
+// Menu vertical
+
+/* General styles for all menus */
+
+.menuvertical {
+    position: fixed;
+    height: 97%;
+}
+ 
+// .menuvertical h3 {
+//     color: #afdefa;
+//     font-size: 1.9em;
+//     padding: 20/16em;
+//     margin: 0;
+//     font-weight: 300;
+// }
+ 
+.inter-menu {
+	.box-shadow(0 0.0625em 0.125em rgba(0, 0, 0, 0.4));
+	background-color: rgba(255, 255, 255, 0.6);
+	width: 100%;
+	height: 1/16em;
+}
+
+.iconmenu {
+	text-shadow: 0 0.0625em 0.125em rgba(0, 0, 0, 0.4);
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.ensemble-menu {
+	position: absolute;
+	bottom: 0;
+	padding-bottom: 40/16em;
+}
+
+.menuvertical a {
+    display: block;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 300;
+    text-decoration: none;
+    line-height: 3.5em;
+    padding-left: 20/16em;
+    padding-right: 18/16em;
+}
+
+.menuvertical a:hover {
+    background-color: @blue;
+    //#gradient > .radial(@blue, darken(@blue, 10%));
+    //.box-shadow(inset 0 0 5px rgba(0,0,0,1))
+}
+ 
+.menuvertical a:active {
+    background: @blue;
+    color: #47a3da;
+}
+ 
+/* Orientation-dependent styles for the content of the menu */
+ 
+.menuvertical-vertical {
+    width: 66/16em;
+    top: 0;
+    z-index: 1000;
+}
+ 
+.menuvertical-vertical a {
+    //border-bottom: 1/16em solid @blue;
+    //padding: 1em;
+}
+
+/* Vertical menu that slides from the left or right */
+ 
+.menuvertical-left {
+    left: -66/16em;
+}
+ 
+.menuvertical-left.menuvertical-open {
+    left: 0/16em;
+}
+
+/* Push classes applied to the body */
+ 
+.menuvertical-push {
+    overflow-x: hidden;
+    position: relative;
+    left: 0;
+}
+ 
+.menuvertical-push-toright {
+    left: 66/16em;
+}
+ 
+.menuvertical-toleft {
+    left: -66/16em;
+}
+ 
+/* Transitions */ 
+ 
+.menuvertical,
+.menuvertical-push {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+/* Menu button */
+
+.button-menuvertical {
+	height: 30/16em;
+	width: 37/16em;
+	border: none;
+	background-color: rgba(0, 0, 0, 0);
+	padding: 0;
+	float: left;
+}
+
+.trait {
+	height: 0.2em;
+	width: 2.3125em;
+	margin-bottom: 0.3em;
+	// height: 5/16em;
+	// width: 37/16em;
+	// margin-bottom: 5/16em;
+	border-radius: 2/16em;
+	.box-shadow(0 0.0625em 0.125em rgba(0, 0, 0, 0.4));
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
+.trait2 {
+	height: 0.2em;
+	width: 2.3125em;
+	margin-bottom: 0.3em;
+	border-radius: 2/16em;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.ensemble-pagenum-bottom-menu {
+	float: left;
+	margin-top: 0.63em;
+}
+
+.bottom-menu {
+	padding-top: 10/16em;
+	padding-bottom: 10/16em;
+	position:absolute;
+	bottom:0;
+	z-index:10000;
+}
+
+.mt34 {
+	height: 34/16em;
+	width: 100%;
+	margin-top: 13/16em;
+	margin-bottom: 7/16em;
+}
+
+.iconmenu {
+	font-size: 1.2em;
+}
+
+
+
+/* Flip effect */ 
+
+.flip-container {
+	-webkit-perspective: 1000;
+	-moz-perspective: 1000;
+	perspective: 1000;
+}
+	/* flip the pane when hovered */
+	.flip-container.hover .flipper, #flip-toggle.flip .flipper {
+				-webkit-transform: rotateY(180deg);
+				-moz-transform: rotateY(180deg);
+				transform: rotateY(180deg);
+				filter: FlipH;
+    			-ms-filter: "FlipH";
+			}
+
+.flip-container, .front, .back {
+	// width: 320px;
+	// height: 480px;
+}
+
+/* flip speed goes here */
+.flipper {
+	-webkit-transition: 0.6s;
+	-webkit-transform-style: preserve-3d;
+	-moz-transition: 0.6s;
+	-moz-transform-style: preserve-3d;
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+}
+
+/* back, initially hidden pane */
+.back {
+	-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			transform: rotateY(180deg);
+	overflow-y: scroll;
+}
+
+// Profil User
+
+.profil-header {
+	padding-top: 25/16em;
+	padding-bottom: 20/16em;
+	.box-shadow(0/16em 0/16em 10/16em #000);
+	position:relative;
+	z-index: 100;
+}
+
+.result {
+	z-index: 1;
+	font-size: 1.1em;
+	&.positif {
+		background-color: @green;
+		color: #fff;
+	}
+	&.negatif {
+		background-color: rgb(255,60,112);
+		color: #fff;
+	}
+	.b {
+		float: left;
+		padding-top: 7/16em;
+		padding-bottom: 7/16em;
+		width: 50%;
+		text-align: center;
+	}
+	.a {
+		float: right;
+		padding-top: 7/16em;
+		padding-bottom: 7/16em;
+		width: 50%;
+		text-align: center;
+	}
+}
+
+.deal-resume {
+	cursor: pointer;
+	padding-bottom: 4%;
+	padding-top: 3%;
+	border-bottom: 1/16em solid rgba(0,0,0,0.1);
+	.part {
+		.title {
+			float:left;
+			width:70%;
+			font-size: 1em;
+			overflow: hidden;
+		}
+		.money-result {
+			float:right;
+			margin-right: 3%;
+			font-size: 0.9em;
+		}
+		.progress-bar-layout {
+			margin-top: 0.34375em;
+			height: 4/16em;
+		}
+		.progress-bar-hover {
+			height: 4/16em;
+			margin-top: -5/16em;
+		}
+		.positif-bar-close {
+			margin-top: 0.34375em;
+			height: 4/16em;
+			background-color: @green;
+			width: 85%;
+		}
+		.negatif-bar-close {
+			margin-top: 0.34375em;
+			height: 4/16em;
+			background-color: @red;
+			width: 85%;
+		}
+		.statut {
+			float:right;
+			margin-right: 3%;
+			font-size: 0.7em;
+			line-height: 0.8em;
+		}
+		.opportunity-bar-layout{
+			width: 85%;
+			margin-top: 0.34375em;
+			height: 4/16em;
+		}
+		.puce {
+			height: 8/16em;
+			width: 8/16em;
+			background-color: #aaa;
+			margin-top: -7/16em;
+			z-index: 10000000;
+			position: relative;
+			.border-radius(50%);
+		}
+	} 
+}
+
+.positif {
+	color: @green;
+}
+
+.negatif {
+	color: @red;
+}
+
+.back-deal {
+	line-height: 2.2em !important;
+	font-size: 1.3em;
+}
+
+// Popup Login 
+
+.popupLogin {
+	position:fixed;
+	height:101%;
+	width:100%;
+	margin-top:-30%;
+	background: rgba(0,0,0,0.5);	
+	display:none;
+	z-index: 10;
+	.animated();	
+	.fadeIn();
+	.message-popup {
+		background-color: rgba(0,0,0,0.6);
+		width: 50%;
+		text-align: center;
+		color: #fff;
+		border-radius: 10px;
+		padding: 5px;
+		.animated.hinge();
+		.fadeIn();
+	}
+}
+
+.loader {
+	position:absolute;
+	z-index:10000000;
+	background-color: rgba(0, 0, 0, 0.6);
+	text-align: center;
+	i {
+		font-size:3.5em;
+		color: rgba(255, 255, 255, 1);
+	}
+
+	&.small {
+		margin-left: -5/2em;
+		margin-top: -5/2em;
+		width: 5em;
+		height: 5em;
+		left:50%;
+		i {
+			margin-top: 13/3.5/16em;
+		}
+	}
+
+	&.big {
+		width: 100%;
+		height: 100%;
+		i {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -0.5em;
+			margin-left: -0.5em;
+		}
+	}
+}
+
+#signin-slider > div {
+	position:absolute;
+}

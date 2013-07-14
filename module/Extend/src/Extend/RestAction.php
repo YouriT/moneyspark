@@ -38,7 +38,7 @@ abstract class RestAction extends AbstractRestfulController
 	protected function setCrossDomainOptions()
 	{
 		$this->getResponse()->getHeaders()
-			->addHeaderLine('Access-Control-Allow-Origin', 'http://moneyspark.app')
+			->addHeaderLine('Access-Control-Allow-Origin', '*')
 			->addHeaderLine('Access-Control-Allow-Methods', 'GET, HEAD, POST, PUT, DELETE, OPTIONS')
 			->addHeaderLine('Access-Control-Allow-Headers', 'api-key, origin, x-mime-type, x-requested-with, x-file-name, content-type')
 			->addHeaderLine('Access-Control-Max-Age', '1728000')

@@ -19,4 +19,44 @@ class IndexController extends Action
     {
         return new ViewModel();
     }
+    public function aboutAction()
+    {
+    	return new ViewModel();
+    }
+    public function buyAction()
+    {
+    	return new ViewModel();
+    }
+    public function cash1Action()
+    {
+    	return new ViewModel();
+    }
+    public function cash2Action()
+    {
+    	return new ViewModel();
+    }
+    public function cash3Action()
+    {
+    	return new ViewModel();
+    }
+    public function confirmationAction()
+    {
+    	return new ViewModel();
+    }
+    public function confirmationdealAction()
+    {
+    	return new ViewModel();
+    }
+    public function connexionAction()
+    {
+    	return new ViewModel();
+    }
+    public function signinAction()
+    {
+    	return new ViewModel();
+    }
+    public function userprofileAction()
+    {
+    	return new ViewModel();
+    }
 }
