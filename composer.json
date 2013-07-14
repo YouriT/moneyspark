@@ -16,6 +16,7 @@
     "autoload": {
         "psr-0": {
             "Front": "module/Front/src",
+	    "Mobile": "module/Mobile/src",
             "Api": "module/Api/src",
             "Account": "module/Account/src",
             "Extend": "module/Extend/src"

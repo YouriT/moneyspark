@@ -20,23 +20,8 @@ return array(
                         'controller' => 'Index',
                         'action'     => 'index',
                     ),
-                ),
-            ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
-            'application' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/application',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
+                ),            	
+            	'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
                         'type'    => 'Segment',
@@ -78,13 +63,23 @@ return array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
+        'not_found_template'       => 'Error/404',
+        'exception_template'       => 'Error/index',
         'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'Front/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+        	'Mobile/layout'           => str_replace("Front", "Mobile", __DIR__) . '/../view/layout/layout.phtml',
+        	'Error/404'               => __DIR__ . '/../view/error/404.phtml',
+        	'Error/index'             => __DIR__ . '/../view/error/index.phtml'
         ),
         'template_path_stack' => array(
-            __DIR__ . '/../view',
-        ),
+        		'Front' => __DIR__ . '/../view',
+        		'Mobile' => str_replace("Front", "Mobile", __DIR__) . '/../view'
+        )
     ),
+	'module_layouts' => array(
+				'Front' => 'Front/layout',
+				'Mobile' => 'Mobile/layout'
+	)
 );
+
+
