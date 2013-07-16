@@ -20,6 +20,9 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+        // $conf = $e->getApplication()->getServiceManager()->get('config');
+        // var_dump($conf['router']);exit;
     }
 
     public function getConfig()

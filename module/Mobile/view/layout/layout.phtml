@@ -6,20 +6,21 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=0.5" />
     <!-- Please don't add "maximum-scale=1" here. It's bad for accessibility. -->
     <!-- <meta name="viewport" content="width=device-width, initial-scale=0.5"> -->
-    <link id="mycss" rel="stylesheet" type="text/css" href="mobile/css/moneyspark.css" />
+    <base href="<?php echo $this->url('mobile') ?>mobile/" />
+    <link id="mycss" rel="stylesheet" type="text/css" href="css/mobile.css" />
     <title>Moneyspark</title>
 </head>
 <body class="menuvertical-push" data-url="deals">
 <?php echo $this->content; ?>
-    <script type="text/javascript" src="mobile/js/jquery.js"></script>
-    <script type="text/javascript" src="mobile/js/jquery.inheritance.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.inheritance.js"></script>
     <!-- <script type="text/javascript" src="cordova.js"></script> !-->
-    <script type="text/javascript" src="mobile/js/jquery.nicescroll.min.js"></script>
-    <script type="text/javascript" src="mobile/js/device.js"></script>
-    <script type="text/javascript" src="mobile/js/transit.min.js"></script>
-    <script type="text/javascript" src="mobile/js/jquery.touchSwipe.min.js"></script>
-    <script type="text/javascript" src="mobile/js/sql.js"></script>
-    <script type="text/javascript" src="mobile/js/rest.js"></script>
-    <script type="text/javascript" src="mobile/js/project.js"></script>
+    <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="js/device.js"></script>
+    <script type="text/javascript" src="js/transit.min.js"></script>
+    <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="js/sql.js"></script>
+    <script type="text/javascript" src="js/rest.js"></script>
+    <script type="text/javascript" src="js/project.js"></script>
 </body>
 </html>

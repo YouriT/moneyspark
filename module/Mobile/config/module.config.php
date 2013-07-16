@@ -19,7 +19,7 @@ return array(
             'mobile' => array(
                 'type' => 'hostname',
                 'options' => array(
-                    'route'    => $r,
+                    'route'    => 'm.reonin.com',
                     'defaults' => array(
                     	'__NAMESPACE__' => 'Mobile',
                         'controller' => 'Index',
@@ -29,14 +29,22 @@ return array(
             	'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Mobile',
+                                'controller' => 'Index',
+                            )
+                        )
+                    ),
+                    'main' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'    => '[/:controller[/:action]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
                             ),
                         ),
                     ),
@@ -44,10 +52,18 @@ return array(
             ),
         ),
     ),
+    'view_manager' => array(
+        'template_map' => array(
+            'Mobile/layout' => __DIR__ . '/../view/layout/layout.phtml',
+        ),
+    ),
     'controllers' => array(
         'invokables' => array(
-            'mobile_index' => 'Mobile\Controller\IndexController'
+            'Mobile\Index' => 'Mobile\Controller\IndexController'
         ),
+    ),
+    'module_layouts' => array(
+        'Mobile' => 'Mobile/layout'
     )
 );
 

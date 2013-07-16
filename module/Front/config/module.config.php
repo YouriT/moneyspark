@@ -11,27 +11,35 @@ namespace Front;
 return array(
     'router' => array(
         'routes' => array(
-            'home' => array(
-                'type' => 'Literal',
+            'front' => array(
+                'type' => 'hostname',
                 'options' => array(
-                    'route'    => '/',
+                    'route'    => 'site.reonin.com',
                     'defaults' => array(
-                    	'__NAMESPACE__' => 'Front',
+                        '__NAMESPACE__' => 'Front',
                         'controller' => 'Index',
-                        'action'     => 'index',
+                        'action' => 'index'
                     ),
-                ),            	
+                ),          	
             	'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Front',
+                                'controller' => 'Index',
+                            )
+                        )
+                    ),
+                    'main' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'    => '[/:controller[/:action]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
                             ),
                         ),
                     ),
@@ -56,7 +64,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'front_index' => 'Front\Controller\IndexController'
+            'Front\Index' => 'Front\Controller\IndexController'
         ),
     ),
     'view_manager' => array(
@@ -67,7 +75,6 @@ return array(
         'exception_template'       => 'Error/index',
         'template_map' => array(
             'Front/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-        	'Mobile/layout'           => str_replace("Front", "Mobile", __DIR__) . '/../view/layout/layout.phtml',
         	'Error/404'               => __DIR__ . '/../view/error/404.phtml',
         	'Error/index'             => __DIR__ . '/../view/error/index.phtml'
         ),
@@ -77,8 +84,7 @@ return array(
         )
     ),
 	'module_layouts' => array(
-				'Front' => 'Front/layout',
-				'Mobile' => 'Mobile/layout'
+			'Front' => 'Front/layout',
 	)
 );
 

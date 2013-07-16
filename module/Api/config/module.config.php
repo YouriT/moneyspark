@@ -23,7 +23,7 @@ return array(
             'api' => array(
                 'type' => 'hostname',
                 'options' => array(
-                    'route'    => $r,
+                    'route'    => 'api.reonin.com',
                     'defaults' => array(
                     	'__NAMESPACE__' => 'Api',
                         'controller' => 'Error',

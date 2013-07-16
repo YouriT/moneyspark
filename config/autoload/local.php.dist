@@ -35,6 +35,25 @@ return array(
 			)
 		)
 	),
+	'router' => array(
+		'routes' => array(
+            'front' => array(
+                'options' => array(
+                    'route'    => 'moneyspark.local',
+                )
+            ),
+            'mobile' => array(
+                'options' => array(
+                    'route'    => 'm.moneyspark'
+                )
+            ),
+            'api' => array(
+                'options' => array(
+                    'route'    => 'api.moneyspark'
+                )
+            )
+		)
+	),
 	'mailer' => array(
 		'default_message' => array(
 			'from' => array(

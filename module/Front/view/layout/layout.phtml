@@ -5,7 +5,8 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=0.5" />
         <!-- Please don't add "maximum-scale=1" here. It's bad for accessibility. -->
         <!-- <meta name="viewport" content="width=device-width, initial-scale=0.5"> -->
-        <link id="mycss" rel="stylesheet" type="text/css" href="www/css/sitemoneyspark.css" />
+        <base href="<?php echo $this->url('front') ?>front/" />
+        <link id="mycss" rel="stylesheet" type="text/css" href="css/front.css" />
         <title>Moneyspark</title>
     </head>
     <body class="bg2">
@@ -13,7 +14,7 @@
         <div class="container" style="padding-top:9%;z-index: 100;position: relative;">
         <?php echo $this->content; ?>
                 <div class="text-site">
-                    <img src="www/img/logo-site.png" class="logo-site"/>
+                    <img src="img/logo-site.png" class="logo-site"/>
                     <div class="clear"></div>
                     <div class="border anim"></div>
                     <div class="purpose">now... small capitals have access to big returns !</div>
@@ -34,7 +35,7 @@
                     <a><i class="section-i icon-google-plus"></i></a>
                 </div>
         </div>
-        <script type="text/javascript" src="www/js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
 
         <!-- Only when compile on device !-->        
         <script type="text/javascript">
