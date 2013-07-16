@@ -4,7 +4,7 @@
             cache: false
         });
         loader();
-        var page = "/index/"+page.replace(".html", "").replace(SERVER_HTTP_HOST(), "");
+        var page = page.replace(".html", "").replace(SERVER_HTTP_HOST(), "");
         
         $.get(page, function (r) {
             var mult = -1;
