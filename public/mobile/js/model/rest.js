@@ -109,7 +109,6 @@ var Auth = Class.extend({
     }
 });
 
-
 var Input = Class.extend({
     i:null,
     pwd:null,
