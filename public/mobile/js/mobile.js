@@ -1,0 +1,9 @@
+//@codekit-append jquery.js
+//@codekit-append jquery.inheritance.js
+//@codekit-append jquery.nicescroll.min.js
+//@codekit-append device.js
+//@codekit-append transit.min.js
+//@codekit-append jquery.touchSwipe.min.js
+//@codekit-append sql.js
+//@codekit-append rest.js
+//@codekit-append project.js
