@@ -35,16 +35,17 @@ var menuClick = function() {
         if($(this).hasClass('needConnected')){
             //Check out if user is connected
             var th = $(this);
-            TableConfiguration.findValueByKey('token', function(){ $(window).changePage(th.prop('href'), dir); },
-                                                       function(){
-                                                            redirectPageAfterLogin=th.prop('href');
-                                                            $(window).changePage("/connexion", dir);
-                                                       });
+            if (TableConfiguration.findValueByKey('token') != false) {
+                $(window).changePage(th.prop('href'), dir);
+            } else {
+                redirectPageAfterLogin=th.prop('href');
+                $(window).changePage("/connexion", dir);
+            }
         }
         else if($(this).hasClass('logout')){
-            TableConfiguration.delete("token", function(){
+            if (TableConfiguration.remove("token")) {
                 $(window).changePage("/connexion", dir);
-            });
+            }
         } else {
             $(window).changePage($(this).prop('href'), dir);
         }
@@ -91,15 +92,15 @@ var Page = Class.extend({
     createdHandler : function () {
         console.log("Current page: "+$('body').attr("data-url"));
 
-        TableConfiguration.findValueByKey("token", function(){
+        if (TableConfiguration.findValueByKey("token") != false) {
             //Menu when connected
             menuCreate(true);
             menuClick();
-        }, function(){
+        } else {
             //Menu when not connected
             menuCreate(false);
             menuClick();
-        });
+        }
 
         //Page deals
         if($('body').attr("data-url") === "deals"){

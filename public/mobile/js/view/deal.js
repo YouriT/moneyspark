@@ -23,12 +23,7 @@ var Deal = Class.extend({
 		if (eventCounts('productsGranted') == 0) {
 			$(window).on('productsGranted', function () {
 				var productsDb = new TableProducts();
-                productsDb.findAll(function (r) {
-                	console.log('salope', obj, r);
-                	obj.products = r;
-					obj.create();
-                	console.log('salope', obj, r);
-                });
+                obj.products = productsDb.findAll();
 			});
 		}
 	},
@@ -82,7 +77,7 @@ var Deal = Class.extend({
                 $this = $(this);
                 amountInvest = parseInt(amountText);
                 var obj = this;
-                TableConfiguration.findValueByKey('token', function(r) {
+                if (TableConfiguration.findValueByKey('token') != false) {
                     $back = $('.flip-container').find('.back');
                     $back.height($(window).height() - $back.offset().top - $('.bottom-menu').outerHeight() - parseInt($back.css('padding-top'),10)*2);
 
@@ -98,10 +93,9 @@ var Deal = Class.extend({
                     $('.resume-user-cash').text();
 
                     $('.flip-container').toggleClass('hover');
-                },
-                function(e) {
+                } else {
                     $(window).changePage("/connexion", "left"); 
-                });
+                }
             }
 		});
 		$('.imin').click(function(){
