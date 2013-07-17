@@ -4,7 +4,7 @@
 //@codekit-append util/transit.min.js
 //@codekit-append util/jquery.touchSwipe.min.js
 //@codekit-append util/spec.js
-//@codekit-append model/sql.js
+//@codekit-append model/storage.js
 //@codekit-append model/rest.js
 //@codekit-append view/deal.js
 //@codekit-append view/register.js

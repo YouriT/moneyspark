@@ -156,7 +156,7 @@ var updateInvestments = function updateInvestments(r){
 };
 
 
-var updateLastRetrieving = function updateLastRetrieving(granted){
+var updateLastRetrieving = function (granted){
     var d = new Date();
     var n = d.getTime();
     c.updateValue("lastRetrieving", n);
@@ -164,44 +164,44 @@ var updateLastRetrieving = function updateLastRetrieving(granted){
 };
 
 
-var Retrieve = function retrieve(force) {
-        if(force == undefined)
-            force = true;
-        var d = new Date();
-        var n = d.getTime();
-        v = c.findValueByKey("lastRetrieving");
-        tok = c.findValueByKey("token");
-        if(v != false){
-        	if( (v < (n-(3600000/2))) || force ){
-                //Update products
-                new Ajax("Product", function(r){
-                		p.insertAll(r)
-                		updateLastRetrieving("productsGranted")}, function(e){});
-               	if(tok != false){ //if token exists, UPDATE investments, profile
-               		new Ajax("Profile/me", function(r){ updateProfile(r);});
-               		new Ajax("Profile/investment", function(r){ updateInvestments(r);});
-               	}
-            }
-            else
-            {
-            	if(tok != false){
-            		updateLastRetrieving("meGranted"); 
-            		updateLastRetrieving("investmentsGranted");
-            	}
-                updateLastRetrieving("productsGranted");
-            }
-        	
-        }
-        else //if lastRetrieving does not exists
-        {
-        	//Update only table products, insert lastRetrieving products
+var retrieve = function (force) {
+    if(force == undefined)
+        force = true;
+    var d = new Date();
+    var n = d.getTime();
+    v = c.findValueByKey("lastRetrieving");
+    tok = c.findValueByKey("token");
+    if(v != false){
+    	if( (v < (n-(3600000/2))) || force ){
+            //Update products
             new Ajax("Product", function(r){
-                p.insertAll(r);
-                updateLastRetrieving("productsGranted");
-            });
-        }    
-    };
+            		p.insertAll(r);
+            		updateLastRetrieving("productsGranted")}, function(e){});
+           	if(tok != false){ //if token exists, UPDATE investments, profile
+           		new Ajax("Profile/me", function(r){ updateProfile(r);});
+           		new Ajax("Profile/investment", function(r){ updateInvestments(r);});
+           	}
+        }
+        else
+        {
+        	if(tok != false){
+        		updateLastRetrieving("meGranted"); 
+        		updateLastRetrieving("investmentsGranted");
+        	}
+            updateLastRetrieving("productsGranted");
+        }
+    	
+    }
+    else //if lastRetrieving does not exists
+    {
+    	//Update only table products, insert lastRetrieving products
+        new Ajax("Product", function(r){
+            p.insertAll(r);
+            updateLastRetrieving("productsGranted");
+        });
+    }    
+};
 
 $(window).load(function () {
-    $(window).on('askRetrieve', function(){ Retrieve(); })
+    $(window).on('askRetrieve', retrieve);
 });
