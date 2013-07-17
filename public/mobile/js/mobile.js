@@ -8,4 +8,6 @@
 //@codekit-append model/rest.js
 //@codekit-append view/deal.js
 //@codekit-append view/register.js
+//@codekit-append view/login.js
+//@codekit-append view/profile.js
 //@codekit-append view/main.js

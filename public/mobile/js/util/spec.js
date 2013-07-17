@@ -71,9 +71,12 @@ var eventCounts = function (name) {
                 transitions();
         }, 'html');
     };
+    $.fn.checkboxes = function () {
+	    $(this).find('div:first-child').toggleClass('active');
+	    $this = $(this);
+	    $('.check-text-little-grey, .check-little-grey', this).click(function () {
+			$this.find('div:first-child').toggleClass('active');
+	    });
+	    // $('.check-input').eq($('.slide .check').index($(this))).val($(this).hasClass('active') ? 1 : 0);
+	};
 }(jQuery));
-
-var beautyCheckboxes = function () {
-    $(this).toggleClass('active');
-    $('.check-input').eq($('.slide .check').index($(this))).val($(this).hasClass('active') ? 1 : 0);
-};
