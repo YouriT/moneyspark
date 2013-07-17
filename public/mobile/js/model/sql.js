@@ -67,6 +67,7 @@ var TableConfiguration = Class.extend({
     		all = this.findAll();
     		delete all[key];
     		localStorage.setItem("cfg", JSON.stringify(all));
+    		return true;
     	}
     	else
     	{
@@ -101,7 +102,13 @@ var TableProducts = Class.extend({
   },
   findAll: function(){     
       if(this.check()){
-      	return JSON.parse(localStorage.getItem("productsList"));
+      	if(localStorage.getItem("productsList") != undefined && localStorage.getItem("productsList") != null){
+      		return JSON.parse(localStorage.getItem("productsList"));
+      	}
+      	else
+      	{
+      		return false;
+      	}
       }
       else
       {
@@ -112,6 +119,7 @@ var TableProducts = Class.extend({
     	if(this.check()){
     		all = listObject;
     		localStorage.setItem("productsList", JSON.stringify(all));
+    		return true;
     	}
     	else
     	{
@@ -121,5 +129,6 @@ var TableProducts = Class.extend({
     deleteAll: function(){
     	all = {};
     	localStorage.setItem("productsList", JSON.stringify(all));
+    	return true;
     }
 });
