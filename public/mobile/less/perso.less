@@ -9,7 +9,7 @@
 
 // mediaquiries pictures
 
-body {overflow: hidden;}
+body {overflow: hidden;margin:0;position:absolute;padding:0;left:0;right:0;top:0;bottom:0;}
 
 @media screen and (min-width: 240px) {
 	body {font-size: @font-size/320*240px;}
@@ -481,8 +481,10 @@ body {overflow: hidden;}
 	color: #888;
 }
 
-#page {
-	.css3hack();
+#page, #page2 {
+	position: absolute;
+	height: 100%;
+	width: 100%;
 }
 
 .cambria {
@@ -765,7 +767,7 @@ body {overflow: hidden;}
 	width: 7/16em;
 	height: 7/16em;
 	border: 2/16em solid rgba(255, 255, 255, 0.65);
-	margin-bottom: 5/16em;
+	// margin-bottom: 5/16em;
 	.border-radius(50%) !important;
 	float: left;
 	box-shadow: 0 1/16em 2/16em rgba(0, 0, 0, 0.3);
@@ -1132,7 +1134,6 @@ body {overflow: hidden;}
 .menuvertical-vertical {
     width: 66/16em;
     top: 0;
-    z-index: 1000;
 }
  
 .menuvertical-vertical a {
@@ -1180,10 +1181,10 @@ body {overflow: hidden;}
 .button-menuvertical {
 	height: 30/16em;
 	width: 37/16em;
+	margin-left: 1em;
 	border: none;
 	background-color: rgba(0, 0, 0, 0);
 	padding: 0;
-	float: left;
 }
 
 .trait {
@@ -1207,27 +1208,30 @@ body {overflow: hidden;}
 }
 
 .ensemble-pagenum-bottom-menu {
-	float: left;
-	margin: 0 auto;
+	position: absolute;
+	left: 50%;
+	height: 30/16em;
+	display: inline;
+	line-height: 30/16em;
+	vertical-align: middle;
 }
 
 .wrapper {
+	position: relative;
+	z-index: 1;
 	min-height: 100%;
-	height: auto !important;
-	height: 100%;
-	margin: 0 auto -4em;
+	height: auto;
+	margin: 0 0 -(30/16+20/16)*1em 0;
+	padding: 0;
+	overflow: hidden;
 }
 
 .footer {
-	height: 4em;
-}
-
-.bottom-menu {
+	position: relative;
+	z-index: 2;
+	height: 30/16em;
 	padding-top: 10/16em;
 	padding-bottom: 10/16em;
-	position:absolute;
-	bottom:0;
-	z-index:10000;
 }
 
 .mt34 {

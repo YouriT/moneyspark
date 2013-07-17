@@ -117,42 +117,41 @@ var numberFormat = function (number, decimals, dec_point, thousands_sep) {
 
             $page.prop('id','page2');
             if (direction === 'left') {
-                $page.css({position:'absolute',left:$(window).width()+'px'});
+                $page.css({left:$(window).width()+'px'});
+                console.log($page);
+                // throw "stop execution";
             } else {
-                $page.css({position:'absolute',left:-$(window).width()+'px'});
+                $page.css({left:-$(window).width()+'px'});
             }
 
-            $page.width($(window).width());
-            $page.height($(window).height());
-            $page.parent().find('script').remove();
-            $page.css('-webkit-filter','blur(3px)');
-            $('#page').before($page.parent().html());
+            // $page.width($(window).width());
+            // $page.height($(window).height());
+            // $page.parent().find('script').remove();
+            // $page.css('-webkit-filter','blur(3px)');
+            $('#page').before($page[0].outerHTML);
             $('#page').css('overflow','hidden');
             var add = 0;
             function transitions() {
                 $('#page').transition({x:mult*($(window).width())});
                 $('#page2').transition({x:mult*($(window).width())},function () {
                     var $p2 = $('#page2');
-                    var copyClasses = $p2.prop('class');
-                    $p2.removeAttr('class');
-                    $('body').prop('class', copyClasses);
-                    $('body').attr('data-url', $p2.attr('data-url'));
                     $('#page').remove();
                     $p2.css({
-                        position: '',
                         left: '',
                         transform: '',
                     });
                     $p2.prop('id','page');
                     $(window).trigger('pageCreated');
-                    $(window).trigger('pageLoader');
+                    // $(window).trigger('pageLoader');
                 });
             }
-            if ($('body').hasClass('menuvertical-push-toright')) {
-                $('body').removeClass('menuvertical-push-toright');
-                transitions();
-            }
-            else
+            if (!$('nav').hasClass('menuvertical-left'))
+                $('nav').addClass('menuvertical-left');
+            // if ($('body').hasClass('menuvertical-push-toright')) {
+            //     $('body').removeClass('menuvertical-push-toright');
+            //     transitions();
+            // }
+            // else
                 transitions();
         }, 'html');
     };

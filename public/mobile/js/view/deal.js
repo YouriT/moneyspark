@@ -4,8 +4,8 @@ var Deal = Class.extend({
 	init: function () {
 		this.index = -1;
 		$('div[data-role=checkbox]').checkboxes();
-		$('#page').width($(window).width());
-        $('#page').height($(window).height());
+		// $('#page').width($(window).width());
+  //       $('#page').height($(window).height());
         var pad = $('.deal').width() - $('.deal').innerWidth();
         $('.buydeal').css({
             marginLeft: pad/2,
@@ -107,7 +107,6 @@ var Deal = Class.extend({
 	},
 	parse : function(prod, i) {
 	    prodObj = this.products[i];
-	    console.log(prodObj);
 	    prod.find('.title').html(prodObj.product.title);
 	    prod.find('.hf-name').html(prodObj.hedgefund.title);
 	    var funded = parseInt(prodObj.product.sumInvestedAmounts,10) / parseInt(prodObj.product.requiredAmount,10);
@@ -133,7 +132,8 @@ var Deal = Class.extend({
 	    for (var i = 0; i < this.products.length; i++)
 	    {
 	        var newpage = $('#deal-model').html();
-	        $('#deal-model').before('<div id="deal'+i+'" data-product="'+i+'" class="deal" style="width:'+$('#deal-model').width()+'px;position:absolute;right:-'+$(window).width()+'px">'+newpage+'</div>');
+	        var dealWidth = $('.wrapper .container:first').width() - parseInt($('#deal-model').css('padding-top'),10)/100*$(window).width()* 2;
+	        $('#deal-model').before('<div id="deal'+i+'" data-product="'+i+'" class="deal" style="width:'+dealWidth+'px;position:absolute;right:-'+$(window).width()+'px">'+newpage+'</div>');
 	        this.parse($('#deal-model').prev(), i);
 	        $('#deal-model').prev().trigger('resize-product', $('#deal-model'));
 	        $('input[name="amount"]', $('#deal-model').prev()).keyup(function (e) {

@@ -6,22 +6,24 @@ var loader = function () {
     var device_loader = $('<div id="main-loader" class="loader big"><i class="icon-refresh icon-spin"></i></div>');
     device_loader.width($(window).width()*5);
     device_loader.css('left',-($(window).width()*2)+'px');
-    $('body').prepend(device_loader);
+    // $('body').prepend(device_loader);
 
-    $('#page').css('-webkit-filter','blur(3px)');
+    // $('#page').css('-webkit-filter','blur(3px)');
 
-    $(window).one('pageLoaded', function () {
-        if (navigator.userAgent.indexOf('Apple') === -1) {
-            $('#page').css('-webkit-filter', 'blur(0px)');
-        } else {
-            $('#page').css('-webkit-filter', '');
-        }
-        $('#main-loader').remove();
-    });
+    if (eventCounts('pageLoaded') == 0) {
+        $(window).on('pageLoaded', function () {
+            if (navigator.userAgent.indexOf('Apple') === -1) {
+                $('#page').css('-webkit-filter', 'blur(0px)');
+            } else {
+                $('#page').css('-webkit-filter', '');
+            }
+            $('#main-loader').remove();
+        });
+    }
 };
 
-var menuClick = function() {
-    $('a').click(function (e) {
+var linkClick = function(context) {
+    $('a',context).click(function (e) {
         e.preventDefault();
         if ($(this).prop('href').indexOf('#') !== -1) {
             return false;
@@ -64,81 +66,63 @@ var menuCreate = function(connected){
 var mainObject = this;
 var Page = Class.extend({
     obj: null,
-    init: function () {
-        var className = $('#page').attr("data-url");
-        className = className.charAt(0).toUpperCase() + className.slice(1);
-        if (mainObject[className] != undefined) {
-            this.obj = new mainObject[className];
-        } else {
-            alert("The class corresponding to this page doesn't exists");
-        }
-        $(window).on('pageCreated', this.createdHandler);
-        this.createdHandler();
-        this.swiper();
-    },
     swiper: function () {
         var $this = this;
         $(window).swipe({
             swipe: function (event, direction, distance, duration, fingerCount) {
                 if (distance > $(window).width()*0.07) {
-                    console.log($this.obj);
                     if ($this.obj['swipe'] != undefined) {
                         $this.obj.swipe(event, direction, distance, duration, fingerCount);
                     }
                 }
             }
         });
-    },
-    createdHandler : function () {
-        console.log("Current page: "+$('body').attr("data-url"));
-
-        if (TableConfiguration.findValueByKey("token") != false) {
-            //Menu when connected
-            menuCreate(true);
-            menuClick();
-        } else {
-            //Menu when not connected
-            menuCreate(false);
-            menuClick();
-        }
-
-        //Page deals
-        if($('body').attr("data-url") === "deals"){
-            
-            
-            // dealView.addListeners();
-
-            // $('.pagenum').click(function () {
-            //     if ($(this).index() === 2) {
-            //         changeProduct('next');
-            //     } else if ($(this).index() === 0) {
-            //         changeProduct('prev');
-            //     }
-            // });
-            
-            
-
-            // $('#page').removeAttr('class');
-
-            
-        }
-        
-
-        // Menu click
-        $('#showLeftPush').click(function () {
-            $('.menuvertical-push').toggleClass('menuvertical-push-toright');
-            $('nav').toggleClass('menuvertical-left');
-        });
-
-        $(window).trigger("askRetrieve");
     }
 });
+var firstPInstance;
+
+var createdHandler = function () {
+    console.log("Current page: "+$('#page').attr("data-url"));
+
+    var className = $('#page').attr("data-url");
+    className = className.charAt(0).toUpperCase() + className.slice(1);
+    if (mainObject[className] != undefined) {
+        firstPInstance.obj = new mainObject[className];
+    } else {
+        alert("The class corresponding to this page doesn't exists");
+    }
+
+    firstPInstance.swiper();
+
+    linkClick('#page');
+
+    // Menu click
+    $('#showLeftPush').click(function () {
+        $('.menuvertical-push').toggleClass('menuvertical-push-toright');
+        $('nav').toggleClass('menuvertical-left');
+    });
+
+    $(window).trigger("askRetrieve");
+}
 
 $(window).ready(function () {
     loader();
 });
 
 $(window).load(function () {
-    new Page();
+
+    firstPInstance = new Page();
+
+    $(window).on('pageCreated', createdHandler);
+    $(window).trigger('pageCreated');
+
+    if (TableConfiguration.findValueByKey("token") != false) {
+        //Menu when connected
+        menuCreate(true);
+    } else {
+        //Menu when not connected
+        menuCreate(false);
+    }
+    linkClick('nav');
     // $('.check').click();
 });
