@@ -85,3 +85,26 @@ var TableProducts = WebStorage.extend({
 		return true;
 	}
 });
+
+
+var TableInvestments = WebStorage.extend({
+	storageName: 'investmentsList',
+	findAll: function(){     
+		if(this.keyExists()){
+			return JSON.parse(localStorage.getItem(this.storageName));
+		}
+		return false;
+	},
+	insertAll: function(listObject){
+		if(this.storageAvailable()){
+			localStorage.setItem(this.storageName, JSON.stringify(listObject));
+			return true;
+		}
+		return false;
+	},
+	truncate: function(){
+		all = {};
+		localStorage.setItem(this.storageName, JSON.stringify(all));
+		return true;
+	}
+});

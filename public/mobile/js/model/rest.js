@@ -1,5 +1,6 @@
 //Global variables
 var TableConfiguration = c = new TableConfiguration();
+var TableInvestments = i = new TableInvestments();
 var p = new TableProducts();
 function SERVER_HTTP_HOST(replace){
 	if(replace == undefined)
@@ -60,11 +61,12 @@ var Ajax = Class.extend({
     }
 
     if(apiKey === undefined){
-        if(TableConfiguration.findValueByKey('token')){
+        if(TableConfiguration.findValueByKey('token') != false){
         	apiKey = TableConfiguration.findValueByKey('token');
         }
-        else
+        else{
         	apiKey = "";
+        }
         ajaxMe();
     }
     else
@@ -144,15 +146,22 @@ var Subscribe = Input.extend({
 
 var updateProfile = function updateProfile(r){
     c = new TableConfiguration();
-    c.insert("firstName", r.firstName);
-	c.insert("lastName", r.lastName);
-	c.insert("lockboxAmount", r.lockboxAmount);
-	c.insert("averageRentability", r.averageRentability);	
-    updateLastRetrieving("meGranted");
+    if(r.firstName != undefined && r.lastName != undefined && r.lockboxAmount != undefined && r.averageRentability != undefined){
+	   	c.insert("firstName", r.firstName);
+		c.insert("lastName", r.lastName);
+		c.insert("lockboxAmount", r.lockboxAmount);
+		c.insert("averageRentability", r.averageRentability);	
+	    updateLastRetrieving("meGranted");
+    }
 };
 
 var updateInvestments = function updateInvestments(r){
-    updateLastRetrieving("investmentsGranted");
+		new Ajax("Investment", function(r) {
+			if (r.current != undefined) {
+				i.insertAll(r);
+				updateLastRetrieving("investmentsGranted");
+			}
+		}); 
 };
 
 
@@ -181,6 +190,13 @@ var retrieve = function (force) {
            		new Ajax("Profile/me", function(r){ updateProfile(r);});
            		new Ajax("Profile/investment", function(r){ updateInvestments(r);});
            	}
+           	//Update Config
+           	new Ajax("Config", function(r){
+        		if(r.maxFeeRate != undefined){
+	            c.insert("maxFeeRate", r.maxFeeRate);
+	            c.insert("minFeeRate", r.minFeeRate);
+	            updateLastRetrieving("configGranted");
+	            }});
         }
         else
         {
@@ -189,6 +205,7 @@ var retrieve = function (force) {
         		updateLastRetrieving("investmentsGranted");
         	}
             updateLastRetrieving("productsGranted");
+            updateLastRetrieving("configGranted");
         }
     	
     }
@@ -198,6 +215,14 @@ var retrieve = function (force) {
         new Ajax("Product", function(r){
             p.insertAll(r);
             updateLastRetrieving("productsGranted");
+        });
+        
+        new Ajax("Config", function(r){
+        	if(r.maxFeeRate != undefined){
+	            c.insert("maxFeeRate", r.maxFeeRate);
+	            c.insert("minFeeRate", r.minFeeRate);
+	            updateLastRetrieving("configGranted");
+           }
         });
     }    
 };
