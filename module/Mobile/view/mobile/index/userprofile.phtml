@@ -7,31 +7,32 @@
         <div>
             <div class="profil-header row-fluid">
                     <div class="user"></div>
-                    <div class="cash-title"><span class="db-fullName">Youri Tolstoy</span></div>
+                    <div class="cash-title"><span class="db-fullName"></span></div>
                 <div class="clear"></div>
             </div>
 
             <div class="result positif">
                     <div class="a">
-                        <span class="db-avgRentability">+ 23,6%</span>                    
+                        <span class="db-avgRentability"><span class="db-avgRentabilityText"></span> %</span>                    
                     </div>
                     <div class="b">
-                        <span class="db-lockboxAmount">+ 12.356 $</span>     
+                        <span class="db-lockboxAmount">+ <span class="db-lockboxAmountText"></span> €</span>     
                     </div>
                     <div class="clear"></div>
             </div> 
 
             <div style="background-color:#fff;padding-top: 3%;color:#666"> 
                 
-                <div class="container" id="profileContainer" style="overflow: scroll;"> 
+                <div class="container myDeals" id="profileContainer" style="overflow: scroll;"> 
 
-                    <div class="deal-resume">
+                	<!--  model notStarted -->
+                    <div class="deal-resume notStarted" style="display:none">
                         <div class="part">
                             <div class="title db-title">
-                                Apple Sunrise
+                                
                             </div>
                             <div class="money-result db-invested">
-                                200 €
+                                <span class="sumInvested"></span> €
                             </div>
                             <div class="clear"></div>
                         </div>
@@ -41,123 +42,123 @@
                                 <div class="progress-bar-hover" style="width: 25%;margin-left: 60%;"></div>
                             </div>
                             <div class="statut db-phrase">
-                                74%<span class="maybe may-funded"> founded</span>
+                                <span class="ratioInvested"></span> %<span class="maybe may-funded"> founded</span>
                             </div>
                             <div class="clear"></div>
                         </div>
                     </div>
 
 
-                    <!-- <div class="deal-resume">
-                        <div class="part">
-                            <div class="title">
-                                Google crash
-                            </div>
-                            <div class="money-result positif">
-                                + 238 €
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="part">
+<!--                     <div class="deal-resume"> -->
+<!--                         <div class="part"> -->
+<!--                             <div class="title"> -->
+<!--                                 Google crash -->
+<!--                             </div> -->
+<!--                             <div class="money-result positif"> -->
+<!--                                 + 238 € -->
+<!--                             </div> -->
+<!--                             <div class="clear"></div> -->
+<!--                         </div> -->
+<!--                         <div class="part"> -->
                             <div style="float:left;width:70%">
-                                <div class="opportunity-bar-layout"></div>
+<!--                                 <div class="opportunity-bar-layout"></div> -->
                                 <div class="puce" style="margin-left: 75px;"></div>
-                            </div>
-                            <div class="statut">
-                                + 5,16%
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
+<!--                             </div> -->
+<!--                             <div class="statut"> -->
+<!--                                 + 5,16% -->
+<!--                             </div> -->
+<!--                             <div class="clear"></div> -->
+<!--                         </div> -->
+<!--                     </div> -->
 
 
-                    <div class="deal-resume">
-                        <div class="part">
-                            <div class="title">
-                                Tesla the new Apple
-                            </div>
-                            <div class="money-result positif">
-                                + 52 €
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="part">
+<!--                     <div class="deal-resume"> -->
+<!--                         <div class="part"> -->
+<!--                             <div class="title"> -->
+<!--                                 Tesla the new Apple -->
+<!--                             </div> -->
+<!--                             <div class="money-result positif"> -->
+<!--                                 + 52 € -->
+<!--                             </div> -->
+<!--                             <div class="clear"></div> -->
+<!--                         </div> -->
+<!--                         <div class="part"> -->
                             <div style="float:left;width:70%">
-                                <div class="positif-bar-close"></div>
-                            </div>
-                            <div class="statut">
-                                + 9,2%
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
+<!--                                 <div class="positif-bar-close"></div> -->
+<!--                             </div> -->
+<!--                             <div class="statut"> -->
+<!--                                 + 9,2% -->
+<!--                             </div> -->
+<!--                             <div class="clear"></div> -->
+<!--                         </div> -->
+<!--                     </div> -->
 
 
-                    <div class="deal-resume">
-                        <div class="part">
-                            <div class="title">
-                                E.U. fucked up
-                            </div>
-                            <div class="money-result negatif">
-                                - 107 €
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="part">
+<!--                     <div class="deal-resume"> -->
+<!--                         <div class="part"> -->
+<!--                             <div class="title"> -->
+<!--                                 E.U. fucked up -->
+<!--                             </div> -->
+<!--                             <div class="money-result negatif"> -->
+<!--                                 - 107 € -->
+<!--                             </div> -->
+<!--                             <div class="clear"></div> -->
+<!--                         </div> -->
+<!--                         <div class="part"> -->
                             <div style="float:left;width:70%">
-                                <div class="negatif-bar-close"></div>
-                            </div>
-                            <div class="statut">
-                                - 12,1%
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
+<!--                                 <div class="negatif-bar-close"></div> -->
+<!--                             </div> -->
+<!--                             <div class="statut"> -->
+<!--                                 - 12,1% -->
+<!--                             </div> -->
+<!--                             <div class="clear"></div> -->
+<!--                         </div> -->
+<!--                     </div> -->
 
 
-                    <div class="deal-resume">
-                        <div class="part">
-                            <div class="title">
-                                Google crash
-                            </div>
-                            <div class="money-result positif">
-                                + 238 €
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="part">
+<!--                     <div class="deal-resume"> -->
+<!--                         <div class="part"> -->
+<!--                             <div class="title"> -->
+<!--                                 Google crash -->
+<!--                             </div> -->
+<!--                             <div class="money-result positif"> -->
+<!--                                 + 238 € -->
+<!--                             </div> -->
+<!--                             <div class="clear"></div> -->
+<!--                         </div> -->
+<!--                         <div class="part"> -->
                             <div style="float:left;width:70%">
-                                <div class="opportunity-bar-layout"></div>
+<!--                                 <div class="opportunity-bar-layout"></div> -->
                                 <div class="puce" style="margin-left: 75px;"></div>
-                            </div>
-                            <div class="statut">
-                                + 5,16%
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
+<!--                             </div> -->
+<!--                             <div class="statut"> -->
+<!--                                 + 5,16% -->
+<!--                             </div> -->
+<!--                             <div class="clear"></div> -->
+<!--                         </div> -->
+<!--                     </div> -->
 
 
-                    <div class="deal-resume">
-                        <div class="part">
-                            <div class="title">
-                                Tesla the new Apple
-                            </div>
-                            <div class="money-result positif">
-                                + 52 €
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="part">
+<!--                     <div class="deal-resume"> -->
+<!--                         <div class="part"> -->
+<!--                             <div class="title"> -->
+<!--                                 Tesla the new Apple -->
+<!--                             </div> -->
+<!--                             <div class="money-result positif"> -->
+<!--                                 + 52 € -->
+<!--                             </div> -->
+<!--                             <div class="clear"></div> -->
+<!--                         </div> -->
+<!--                         <div class="part"> -->
                             <div style="float:left;width:70%">
-                                <div class="positif-bar-close"></div>
-                            </div>
-                            <div class="statut">
-                                + 9,2%
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div> -->
+<!--                                 <div class="positif-bar-close"></div> -->
+<!--                             </div> -->
+<!--                             <div class="statut"> -->
+<!--                                 + 9,2% -->
+<!--                             </div> -->
+<!--                             <div class="clear"></div> -->
+<!--                         </div> -->
+<!--                     </div> -->
 
 
                    

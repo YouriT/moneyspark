@@ -132,7 +132,6 @@ var Input = Class.extend({
             return "good";
     }
 });
-
 var Subscribe = Input.extend({
     data:null,
     setData:function(inputs){
@@ -142,10 +141,7 @@ var Subscribe = Input.extend({
         new Ajax("Register", successCallBack, inputs, 'POST');
     }
 });
-
-
-var updateProfile = function updateProfile(r){
-    c = new TableConfiguration();
+var updateProfile = function (r){
     if(r.firstName != undefined && r.lastName != undefined && r.lockboxAmount != undefined && r.averageRentability != undefined){
 	   	c.insert("firstName", r.firstName);
 		c.insert("lastName", r.lastName);
@@ -154,41 +150,36 @@ var updateProfile = function updateProfile(r){
 	    updateLastRetrieving("meGranted");
     }
 };
-
-var updateInvestments = function updateInvestments(r){
-		new Ajax("Investment", function(r) {
-			if (r.current != undefined) {
-				i.insertAll(r);
-				updateLastRetrieving("investmentsGranted");
-			}
-		}); 
+var updateInvestments = function (r){
+	if (r.current != undefined) {
+		i.insertAll(r);
+		updateLastRetrieving("investmentsGranted");
+	}
 };
-
-
 var updateLastRetrieving = function (granted){
     var d = new Date();
     var n = d.getTime();
     c.updateValue("lastRetrieving", n);
     $(window).trigger(granted);
 };
-
-
 var retrieve = function (force) {
     if(force == undefined)
-        force = true;
+        force = false;
     var d = new Date();
     var n = d.getTime();
     v = c.findValueByKey("lastRetrieving");
     tok = c.findValueByKey("token");
     if(v != false){
-    	if( (v < (n-(3600000/2))) || force ){
+    	if( (v < (n-(3600000))) || force ){
             //Update products
             new Ajax("Product", function(r){
             		p.insertAll(r);
             		updateLastRetrieving("productsGranted")}, function(e){});
+            console.log(tok);
            	if(tok != false){ //if token exists, UPDATE investments, profile
+           		
            		new Ajax("Profile/me", function(r){ updateProfile(r);});
-           		new Ajax("Profile/investment", function(r){ updateInvestments(r);});
+           		new Ajax("Investment", function(r){ updateInvestments(r);});
            	}
            	//Update Config
            	new Ajax("Config", function(r){
@@ -226,7 +217,6 @@ var retrieve = function (force) {
         });
     }    
 };
-
 $(window).load(function () {
     $(window).on('askRetrieve', retrieve);
 });

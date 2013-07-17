@@ -42,8 +42,12 @@ class InvestmentController extends RestAction
 			$array['hedgefund'] = $hedgefund = $p->getHedgefund()->toArray();
 			$array['amount'] = $i->getAmount();
 			
+
+			
 			if($i->isEnded())
 				$ret["ended"][] = $array;
+			elseif($p->getDateBeginExpected() > new \DateTime())
+				$ret["notStarted"][] = $array;
 			else
 				$ret["current"][] = $array;
 		}
