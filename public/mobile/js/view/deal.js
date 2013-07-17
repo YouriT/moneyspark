@@ -11,10 +11,7 @@ var Deal = Class.extend({
             marginLeft: pad/2,
             marginRight: pad/2
         });
-        var middle = $('.container:last').width()/2 - $('.ensemble-pagenum-bottom-menu').width()/2 - $('.button-menuvertical').width();
-        $('.ensemble-pagenum-bottom-menu').css({
-            marginLeft: middle+'px'
-        });
+        // $('.ensemble-pagenum-bottom-menu').alignCenter();
         this.addListeners();
 	},
 	addListeners: function () {
@@ -24,6 +21,7 @@ var Deal = Class.extend({
 			$(window).on('productsGranted', function () {
 				var productsDb = new TableProducts();
                 obj.products = productsDb.findAll();
+                obj.create();
 			});
 		}
 	},
@@ -52,9 +50,6 @@ var Deal = Class.extend({
 	investHandler : function () {
         var amountInvest = 0;
         var prod;
-        $('.check-little-grey:not(.no-change)').click(function () {
-            $(this).toggleClass('active');
-        });
         $('.validate').click(function () {
             var termsOk = true;
             $('.terms, .risk, .claim').each(function () {
@@ -111,27 +106,28 @@ var Deal = Class.extend({
 		});
 	},
 	parse : function(prod, i) {
-	    prodObj = this.products.item(i);
-	    prod.find('.title').html(prodObj.title);
-	    prod.find('.hf-name').html(prodObj.hedgefundTitle);
-	    var funded = prodObj.sumInvestedAmounts / prodObj.requiredAmount;
+	    prodObj = this.products[i];
+	    console.log(prodObj);
+	    prod.find('.title').html(prodObj.product.title);
+	    prod.find('.hf-name').html(prodObj.hedgefund.title);
+	    var funded = parseInt(prodObj.product.sumInvestedAmounts,10) / parseInt(prodObj.product.requiredAmount,10);
 	    var fundedNumBar = funded > 1 ? 1 : funded;
 	    var fundedBar = prod.find('.progress-bar-hover').width()*fundedNumBar;
 	    prod.find('.progress-bar-hover').width('-='+fundedBar);
 	    prod.find('.progress-bar-hover').css({marginLeft:fundedBar});
 	    prod.find('.may-funded').before(Math.round(funded*10000)/100+'% ');
-	    var endFundDate = new Date(prodObj.dateBeginExpected.date);
+	    var endFundDate = new Date(prodObj.product.dateBeginExpected.date);
 	    var today = new Date();
 	    var left = (endFundDate.getTime()/1000 - today.getTime()/1000)/(24*3600);
 	    var leftText = Math.round(left) > 1 ? Math.round(left)+' d' : Math.round(left) < 1 ? Math.round(left*24) > 1 ? Math.round(left*24)+' h' : Math.round(left*24)+' h' : '1 d';
 	    prod.find('.lock-time').html(leftText);
-	    prod.find('.ana > .text').html(prodObj.description);
-	    var endExpect = new Date(prodObj.dateEndExpected.date);
+	    prod.find('.ana > .text').html(prodObj.product.description);
+	    var endExpect = new Date(prodObj.product.dateEndExpected.date);
 	    var dealTime = (endExpect.getTime()/1000 - endFundDate.getTime()/1000)/(24*3600);
 	    var dealTimeText = Math.round(dealTime) > 1 ? Math.round(dealTime)+' days' : Math.round(dealTime) < 1 ? Math.round(dealTime*24) > 1 ? Math.round(dealTime*24)+' hours' : Math.round(dealTime*24)+' hour' : '1 day';
 	    prod.find('.sportwatch-time').html(dealTimeText);
-	    prod.find('.renta-expected').html('+'+prodObj.profitsRateExpected*100+'%');
-	    prod.find('.loss-expected').html('-'+prodObj.lossRateExpected*100+'%');
+	    prod.find('.renta-expected').html('+'+parseInt(prodObj.product.profitsRateExpected,10)*100+'%');
+	    prod.find('.loss-expected').html('-'+parseInt(prodObj.product.lossRateExpected,10)*100+'%');
 	},
 	create : function () {
 	    for (var i = 0; i < this.products.length; i++)

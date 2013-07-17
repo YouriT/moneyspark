@@ -79,4 +79,14 @@ var eventCounts = function (name) {
 	    });
 	    // $('.check-input').eq($('.slide .check').index($(this))).val($(this).hasClass('active') ? 1 : 0);
 	};
+    $.fn.alignCenter = function () {
+        console.log('aligning',$(this));
+        var middle = $(this).width()/2;
+        $(this).width($(this).width());
+        $(this).css({
+            position: 'absolute',
+            left: '50%',
+            marginLeft: '-'+middle+'px'
+        });
+    };
 }(jQuery));
