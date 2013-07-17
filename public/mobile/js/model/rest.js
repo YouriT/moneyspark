@@ -1,8 +1,6 @@
 //Global variables
 var TableConfiguration = c = new TableConfiguration();
 var p = new TableProducts();
-//var nav = navigator = null;
-
 function SERVER_HTTP_HOST(replace){
 	if(replace == undefined)
 		replace = false;  
@@ -12,8 +10,6 @@ function SERVER_HTTP_HOST(replace){
     	serverName = serverName.replace("m.", "api.");
     return serverName;  
 }  
-
-
 var Ajax = Class.extend({
   currentRetry:0,
   init: function(urlRequest, successCallBack, params, typeRequest, apiKey){
@@ -22,22 +18,11 @@ var Ajax = Class.extend({
         params = {};
     if(typeRequest == undefined || typeRequest == "GET"){
         typeRequest = "GET";
-
-/*        if(urlRequest.indexOf("product") !== -1){
-            nav.globalization.getLocaleName(function (locale) {
-                urlRequest = urlRequest+"?locale="+locale.value;
-            }, function () {
-                urlRequest = urlRequest+"?locale=en_US";
-            });
-
-        }*/
-
         contentType = "application/json; charset=utf-8"
     }
     else if(typeRequest == "POST"){
         contentType = "application/x-www-form-urlencoded; charset=UTF-8";
     }
-
     function ajaxMe() {
         if (apiKey !== undefined) {
             $.ajaxSetup({
@@ -56,8 +41,8 @@ var Ajax = Class.extend({
             crossDomain: true,
             success: function(r){ 
                 if(r.error != undefined  && r.error.code == 1200){ 
-                    TableConfiguration.delete("token", function(){ console.log("token deleted because expired"); }, function(e){ console.log("error while deleting expired token"); }); 
-                } else{ successCallBack(r); }  0
+                    TableConfiguration.remove("token"); 
+                } else{ successCallBack(r); }
             },
             error: function(){
                 aj.currentRetry++;
@@ -75,13 +60,12 @@ var Ajax = Class.extend({
     }
 
     if(apiKey === undefined){
-        TableConfiguration.findValueByKey('token', function(v){
-            apiKey=v;
-            ajaxMe();
-        }, function(e){
-            apiKey="";
-            ajaxMe();
-        });
+        if(TableConfiguration.findValueByKey('token')){
+        	apiKey = TableConfiguration.findValueByKey('token');
+        }
+        else
+        	apiKey = "";
+        ajaxMe();
     }
     else
         ajaxMe();
@@ -94,12 +78,10 @@ var Auth = Class.extend({
         params = {email: emailRequest, password: passwordRequest};
         new Ajax("Auth", function(r){ 
             if(r != undefined && r.token != undefined){
-
-                c.findValueByKey("token", function(v){
-                    c.delete("token", function(){ console.log("old token deleted from database"); c.insert({key:"token",value:r.token}, function(){ console.log("Token "+r.token+" added to database"); $(window).trigger('askRetrieve'); successCallBack(); }, function(e){ console.log("token not added"); }); }, function(e){});
-                }, function(e){
-                    c.insert({key:"token",value:r.token}, function(){ console.log("Token "+r.token+" added to database"); $(window).trigger('askRetrieve'); successCallBack(); }, function(e){ console.log("token not added"); });
-                });
+            	TableConfiguration.remove("token");
+            	TableConfiguration.insert("token", r.token);
+            	$(window).trigger('askRetrieve'); 
+            	successCallBack();
             }
             else
             {
@@ -162,16 +144,10 @@ var Subscribe = Input.extend({
 
 var updateProfile = function updateProfile(r){
     c = new TableConfiguration();
-    function insertV(k, v, successCallBack){
-        c.insert({key:k,value:v}, function(){ console.log("Update "+k+" "+v); successCallBack(); })
-    };
-    function updateV(k, v, successCallBack){
-        c.updateValue(k,v, function(){ console.log("Insert "+k+" "+v); successCallBack(); })
-    };
-    c.findValueByKey("firstName", function(r){ updateV("firstName", r.firstName); }, function(e){ insertV("firstName", r.firstName); });
-    c.findValueByKey("lastName", function(r){ updateV("lastName", r.lastName); }, function(e){ insertV("lastName", r.lastName); });
-    c.findValueByKey("lockboxAmount", function(r){ updateV("lockboxAmount", r.lockboxAmount); }, function(e){ insertV("lockboxAmount", r.lockboxAmount); });
-    c.findValueByKey("averageRentability", function(r){ updateV("averageRentability", r.averageRentability); }, function(e){ insertV("averageRentability", r.averageRentability); });
+    c.insert("firstName", r.firstName);
+	c.insert("lastName", r.lastName);
+	c.insert("lockboxAmount", r.lockboxAmount);
+	c.insert("averageRentability", r.averageRentability);	
     updateLastRetrieving("meGranted");
 };
 
@@ -183,11 +159,8 @@ var updateInvestments = function updateInvestments(r){
 var updateLastRetrieving = function updateLastRetrieving(granted){
     var d = new Date();
     var n = d.getTime();
-    c.findValueByKey("lastRetrieving", function(v){
-        c.updateValue("lastRetrieving", n, function(){ $(window).trigger(granted);}, function(e){});
-    }, function(e){
-        c.insert({key:"lastRetrieving",value:n}, function(){ $(window).trigger(granted);}, function(e){});
-    });
+    c.updateValue("lastRetrieving", n);
+    $(window).trigger(granted);
 };
 
 
@@ -196,29 +169,37 @@ var Retrieve = function retrieve(force) {
             force = true;
         var d = new Date();
         var n = d.getTime();
-        c.findValueByKey("lastRetrieving", function(v){
-            if( (v < (n-(3600000*6))) || force ){
+        v = c.findValueByKey("lastRetrieving");
+        tok = c.findValueByKey("token");
+        if(v != false){
+        	if( (v < (n-(3600000/2))) || force ){
                 //Update products
-                new Ajax("Product", function(r){p.insertAll(r, function(){updateLastRetrieving("productsGranted")}, function(e){});});
-                //if token exists, UPDATE investments, profile
-                 c.findValueByKey("token", function(v){ new Ajax("Profile/me", function(r){ updateProfile(r); updateInvestments(r);  }); }, function(e){});
+                new Ajax("Product", function(r){
+                		p.insertAll(r)
+                		updateLastRetrieving("productsGranted")}, function(e){});
+               	if(tok != false){ //if token exists, UPDATE investments, profile
+               		new Ajax("Profile/me", function(r){ updateProfile(r);});
+               		new Ajax("Profile/investment", function(r){ updateInvestments(r);});
+               	}
             }
             else
             {
-                c.findValueByKey("token", function(v){ updateLastRetrieving("meGranted"); updateLastRetrieving("investmentsGranted")  }, function(e){});
+            	if(tok != false){
+            		updateLastRetrieving("meGranted"); 
+            		updateLastRetrieving("investmentsGranted");
+            	}
                 updateLastRetrieving("productsGranted");
             }
-        }, function(e){ //if lastRetrieving does not exists
-            //Update only table products, insert lastRetrieving products
+        	
+        }
+        else //if lastRetrieving does not exists
+        {
+        	//Update only table products, insert lastRetrieving products
             new Ajax("Product", function(r){
-                p.insertAll(r, function(){ 
-                    updateLastRetrieving("productsGranted");
-                 }, function(e){
-                    //Error products not added
-                 });
+                p.insertAll(r);
+                updateLastRetrieving("productsGranted");
             });
-        });
-
+        }    
     };
 
 $(window).load(function () {
