@@ -46,6 +46,7 @@ class InvestmentController extends RestAction
 			$array['hedgefund'] = $hedgefund = $p->getHedgefund()->toArray();
 			$array['amount'] = $i->getAmount();
 			$array['gain'] = $array['rentability']*$array['amount'];
+			$array['id'] = $i->getId();
 			
 
 			

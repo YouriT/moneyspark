@@ -19,9 +19,9 @@ var Profile = Class.extend({
 			
 			var invests = i.findAll();
 			
-			modelNotStarted = $($(".notStarted:first").outerHTML()).css("display", "block");
-			modelCurrent = $($(".current:first").outerHTML()).css("display", "block");
-			modelEnded = $($(".ended:first").outerHTML()).css("display", "block");
+			modelNotStarted = $($(".notStarted:first").outerHTML()).show();
+			modelCurrent = $($(".current:first").outerHTML()).show();
+			modelEnded = $($(".ended:first").outerHTML()).show();
 			
 			
 			//Display started currents
@@ -29,8 +29,9 @@ var Profile = Class.extend({
 				content = $(this);
 				var investItem = modelCurrent.clone();
 				investItem.find(".title").html(content[0].product.text.title);
+				investItem.attr("data-investId", content[0].id);
 				gain = parseInt(content[0].gain, 10);
-				rentability = content[0].rentability;
+				rentability = content[0].rentability*100;
 				pre = "+";
 				if(gain < 0){
 					investItem.find('.money-result').addClass("negatif").removeClass("positif");
@@ -39,24 +40,39 @@ var Profile = Class.extend({
 				investItem.find(".gain").html(pre+" "+numberFormat(gain, 2, ',', ' '));
 				investItem.find(".rentability").html(pre+" "+numberFormat(rentability, 2, ',', ' '));
 				$(".myDeals").append(investItem.outerHTML());
+				investItemV = $("[data-investId="+content[0].id+"]");
+				w = investItemV.find(".puce").siblings(".opportunity-bar-layout").width();
+				side = Math.round(w/2);
+				if(content[0].rentability < -1)
+					content[0].rentability = -1;
+				else if(content[0].rentability > 1)
+					content[0].rentability = 1;
+				position = Math.round((side+(content[0].rentability*side)));
+				wp = Math.round(investItemV.find(".puce").width()/2);
+				if(gain<=0)
+					position -= wp;
+				else if(gain > 0)
+					position += wp;
+				investItemV.find(".puce").animate({marginLeft:position+"px"}, 1000);
 			});
 			
-//			//Display notStarted
-//			$(invests.notStarted).each(function(){
-//				content = $(this);
-//				console.log(content);
-//				var investItem = modelNotStarted.clone();
-//				investItem.find(".title").html(content[0].product.text.title);
-//				investItem.find(".sumInvested").html(numberFormat(parseInt(content[0].product.config.sumInvestedAmounts, 10), 2, ',', ' '));
-//				funded = parseInt(content[0].product.config.sumInvestedAmounts,10) / parseInt(content[0].product.config.requiredAmount,10);
-//				var fundedNumBar = funded > 1 ? 1 : funded;
-//				var fundedBar = investItem.find('.progress-bar-hover').width()*fundedNumBar;
-//				investItem.find('.progress-bar-hover').width('-='+fundedBar);
-//				investItem.find('.progress-bar-hover').css({marginLeft:fundedBar});
-//				ratioInvested = Math.round(funded*10000)/100;
-//				investItem.find(".ratioInvested").html(ratioInvested);
-//				$(".myDeals").append(investItem.outerHTML());
-//			});
+			//Display notStarted
+			$(invests.notStarted).each(function(){
+				content = $(this);
+				console.log(content);
+				var investItem = modelNotStarted.clone();
+				investItem.find(".title").html(content[0].product.text.title);
+				investItem.attr("data-investId", content[0].id);
+				investItem.find(".sumInvested").html(numberFormat(parseInt(content[0].product.config.sumInvestedAmounts, 10), 2, ',', ' '));
+				funded = parseInt(content[0].product.config.sumInvestedAmounts,10) / parseInt(content[0].product.config.requiredAmount,10);
+				ratioInvested = Math.round(funded*10000)/100;
+				investItem.find(".ratioInvested").html(ratioInvested);
+				$(".myDeals").append(investItem.outerHTML());
+				investItemV = $("[data-investId="+content[0].id+"]");
+				var fundedNumBar = funded > 1 ? 1 : funded;
+				var fundedBar = investItemV.find('.progress-bar-hover').width()*fundedNumBar;
+				investItemV.find('.progress-bar-hover').animate({width:"-="+fundedBar, marginLeft:fundedBar}, 1000);
+			});
 			
 			//Display ended
 			
