@@ -32,7 +32,7 @@ class InvestmentController extends RestAction
 				if($lastKnownRentability == null)
 					$array['rentability'] = 0;
 				else
-					$array['rentability'] = $lastKnownRentability->getCurrentRate();
+					$array['rentability'] = $lastKnownRentability[0]->getCurrentRate();
 			}
 			else
 				$array['rentability'] = $i->getRentabilityAchieved();
@@ -45,6 +45,7 @@ class InvestmentController extends RestAction
 			
 			$array['hedgefund'] = $hedgefund = $p->getHedgefund()->toArray();
 			$array['amount'] = $i->getAmount();
+			$array['gain'] = $array['rentability']*$array['amount'];
 			
 
 			
