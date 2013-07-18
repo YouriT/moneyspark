@@ -27,9 +27,9 @@ var Profile = Class.extend({
 				content = $(this);
 				console.log(content);
 				var investItem = modelNotStarted.clone();
-				investItem.find(".title").html(content[0].product.title);
-				investItem.find(".sumInvested").html(numberFormat(parseInt(content[0].product.sumInvestedAmounts, 10), 2, ',', ' '));
-				
+				investItem.find(".title").html(content[0].product.text.title);
+				investItem.find(".sumInvested").html(numberFormat(parseInt(content[0].product.config.sumInvestedAmounts, 10), 2, ',', ' '));
+				investItem.find(".ratioInvested").html(parseInt(content[0].product.config.sumInvestedAmounts,10) / parseInt(content[0].product.config.requiredAmount,10));
 				
 				$(".myDeals").append(investItem.outerHTML());
 			});
@@ -38,6 +38,7 @@ var Profile = Class.extend({
 			
 		};
 		$(window).on("meGranted", manageProfile);
+		$(window).trigger("meGranted");
 		
 		
 		

@@ -38,7 +38,11 @@ class InvestmentController extends RestAction
 				$array['rentability'] = $i->getRentabilityAchieved();
 			
 			
-			$array['product'] = $p->getTranslation($this->getIdentity()->getLocale())->toArray();
+			$array['product']['text'] = $p->getTranslation($this->getIdentity()->getLocale())->toArray();
+			$sumInvAm = $this->getEntityManager()->getRepository("Account\Entity\Investment")->getSumInvestedAmounts($p);
+			$array['product']['config'] = array("sumInvestedAmounts"=>$sumInvAm == null ? 0 : $sumInvAm,
+												"requiredAmount"=>$p->getRequiredAmount());
+			
 			$array['hedgefund'] = $hedgefund = $p->getHedgefund()->toArray();
 			$array['amount'] = $i->getAmount();
 			
