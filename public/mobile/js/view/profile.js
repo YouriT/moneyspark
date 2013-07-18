@@ -7,7 +7,6 @@ var Profile = Class.extend({
 //            console.log(r);
 //            profile = r;
 //        });
-		
 		var manageProfile = function(){
 			$(".db-fullName").html(c.findValueByKey("firstName")+" "+c.findValueByKey("lastName"));
 			$(".db-lockboxAmountText").html(numberFormat(parseInt(c.findValueByKey("lockboxAmount"), 10), 2, ',', ' '));

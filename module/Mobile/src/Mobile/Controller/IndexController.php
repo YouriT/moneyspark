@@ -15,48 +15,58 @@ use Extend\Action;
 
 class IndexController extends Action
 {
+	private $view;
+	
+	private function getView() {
+		if (!$this->view) {
+			$this->view = new ViewModel();
+			if ($this->request->isXmlHttpRequest())
+				$this->view->setTerminal(true);
+		}
+		return $this->view;
+	}
     public function indexAction()
     {
         return new ViewModel();
     }
     public function aboutAction()
     {
-    	return new ViewModel();
+    	return $this->getView();
     }
     public function buyAction()
     {
-    	return new ViewModel();
+    	return $this->getView();
     }
     public function cash1Action()
     {
-    	return new ViewModel();
+    	return $this->getView();
     }
     public function cash2Action()
     {
-    	return new ViewModel();
+    	return $this->getView();
     }
     public function cash3Action()
     {
-    	return new ViewModel();
+    	return $this->getView();
     }
     public function confirmationAction()
     {
-    	return new ViewModel();
+    	return $this->getView();
     }
     public function confirmationdealAction()
     {
-    	return new ViewModel();
+    	return $this->getView();
     }
     public function connexionAction()
     {
-    	return new ViewModel();
+    	return $this->getView();
     }
     public function signinAction()
     {
-    	return new ViewModel();
+    	return $this->getView();
     }
     public function userprofileAction()
     {
-    	return new ViewModel();
+    	return $this->getView();
     }
 }

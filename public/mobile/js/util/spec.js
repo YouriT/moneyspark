@@ -94,66 +94,88 @@ var numberFormat = function (number, decimals, dec_point, thousands_sep) {
 
 (function ($) {
     $.fn.changePage = function (page, direction) {
+        console.log('wanna change', page);
         $.ajaxSetup ({
             cache: false
         });
-        loader();
-        
-        $.get(page, function (r) {
-            var mult = -1;
-            if (direction == undefined) {
-                direction = 'left';
-            }
-            if (direction == 'right') {
-                mult = 1;
-            }
 
-            var pattern = /<body[^>]*>((.|[\n\r])*)<\/body>/im
-            var body = pattern.exec(r);
-            if (body != null) {
-                r = body[0].replace('<body','<div').replace('</body>','</div>');
-            }
-            var $page = $(r).find('#page');
+        // Change-page function
+        var makeChanges = function () {
+            loader();
+            
+            $.get(page, function (r) {
+                var mult = -1;
+                if (direction == undefined) {
+                    direction = 'left';
+                }
+                if (direction == 'right') {
+                    mult = 1;
+                }
 
-            $page.prop('id','page2');
-            if (direction === 'left') {
-                $page.css({left:$(window).width()+'px'});
-                console.log($page);
-                // throw "stop execution";
-            } else {
-                $page.css({left:-$(window).width()+'px'});
-            }
+                var pattern = /<body[^>]*>((.|[\n\r])*)<\/body>/im
+                var body = pattern.exec(r);
+                if (body != null) {
+                    r = body[0].replace('<body','<div').replace('</body>','</div>');
+                }
+                var $page = $(r).find('#page');
 
-            // $page.width($(window).width());
-            // $page.height($(window).height());
-            // $page.parent().find('script').remove();
-            // $page.css('-webkit-filter','blur(3px)');
-            $('#page').before($page[0].outerHTML);
-            $('#page').css('overflow','hidden');
-            var add = 0;
-            function transitions() {
-                $('#page').transition({x:mult*($(window).width())});
-                $('#page2').transition({x:mult*($(window).width())},function () {
-                    var $p2 = $('#page2');
-                    $('#page').remove();
-                    $p2.css({
-                        left: '',
-                        transform: '',
+                $page.prop('id','page2');
+                if (direction === 'left') {
+                    $page.css({left:$(window).width()+'px'});
+                    console.log($page);
+                    //throw "stop execution";
+                } else {
+                    $page.css({left:-$(window).width()+'px'});
+                }
+
+                // $page.width($(window).width());
+                // $page.height($(window).height());
+                // $page.parent().find('script').remove();
+                // $page.css('-webkit-filter','blur(3px)');
+                $('#page').before($page[0].outerHTML);
+                $('#page').css('overflow','hidden');
+                var add = 0;
+                // function transitions() {
+                    $('#page').transition({x:mult*($(window).width())});
+                    $('#page2').transition({x:mult*($(window).width())}, function () {
+                        var $p2 = $('#page2');
+                        $('#page').remove();
+                        if ($p2.hasClass('menuvertical-push')) {
+                            $p2.removeClass('menuvertical-push');
+                        }
+                        $p2.css({
+                            transform: '',
+                            left: '',
+                        });
+                        // throw 'nkjn';
+                        $p2.prop('id','page');
+                        $(window).trigger('pageCreated');
+                        // if (endAnim == 2 && addPushAtEnd)
+                        //     $p2.addClass('menuvertical-push');
+                        // $(window).trigger('pageLoader');
                     });
-                    $p2.prop('id','page');
-                    $(window).trigger('pageCreated');
-                    // $(window).trigger('pageLoader');
-                });
-            }
-            if (!$('nav').hasClass('menuvertical-left'))
-                $('nav').addClass('menuvertical-left');
-            // if ($('body').hasClass('menuvertical-push-toright')) {
-            //     $('body').removeClass('menuvertical-push-toright');
-            //     transitions();
-            // }
-            // else
-                transitions();
-        }, 'html');
+                // }
+                // if ($('body').hasClass('menuvertical-push-toright')) {
+                //     $('body').removeClass('menuvertical-push-toright');
+                //     transitions();
+                // }
+                // else
+                    // transitions();
+                // setTimeout(function () {throw 'boucle infinie';},2000);
+                // while (!endAnim1 || !endAnim2) {
+                //     console.log(endAnim1, endAnim2);
+                // }
+                        
+            }, 'html');
+        }
+
+        // Close menu if open
+        $('nav').not('.menuvertical-left').addClass('menuvertical-left');
+        $('#page.menuvertical-push-toright').removeClass('menuvertical-push-toright');
+        if ($('#page').hasClass('menuvertical-push-toright'))
+            $('#page').one('transitionend', makeChanges);
+        else
+            makeChanges();
     };
     $.fn.checkboxes = function () {
 	    $(this).find('div:first-child').toggleClass('active');

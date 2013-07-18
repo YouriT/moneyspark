@@ -98,6 +98,7 @@ var createdHandler = function () {
 
     // Menu click
     $('#showLeftPush').click(function () {
+        $('#page').not('.menuvertical-push').addClass('menuvertical-push');
         $('.menuvertical-push').toggleClass('menuvertical-push-toright');
         $('nav').toggleClass('menuvertical-left');
     });
