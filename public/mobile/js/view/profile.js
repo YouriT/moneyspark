@@ -75,6 +75,23 @@ var Profile = Class.extend({
 			});
 			
 			//Display ended
+			$(invests.ended).each(function(){
+				content = $(this);
+				var investItem = modelEnded.clone();
+				investItem.find(".title").html(content[0].product.text.title);
+				investItem.attr("data-investId", content[0].id);
+				gain = parseInt(content[0].gain, 10);
+				rentability = content[0].rentability*100;
+				pre = "+";
+				if(gain < 0){
+					investItem.find('.closeBar').addClass("negatif-bar-close").removeClass("positif-bar-close");
+					investItem.find('.money-result').addClass("negatif").removeClass("positif");
+					pre = "";
+				}
+				investItem.find(".gain").html(pre+" "+numberFormat(gain, 2, ',', ' '));
+				investItem.find(".rentability").html(pre+" "+numberFormat(rentability, 2, ',', ' '));
+				$(".myDeals").append(investItem.outerHTML());
+			});
 			
 		};
 		$(window).on("meGranted", manageProfile);
