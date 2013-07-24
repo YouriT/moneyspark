@@ -1,3 +1,4 @@
+//@codekit-append util/fastclick.js
 //@codekit-append util/jquery.js
 //@codekit-append util/jquery.inheritance.js
 //@codekit-append util/jquery.nicescroll.min.js

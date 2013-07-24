@@ -112,6 +112,8 @@ $(window).ready(function () {
 
 $(window).load(function () {
 
+    FastClick.attach(document.body);
+
     firstPInstance = new Page();
 
     $(window).on('pageCreated', createdHandler);
