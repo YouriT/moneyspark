@@ -29,7 +29,6 @@ var Ajax = Class.extend({
             $.ajaxSetup({
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('api-key',apiKey);
-                    console.log('called');
                 }
             });
         }
@@ -82,7 +81,7 @@ var Auth = Class.extend({
             if(r != undefined && r.token != undefined){
             	TableConfiguration.remove("token");
             	TableConfiguration.insert("token", r.token);
-            	$(window).trigger('askRetrieve'); 
+            	$("#page").trigger('askRetrieve'); 
             	successCallBack();
             }
             else
@@ -160,22 +159,22 @@ var updateLastRetrieving = function (granted){
     var d = new Date();
     var n = d.getTime();
     c.updateValue("lastRetrieving", n);
-    $(window).trigger(granted);
+    $("#page").trigger(granted);
 };
 var retrieve = function (force) {
     if(force == undefined)
         force = false;
     var d = new Date();
     var n = d.getTime();
+    var nw = n-600000;
     v = c.findValueByKey("lastRetrieving");
     tok = c.findValueByKey("token");
     if(v != false){
-    	if( (v < (n-(3600000))) || force ){
+    	if( (v < nw) || force==true ){
             //Update products
             new Ajax("Product", function(r){
             		p.insertAll(r);
             		updateLastRetrieving("productsGranted")}, function(e){});
-            console.log(tok);
            	if(tok != false){ //if token exists, UPDATE investments, profile
            		
            		new Ajax("Profile/me", function(r){ updateProfile(r);});

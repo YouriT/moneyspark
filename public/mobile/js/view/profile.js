@@ -1,12 +1,10 @@
 var Profile = Class.extend({
 	init: function () {
-//		var dealresumehgt = $(window).height() - $('#profileContainer').offset().top - $('.bottom-menu').outerHeight();
-//        $('#profileContainer').height(dealresumehgt);
-//        var profile;
-//        new Ajax('profile/me', function (r) {
-//            console.log(r);
-//            profile = r;
-//        });
+		
+		
+		//console.log(dealresumehgt, $(window).height(), $('#profileContainer').offset().top, $('.footer').outerHeight());
+		
+	
 		var manageProfile = function(){
 			$(".db-fullName").html(c.findValueByKey("firstName")+" "+c.findValueByKey("lastName"));
 			$(".db-lockboxAmountText").html(numberFormat(parseInt(c.findValueByKey("lockboxAmount"), 10), 2, ',', ' '));
@@ -23,7 +21,9 @@ var Profile = Class.extend({
 			modelCurrent = $($(".current:first").outerHTML()).show();
 			modelEnded = $($(".ended:first").outerHTML()).show();
 			
-			
+			var dealresumehgt = $(window).height() - $('#profileContainer').offset().top - $('.footer').outerHeight();
+			$('#profileContainer').height(dealresumehgt);
+			$('#profileContainer').niceScroll();
 			//Display started currents
 			$(invests.current).each(function(){
 				content = $(this);
@@ -59,7 +59,6 @@ var Profile = Class.extend({
 			//Display notStarted
 			$(invests.notStarted).each(function(){
 				content = $(this);
-				console.log(content);
 				var investItem = modelNotStarted.clone();
 				investItem.find(".title").html(content[0].product.text.title);
 				investItem.attr("data-investId", content[0].id);
@@ -94,7 +93,7 @@ var Profile = Class.extend({
 			});
 			
 		};
-		$(window).on("meGranted", manageProfile);
+		$("#page").on("meGranted", manageProfile);
 		
 		
 		
