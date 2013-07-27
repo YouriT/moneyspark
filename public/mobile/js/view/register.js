@@ -8,14 +8,22 @@ var keyAt = function(obj, index) {
 
 var Register = Class.extend({
     init: function () {
+        var $this = this;
         $('#signin-slider > div').width($('#signin-slider').parents('.container').width());
         $('#signin-slider > div:not(.active)').each(function () {
             $(this).css('right',-$(window).width());
         });
+
+        $('.check,.check-text').click(function () {
+            $(this).parent().find('.check').toggleClass('active');
+            $(this).parent().find('input').val($(this).parent().find('.check').hasClass('active') ? '1' : '0');
+        });
         
         $('input[name=birthDate]').keypress(function(e){
             var t = $(this);
-            if(e.which != 13){
+            if (t.val().length >= 10 && e.which != 8)
+                return false;
+            if(e.which != 13 && e.which != 8){
                 if(t.val().length == 2 || t.val().length == 5){
                     t.val(t.val()+"/");
                 }
@@ -24,7 +32,7 @@ var Register = Class.extend({
         n=0;
         $('input[name=iban]').keypress(function(e){
             t = $(this);
-            if(e.which != 13){
+            if(e.which != 13 && e.which != 8){
                 if(t.val().length == 4 || ( t.val().length > 4 && ( t.val().length-n )%4 ==0 ) ) {
                     n++;
                     t.val(t.val()+" ");
@@ -54,7 +62,7 @@ var Register = Class.extend({
                         current=0;
                         //Next if not last step
                         if($('.active').index() <= 1 ){
-                            slideSignin('next');
+                            $this.slide('next');
                         }
                         else //Last step !
                         {
@@ -74,7 +82,7 @@ var Register = Class.extend({
                                     
                                     if(r.error.code != 1000){
                                         for(i=0; i<2;i++){
-                                            slideSignin('prev');
+                                            $this.slide('prev');
                                         }
                                         alert(r.error.message);
                                     }

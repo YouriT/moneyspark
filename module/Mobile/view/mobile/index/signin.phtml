@@ -1,75 +1,62 @@
 <div>
-    <div id="page" class="bg1 menuvertical-push" data-url="register">
-        <nav class="menuvertical menuvertical-vertical menuvertical-left">
-            <div class="mt34"></div>
-            <div class="ensemble-menu"></div>
-        </nav>
-
-        <div class="container">
-            <div class="row-fluid" style="margin-top: 40%">
-                <div id="signin-step" class="ensemble-pagenum zeroauto">
-                    <a class="pagenum active" href="#" rel="1"></a>
-                    <a class="pagenum center" href="#" rel="2"></a>
-                    <a class="pagenum" href="#" rel="3"></a>
-                    <div class="clear"></div>
-                </div>
-                <div id="signin-slider">
-                    <div class="slide active">
-                        <input type="text" name="firstName" class="userinfo" style="margin-top: 5%;" placeholder="first name" />
-                        <input type="text" name="lastName" class="userinfo" style="margin-top: 5%;" placeholder="last name" />
-                        <input type="text" 
-                               name="birthDate" 
-                               class="userinfo" 
-                               style="margin-top: 5%;" 
-                               
-                               placeholder="birthdate - dd/mm/yy"/>
-                        <button class="signin" style="margin-bottom: 5%;margin-top: 10%;">next</button>
+    <div id="page" class="bg1" data-url="register">
+        <div class="wrapper">
+            <div class="container">
+                <div class="row-fluid" style="margin-top: 40%">
+                    <div id="signin-step" class="ensemble-pagenum zeroauto">
+                        <a class="pagenum active" href="#" rel="1"></a>
+                        <a class="pagenum center" href="#" rel="2"></a>
+                        <a class="pagenum" href="#" rel="3"></a>
+                        <div class="clear"></div>
                     </div>
-                    <div class="slide">
-                        <input type="text" name="email" class="userinfo" style="margin-top: 5%;" placeholder="email" />
-                        <input type="text" name="iban" class="userinfo" style="margin-top: 5%;" placeholder="IBAN" />
-                        <input type="text" name="phone" class="userinfo" style="margin-top: 5%;" placeholder="phone" />
-                        <button class="signin" style="margin-bottom: 5%;margin-top: 10%;">next</button>
-                    </div>
-                    <div class="slide">
-                        <input type="password" name="password" class="userinfo" style="margin-top: 5%;" placeholder="password" />
-                        <input type="password" name="passwordconf" class="userinfo" style="margin-top: 5%;" placeholder="password confirmation" />
-
-                        <div style="margin-left: 10%;margin-right: 10%;">
-                            <div class="check" style="float:left;"></div>
-                            <div class="check-text" style="margin-top: 8%;float:left;">I've read the use of terms</div>
-                            <div class="clear"></div>
-                            <div class="check" style="float:left;margin-top: 0;"></div>
-                            <div class="check-text" style="margin-top: -2%;float:left;">Newsletter</div>
-                            <div class="clear"></div>
-                            <input type="hidden" class="check-input" name="terms" value="0"/>
-                            <input type="hidden" class="check-input" name="newsletter" value="0"/>
+                    <div id="signin-slider">
+                        <div class="slide active">
+                            <input type="text" name="firstName" class="userinfo" style="margin-top: 5%;" placeholder="first name" />
+                            <input type="text" name="lastName" class="userinfo" style="margin-top: 5%;" placeholder="last name" />
+                            <input type="text" 
+                                   name="birthDate" 
+                                   class="userinfo" 
+                                   style="margin-top: 5%;" 
+                                   
+                                   placeholder="birthdate - dd/mm/yy"/>
+                            <button class="signin" style="margin-bottom: 5%;margin-top: 10%;">next</button>
                         </div>
-                        <button class="signin" style="margin-bottom: 5%;margin-top: 5%;">confirm sign in</button>
+                        <div class="slide">
+                            <input type="text" name="email" class="userinfo" style="margin-top: 5%;" placeholder="email" />
+                            <input type="text" name="iban" class="userinfo" style="margin-top: 5%;" placeholder="IBAN" />
+                            <input type="text" name="phone" class="userinfo" style="margin-top: 5%;" placeholder="phone" />
+                            <button class="signin" style="margin-bottom: 5%;margin-top: 10%;">next</button>
+                        </div>
+                        <div class="slide">
+                            <input type="password" name="password" class="userinfo" style="margin-top: 5%;" placeholder="password" />
+                            <input type="password" name="passwordconf" class="userinfo" style="margin-top: 5%;" placeholder="password confirmation" />
+
+                            <div style="margin-left: 10%;margin-right: 10%;">
+                                <div class="check" style="float:left;"></div>
+                                <div class="check-text" style="margin-top: 8%;float:left;">I've read the use of terms</div>
+                                <div class="clear"></div>
+                                <div class="check" style="float:left;margin-top: 0;"></div>
+                                <div class="check-text" style="margin-top: -2%;float:left;">Newsletter</div>
+                                <div class="clear"></div>
+                                <input type="hidden" class="check-input" name="terms" value="0"/>
+                                <input type="hidden" class="check-input" name="newsletter" value="0"/>
+                            </div>
+                            <button class="signin" style="margin-bottom: 5%;margin-top: 5%;">confirm sign in</button>
+                        </div>
+
                     </div>
-
                 </div>
+                
             </div>
-            
-        </div>
-
-        <div class="container">
+        </div>  
+        <div class="footer">
             <div class="bottom-menu">
                 <button id="showLeftPush" class="button-menuvertical">
                     <div class="trait"></div>
                     <div class="trait"></div>
                     <div class="trait"></div>
                 </button>
-                    <!--
-                    <div class="ensemble-pagenum-bottom-menu">
-                        <a class="pagenum" href="#prev" rel="1"></a>
-                        <a class="pagenum center active" href="#" rel="2"></a>
-                        <a class="pagenum" href="#next" rel="3"></a>
-                        <div class="clear"></div>
-                    </div>
-                -->
-                <div class="clear"></div>
             </div>
-        </div>   
+        </div> 
     </div>
 </div>

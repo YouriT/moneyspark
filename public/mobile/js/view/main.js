@@ -3,27 +3,28 @@ var inputObject = new Input();
 
 var loader = function () {
 
-    var device_loader = $('<div id="main-loader" class="loader big"><i class="icon-refresh icon-spin"></i></div>');
-    device_loader.width($(window).width()*5);
-    device_loader.css('left',-($(window).width()*2)+'px');
-    // $('body').prepend(device_loader);
+    // var device_loader = $('<div id="main-loader" class="loader big"><i class="icon-refresh icon-spin"></i></div>');
+    // device_loader.width($(window).width()*5);
+    // // device_loader.css('left',-($(window).width()*2)+'px');
+    // // $('body').prepend(device_loader);
 
-    // $('#page').css('-webkit-filter','blur(3px)');
+    // // $('#page').css('-webkit-filter','blur(3px)');
 
-    if (eventCounts('pageLoaded') == 0) {
-        $(window).on('pageLoaded', function () {
-            if (navigator.userAgent.indexOf('Apple') === -1) {
-                $('#page').css('-webkit-filter', 'blur(0px)');
-            } else {
-                $('#page').css('-webkit-filter', '');
-            }
-            $('#main-loader').remove();
-        });
-    }
+    // if (eventCounts('pageLoaded') == 0) {
+    //     $(window).on('pageLoaded', function () {
+    //         if (navigator.userAgent.indexOf('Apple') === -1) {
+    //             $('#page').css('-webkit-filter', 'blur(0px)');
+    //         } else {
+    //             $('#page').css('-webkit-filter', '');
+    //         }
+    //         $('#main-loader').remove();
+    //     });
+    // }
 };
 
 var linkClick = function(context) {
     $('a',context).click(function (e) {
+        console.log('clicked'+$(this).prop('href'));
         e.preventDefault();
         if ($(this).prop('href').indexOf('#') !== -1) {
             return false;
@@ -81,51 +82,66 @@ var Page = Class.extend({
 });
 var firstPInstance;
 
-var createdHandler = function () {
-    console.log("Current page: "+$('#page').attr("data-url"));
+var loadedHandler = function (e, context) {
+    if (firstPInstance.obj != null && firstPInstance.obj.loaded != null) {
+        firstPInstance.obj.loaded.apply(firstPInstance.obj, arguments);
+    }
+};
 
-    var className = $('#page').attr("data-url");
+var readyHandler = function (e, context) {
+    console.log("Current page: "+context.attr("data-url"));
+
+    var className = context.attr("data-url");
     className = className.charAt(0).toUpperCase() + className.slice(1);
     if (mainObject[className] != undefined) {
         firstPInstance.obj = new mainObject[className];
-    } else {
-        alert("The class corresponding to this page doesn't exists");
+        if (firstPInstance.obj != null && firstPInstance.obj.ready != null) {
+            firstPInstance.obj.ready.apply(firstPInstance.obj, arguments);
+        }
     }
 
     firstPInstance.swiper();
 
-    linkClick('#page');
+    linkClick(context);
 
     // Menu click
     $('#showLeftPush').click(function () {
-        $('#page').not('.menuvertical-push').addClass('menuvertical-push');
-        $('.menuvertical-push').toggleClass('menuvertical-push-toright');
-        $('nav').toggleClass('menuvertical-left');
+        var val = [0,0,0,0,0,0];
+        if ($('#page').css('transform') != 'none') {
+            val = matrixToArray($('#page').css('transform'));
+        }
+
+        var menuWidth = 66/16*parseInt($('#page').css('font-size'),10);
+
+        if (val[4] == 0) {
+            $('#page,nav').transition({x: menuWidth});
+        } else {
+            $('#page,nav').transition({x: 0});
+        }
     });
 
-    $(window).trigger("askRetrieve");
-}
+    $(document).trigger("askRetrieve");
+};
 
-$(window).ready(function () {
+$(document).ready(function () {
+    $(document).on('askRetrieve', retrieve);
     loader();
+    firstPInstance = new Page();
+    $(document).on('page-ready', readyHandler);
+    $(document).trigger('page-ready', [$('#page')]);
 });
 
 $(window).load(function () {
 
     FastClick.attach(document.body);
 
-    firstPInstance = new Page();
-
-    $(window).on('pageCreated', createdHandler);
-    $(window).trigger('pageCreated');
+    $(window).on('page-loaded', loadedHandler);
+    $(window).trigger('page-loaded', [$('#page')]);
 
     if (TableConfiguration.findValueByKey("token") != false) {
-        //Menu when connected
         menuCreate(true);
     } else {
-        //Menu when not connected
         menuCreate(false);
     }
     linkClick('nav');
-    // $('.check').click();
 });

@@ -6,54 +6,11 @@ var eventCounts = function (name) {
 		return arr[name].length;
 };
 
-
+var matrixToArray = function(matrix) {
+    return matrix.substr(7, matrix.length - 8).split(', ');
+};
 
 var numberFormat = function (number, decimals, dec_point, thousands_sep) {
-	// Formats a number with grouped thousands
-	//
-	// version: 906.1806
-	// discuss at: http://phpjs.org/functions/number_format
-	// +   original by: Jonas Raoni Soares Silva (http://www.jsfromhell.com)
-	// +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-	// +     bugfix by: Michael White (http://getsprink.com)
-	// +     bugfix by: Benjamin Lupton
-	// +     bugfix by: Allan Jensen (http://www.winternet.no)
-	// +    revised by: Jonas Raoni Soares Silva (http://www.jsfromhell.com)
-	// +     bugfix by: Howard Yeend
-	// +    revised by: Luke Smith (http://lucassmith.name)
-	// +     bugfix by: Diogo Resende
-	// +     bugfix by: Rival
-	// +     input by: Kheang Hok Chin (http://www.distantia.ca/)
-	// +     improved by: davook
-	// +     improved by: Brett Zamir (http://brett-zamir.me)
-	// +     input by: Jay Klehr
-	// +     improved by: Brett Zamir (http://brett-zamir.me)
-	// +     input by: Amir Habibi (http://www.residence-mixte.com/)
-	// +     bugfix by: Brett Zamir (http://brett-zamir.me)
-	// *     example 1: number_format(1234.56);
-	// *     returns 1: '1,235'
-	// *     example 2: number_format(1234.56, 2, ',', ' ');
-	// *     returns 2: '1 234,56'
-	// *     example 3: number_format(1234.5678, 2, '.', '');
-	// *     returns 3: '1234.57'
-	// *     example 4: number_format(67, 2, ',', '.');
-	// *     returns 4: '67,00'
-	// *     example 5: number_format(1000);
-	// *     returns 5: '1,000'
-	// *     example 6: number_format(67.311, 2);
-	// *     returns 6: '67.31'
-	// *     example 7: number_format(1000.55, 1);
-	// *     returns 7: '1,000.6'
-	// *     example 8: number_format(67000, 5, ',', '.');
-	// *     returns 8: '67.000,00000'
-	// *     example 9: number_format(0.9, 0);
-	// *     returns 9: '1'
-	// *     example 10: number_format('1.20', 2);
-	// *     returns 10: '1.20'
-	// *     example 11: number_format('1.20', 4);
-	// *     returns 11: '1.2000'
-	// *     example 12: number_format('1.2000', 3);
-	// *     returns 12: '1.200'
 	var n = number, prec = decimals;
 
 	var toFixedFix = function (n,prec) {
@@ -95,87 +52,75 @@ var numberFormat = function (number, decimals, dec_point, thousands_sep) {
 (function ($) {
     $.fn.changePage = function (page, direction) {
         console.log('wanna change', page);
-        $.ajaxSetup ({
-            cache: false
-        });
+        // $.ajaxSetup ({
+        //     cache: false
+        // });
+        var counter = 0;
+        $('#page').unbind();
 
         // Change-page function
-        var makeChanges = function () {
-            loader();
+        loader();
+        
+        $.get(page, function (r) {
+            var mult = -1;
+            if (direction == undefined) {
+                direction = 'left';
+            }
+            if (direction == 'right') {
+                mult = 1;
+            }
+
+            var pattern = /<body[^>]*>((.|[\n\r])*)<\/body>/im
+            var body = pattern.exec(r);
+            if (body != null) {
+                r = body[0].replace('<body','<div').replace('</body>','</div>');
+            }
+            var $page = $(r).find('#page');
+
+            $page.prop('id','page2');
+            if (direction === 'left') {
+                $page.css({left:$(window).width()+'px'});
+            } else {
+                $page.css({left:-$(window).width()+'px'});
+            }
+
+            // $page.width($(window).width());
+            // $page.height($(window).height());
+            // $page.parent().find('script').remove();
+            // $page.css('-webkit-filter','blur(3px)');
+            $('#page').before($page[0].outerHTML).ready(function () {
+                $(document).trigger('page-ready', [$('#page2')]);
+            });
+            $('#page').css('overflow','hidden');
+            var add = 0;
+            var menuWidth = 66/16*parseInt($('#page').css('font-size'),10);
             
-            $.get(page, function (r) {
-                var mult = -1;
-                if (direction == undefined) {
-                    direction = 'left';
-                }
-                if (direction == 'right') {
-                    mult = 1;
-                }
-
-                var pattern = /<body[^>]*>((.|[\n\r])*)<\/body>/im
-                var body = pattern.exec(r);
-                if (body != null) {
-                    r = body[0].replace('<body','<div').replace('</body>','</div>');
-                }
-                var $page = $(r).find('#page');
-
-                $page.prop('id','page2');
-                if (direction === 'left') {
-                    $page.css({left:$(window).width()+'px'});
-                    console.log($page);
-                    //throw "stop execution";
-                } else {
-                    $page.css({left:-$(window).width()+'px'});
-                }
-
-                // $page.width($(window).width());
-                // $page.height($(window).height());
-                // $page.parent().find('script').remove();
-                // $page.css('-webkit-filter','blur(3px)');
-                $('#page').before($page[0].outerHTML);
-                $('#page').css('overflow','hidden');
-                var add = 0;
-                // function transitions() {
-                    $('#page').transition({x:mult*($(window).width())});
-                    $('#page2').transition({x:mult*($(window).width())}, function () {
-                        var $p2 = $('#page2');
-                        $('#page').remove();
-                        if ($p2.hasClass('menuvertical-push')) {
-                            $p2.removeClass('menuvertical-push');
-                        }
-                        $p2.css({
-                            transform: '',
-                            left: '',
-                        });
-                        // throw 'nkjn';
-                        $p2.prop('id','page');
-                        $(window).trigger('pageCreated');
-                        // if (endAnim == 2 && addPushAtEnd)
-                        //     $p2.addClass('menuvertical-push');
-                        // $(window).trigger('pageLoader');
+            function transitions() {
+                $('#page').transition({x:mult*($(window).width())});
+                $('#page2').transition({x:mult*($(window).width())}, function () {
+                    var $p2 = $('#page2');
+                    $('#page').remove();
+                    $p2.prop('id','page');
+                    $p2.css({
+                        transform: '',
+                        left: ''
                     });
-                // }
-                // if ($('body').hasClass('menuvertical-push-toright')) {
-                //     $('body').removeClass('menuvertical-push-toright');
-                //     transitions();
-                // }
-                // else
-                    // transitions();
-                // setTimeout(function () {throw 'boucle infinie';},2000);
-                // while (!endAnim1 || !endAnim2) {
-                //     console.log(endAnim1, endAnim2);
-                // }
-                        
-            }, 'html');
-        }
+                    $(window).trigger('page-loaded', [$('#page')]);
+                });
+            }
 
-        // Close menu if open
-        $('nav').not('.menuvertical-left').addClass('menuvertical-left');
-        $('#page.menuvertical-push-toright').removeClass('menuvertical-push-toright');
-        if ($('#page').hasClass('menuvertical-push-toright'))
-            $('#page').one('transitionend', makeChanges);
-        else
-            makeChanges();
+            var val = [0,0,0,0,0,0];
+            if ($('#page').css('transform') != 'none') {
+                val = matrixToArray($('#page').css('transform'));
+            }
+
+            if (val[4] != 0) {
+                $('#page').transition({x:0});
+                $('nav').transition({x:0}, transitions);
+            } else {
+                transitions();
+            }
+        }, 'html');
     };
     $.fn.checkboxes = function () {
 	    $(this).find('div:first-child').toggleClass('active');
