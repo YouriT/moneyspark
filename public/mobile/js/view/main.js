@@ -47,6 +47,7 @@ var linkClick = function(context) {
         }
         else if($(this).hasClass('logout')){
             if (TableConfiguration.remove("token")) {
+            	menuCreate(false); linkClick('nav');
                 $(window).changePage("/connexion", dir);
             }
         } else {
@@ -56,6 +57,7 @@ var linkClick = function(context) {
 };
 
 var menuCreate = function(connected){
+	$('.ensemble-menu').html("");
     $('.ensemble-menu').append('<a href="/userprofile" class="needConnected"><i class="icon-user iconmenu"></i></a><div class="inter-menu"></div>');
     $('.ensemble-menu').append('<a href="/cash1" class="needConnected"><i class="icon-lock iconmenu"></i></a><div class="inter-menu"></div>');
     $('.ensemble-menu').append('<a href="/about"><i class="icon-bolt iconmenu"></i></a>');
