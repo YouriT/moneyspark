@@ -12,10 +12,6 @@ use DoctrineModule\Authentication\Adapter\ObjectRepository;
 use Zend\Authentication\AuthenticationService;
 use Account\Model\AuthServiceApi;
 
-if(!preg_match("#moneyspark#", $_SERVER["HTTP_HOST"]))
-	$r = "api.reonin.com";
-else
-	$r = "api.moneyspark";
 
 return array(
     'router' => array(

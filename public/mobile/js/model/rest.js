@@ -81,7 +81,7 @@ var Auth = Class.extend({
             if(r != undefined && r.token != undefined){
             	TableConfiguration.remove("token");
             	TableConfiguration.insert("token", r.token);
-            	$("#page").trigger('askRetrieve'); 
+            	$("#page").trigger('askRetrieve', [true]); 
             	successCallBack();
             }
             else
@@ -161,7 +161,7 @@ var updateLastRetrieving = function (granted){
     c.updateValue("lastRetrieving", n);
     $("#page").trigger(granted);
 };
-var retrieve = function (force) {
+var retrieve = function (event, force) {
     if(force == undefined)
         force = false;
     var d = new Date();

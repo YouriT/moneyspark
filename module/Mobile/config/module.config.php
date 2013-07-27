@@ -8,11 +8,6 @@
  */
 namespace Mobile;
 
-if(!preg_match("#moneyspark#", $_SERVER["HTTP_HOST"]))
-	$r = "m.reonin.com";
-else
-	$r = "m.moneyspark";
-
 return array(
     'router' => array(
         'routes' => array(
