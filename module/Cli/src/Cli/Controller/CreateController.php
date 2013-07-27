@@ -1,5 +1,5 @@
 <?php
-namespace Api\Controller;
+namespace Cli\Controller;
 
 
 use Zend\View\Model\ConsoleModel;

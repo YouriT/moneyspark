@@ -9,6 +9,7 @@ use Zend\Mvc\Controller\Plugin\AbstractPlugin,
     Zend\Permissions\Acl\Role\GenericRole as Role,
     Zend\Permissions\Acl\Resource\GenericResource as Resource;
 use Account\Entity\User;
+use Zend\Console\Request;
      
 class AuthAcl extends AbstractPlugin
 {
@@ -31,6 +32,9 @@ class AuthAcl extends AbstractPlugin
      
     public function doAuthorization(MvcEvent $e)
     {
+    	if ($this->getController()->getServiceLocator()->get('request') instanceof Request)
+    		return true;
+    	
     	$this->mvcEvent = $e;
         $acl = new Acl();
         

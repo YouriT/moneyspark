@@ -6,10 +6,9 @@
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-namespace Cli;
 
 return array(
-	'Console' => array(
+	'console' => array(
 	    'router' => array(
 	        'routes' => array(
 	            'cli-appcache' => array(
@@ -23,9 +22,10 @@ return array(
 	            ),
 	        ),
 	    ),
-	    'controllers' => array(
-	        'invokables' => array(
-	            'Cli\Create' => 'Cli\Controller\CreateController',
-	        ),
-	    ),
-));
+	),
+	'controllers' => array(
+        'invokables' => array(
+            'Cli\Create' => 'Cli\Controller\CreateController',
+        ),
+    ),
+);

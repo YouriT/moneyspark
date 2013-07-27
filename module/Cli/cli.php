@@ -41,7 +41,6 @@ if (file_exists("$basePath/config/application.config.php")) {
             ),
             'module_paths' => array(
                 '.',
-                './vendor',
             ),
         ),
     );

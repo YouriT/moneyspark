@@ -1,6 +1,7 @@
 <?php
 namespace Account\Model;
 use Zend\ServiceManager\ServiceManager;
+use Zend\Console\Request;
 // HTTP_API_KEY
 class AuthServiceApi
 {
@@ -14,6 +15,9 @@ class AuthServiceApi
 	
 	public function hasIdentity()
 	{
+		if ($this->sm->get('request') instanceof Request)
+			return false;
+		
 		if ($this->identity != null)
 			return $this->identity;
 		
