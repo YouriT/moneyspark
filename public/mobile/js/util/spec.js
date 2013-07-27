@@ -52,11 +52,12 @@ var numberFormat = function (number, decimals, dec_point, thousands_sep) {
 (function ($) {
     $.fn.changePage = function (page, direction) {
         console.log('wanna change', page);
-        // $.ajaxSetup ({
-        //     cache: false
-        // });
         var counter = 0;
         $('#page').unbind();
+        $.ajaxSetup ({
+            cache: true
+        });
+
 
         // Change-page function
         loader();

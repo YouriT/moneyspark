@@ -11,7 +11,7 @@ return array(
 	'console' => array(
 	    'router' => array(
 	        'routes' => array(
-	            'cli-appcache' => array(
+	            'cli-create-appcache' => array(
 	                'options' => array(
 	                    'route'    => 'create appcache',
 	                    'defaults' => array(
@@ -20,12 +20,22 @@ return array(
 	                    ),
 	                ),
 	            ),
+        		'cli-empty-appcache' => array(
+        				'options' => array(
+        						'route'    => 'empty appcache',
+        						'defaults' => array(
+        								'controller' => 'Cli\Empty',
+        								'action' => 'appcache'
+        						),
+        				),
+        		),
 	        ),
 	    ),
 	),
 	'controllers' => array(
         'invokables' => array(
             'Cli\Create' => 'Cli\Controller\CreateController',
+            'Cli\Empty' => 'Cli\Controller\EmptyController',
         ),
     ),
 );
