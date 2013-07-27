@@ -69,7 +69,7 @@ var Page = Class.extend({
     obj: null,
     swiper: function () {
         var $this = this;
-        $(window).swipe({
+        $(document).swipe({
             swipe: function (event, direction, distance, duration, fingerCount) {
                 if (distance > $(window).width()*0.07) {
                     if ($this.obj['swipe'] != undefined) {

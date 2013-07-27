@@ -558,7 +558,7 @@ body {overflow: hidden;margin:0;position:absolute;padding:0;left:0;right:0;top:0
 }
 
 .deal {
-	padding: 4%;
+	// padding: 4%;
 	.border-radius(0/16em);
 	//.box-shadow(0 1/16em 2/16em rgba(0,0,0,0.3));
 	.box-shadow(0 1/16em 2/16em rgba(0,0,0,0.4));
@@ -797,9 +797,9 @@ body {overflow: hidden;margin:0;position:absolute;padding:0;left:0;right:0;top:0
 // Buydeal
 
 .buydeal {
-	.css3hack();
-	margin-top: -1%;
-	.accordion(0.3s);
+	// .css3hack();
+	// margin-top: -1%;
+	// .accordion(0.3s);
 	.box-shadow(inset 0px 0px 13px rgba(0,0,0,0.5));
 	// width: 245/16em;
 	// margin-left: -4%;
@@ -809,6 +809,12 @@ body {overflow: hidden;margin:0;position:absolute;padding:0;left:0;right:0;top:0
 	
 	padding-left: 10%;
 	padding-right: 10%;
+		margin-top: -10/16em;
+		padding-top: 20/16em;
+		padding-bottom: 20/16em;
+		height: 146/16-40/16em;
+		margin-bottom: 10/16em;
+		display: none;
 	//.box-shadow(0/16em 0/16em 4/16em rgba(0,0,0,0.5));
 	&.active {
 		margin-top: -10/16em;
@@ -1283,6 +1289,10 @@ body {overflow: hidden;margin:0;position:absolute;padding:0;left:0;right:0;top:0
 	position: relative;
 }
 
+#page {
+	-webkit-backface-visibility: hidden;
+}
+
 /* hide back of pane during swap */
 .front, .back {
 	-webkit-backface-visibility: hidden;
@@ -1301,10 +1311,10 @@ body {overflow: hidden;margin:0;position:absolute;padding:0;left:0;right:0;top:0
 
 /* back, initially hidden pane */
 .back {
+	z-index: 1;
 	-webkit-transform: rotateY(180deg);
 			-moz-transform: rotateY(180deg);
 			transform: rotateY(180deg);
-	overflow-y: scroll;
 }
 
 // Profil User

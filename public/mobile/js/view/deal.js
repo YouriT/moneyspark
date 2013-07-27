@@ -23,8 +23,8 @@ var Deal = Class.extend({
         });
 	},
 	addListeners: function () {
-		$('#page').on('imin', this.investHandler);
 		var obj = this;
+		$('#page').on('imin', {class:this}, this.investHandler);
 		$('#page').on('productsGranted', function () {
 			var productsDb = new TableProducts();
             obj.products = productsDb.findAll();
@@ -42,7 +42,7 @@ var Deal = Class.extend({
 	    $maxFeeRate = 0.15;
 
 	    i = parseInt(obj.parents('.deal').attr('data-product'),10);
-	    prod = this.products.item(i);
+	    prod = this.products[i];
 	    $ratioInvested = Math.round(prod.sumInvestedAmounts/prod.requiredAmount*100)/100;
 	    if($ratioInvested>1)$ratioInvested=1;
 	    $diff = $maxFeeRate - $minFeeRate;
@@ -53,7 +53,7 @@ var Deal = Class.extend({
 	    
 	    obj.parents('.deal').find('.fees:last').html($feeRate);
 	},
-	investHandler : function () {
+	investHandler : function (e) {
         var amountInvest = 0;
         var prod;
         var context = this.context;
@@ -78,12 +78,11 @@ var Deal = Class.extend({
             if (amountText !== '' && !isNaN(amountText) && parseInt(amountText,10) > 0) {
                 $this = $(this);
                 amountInvest = parseInt(amountText);
-                var obj = this;
                 if (TableConfiguration.findValueByKey('token') != false) {
                     $back = $('.flip-container', context).find('.back');
                     $back.height($(window).height() - $back.offset().top - $('.bottom-menu', context).outerHeight() - parseInt($back.css('padding-top'),10)*2);
 
-                    prod = obj.products.item($('.front > .deal', context).index($this.parents('.deal')));
+                    prod = e.data.class.products[$('.front > .deal', context).index($this.parents('.deal'))];
                     $('.resume-amount', context).text(amountInvest);
                     $('.resume-product-name', context).text(prod.title);
                     $('.resume-hedgefund', context).text(prod.hedgefundTitle);
@@ -100,16 +99,22 @@ var Deal = Class.extend({
                 }
             }
 		});
+console.log($('.imin'));
 		$('.imin', context).click(function(){
-			$('.buydeal', context).toggleClass('active');
-			if (!$('.buydeal', context).hasClass('active')) {
-				setTimeout(function () { $('.buydeal', context).css({marginTop: 0}); }, 300);
-				// $("body").css("overflow-y", "hidden");
+			if ($('.buydeal', context).is(':visible')) {
+				$('.buydeal', context).hide();
+			} else {
+				$('.buydeal', context).show();
 			}
-			else {
-				$('.buydeal', context).css({marginTop: -10/16+'em'});
-				// $("body").css("overflow-y", "hidden");
-			}
+			// $('.buydeal', context).toggleClass('active');
+			// if (!$('.buydeal', context).hasClass('active')) {
+			// 	setTimeout(function () { $('.buydeal', context).css({marginTop: 0}); }, 300);
+			// 	// $("body").css("overflow-y", "hidden");
+			// }
+			// else {
+			// 	$('.buydeal', context).css({marginTop: -10/16+'em'});
+			// 	// $("body").css("overflow-y", "hidden");
+			// }
 		});
 	},
 	parse : function(prod, i) {
@@ -136,62 +141,70 @@ var Deal = Class.extend({
 	    prod.find('.loss-expected').html('-'+parseInt(prodObj.product.lossRateExpected,10)*100+'%');
 	},
 	create : function () {
+		var $this = this;
+	    $('.flip-container .front', this.context).width($(window).width()*this.products.length);
 	    for (var i = 0; i < this.products.length; i++)
 	    {
 	        var newpage = $('#deal-model', this.context).html();
-	        var dealWidth = $('.wrapper .container:first', this.context).width() - parseInt($('#deal-model', this.context).css('padding-top'),10)/100*$(window).width()* 2;
-	        $('#deal-model', this.context).before('<div id="deal'+i+'" data-product="'+i+'" class="deal" style="width:'+dealWidth+'px;position:absolute;right:-'+$(window).width()+'px">'+newpage+'</div>');
+	        var padding = $(window).width()*0.04;
+	        var dealWidth = $('.wrapper .container:first', this.context).width() - padding* 2;
+	        var margin = parseInt($('.wrapper .container:first', this.context).css('margin-left'),10)*2;
+	        //right:-'+$(window).width()+'px
+	        $('#deal-model', this.context).before('<div id="deal'+i+'" data-product="'+i+'" class="deal" style="width:'+dealWidth+'px;float:left;margin-right:'+margin+'px;padding:'+padding+'px">'+newpage+'</div>');
 	        this.parse($('#deal-model', this.context).prev(), i);
 	        // $('#deal-model').prev().trigger('resize-product', $('#deal-model'));
 	        $('input[name="amount"]', $('#deal-model', this.context).prev()).keyup(function (e) {
-	            this.fee($(this), this.products);
+	            $this.fee($(this), this.products);
 	        });
 	    }
 	    $('#page').trigger('imin');
-	    $('.flip-container .front', this.context).width($('#deal-container', this.context).width());
 	    $('.flip-container .front', this.context).height($('#deal-container', this.context).height());
 	    $('#deal-model', this.context).hide();
-	    this.index = -1;
-	    this.slide('next');
+	    this.index = 0;
+	    // this.slide('next');
 	    // $(window).trigger('pageLoaded');
 	},
 	slide : function (toPage) {
 	    var toIndex = toPage === 'next' ? this.index+1 : this.index-1;
-	    if ((toIndex >= this.products.length && toPage === 'next') ||
-	        (toIndex < 0 && toPage === 'prev'))
-	    {
-	        alert('no more dude');
-	        return;
-	    }
 
-	    if ($('#deal'+toPage, this.context).length == 0)
+		console.log($('#deal'+toIndex, this.context).length,toIndex);
+	    if ($('#deal'+toIndex, this.context).length != 0)
 	    {
-	        var mult = 1;
-	        var margin = 0;
-	        if (toPage === 'next') {
-	            mult = -1;
-	        }
-	        
-	        var cacheIndex = this.index;
-	        var obj = this;
-	        $('#deal' + toIndex, this.context).show();
-	        
-	        $('.pagenum', this.context).each(function () {
-	            $(this).removeClass('active');
-	            if (toIndex == 0 && $(this).index() == 0)
-	                $(this).addClass('active');
-	            else if (toIndex == obj.products.length-1 && $(this).index() == 2)
-	                $(this).addClass('active');
-	            else if (toIndex != 0 && toIndex != obj.products.length-1 && $(this).index() == 1)
-	                $(this).addClass('active');
-	        });
+	    	var mult = 1;
+	    	if (toIndex > this.index)
+	    		mult = -1;
+	    	var arr = [0,0,0,0,0,0];
+	    	if ($('.front').css('transform') != 'none')
+	    		arr = matrixToArray($('.front').css('transform'));
 
-	        if (toIndex >= 0 && toIndex < this.products.length && $('#deal' + toIndex, this.context).length > 0)
-	            $('#deal' + toIndex, this.context).transition({x: '+='+(mult*($(window).width()+margin))}, function () {
-	                $('#deal' + cacheIndex, this.context).hide();
-	            });
-	        if (this.index >= 0 && this.index < this.products.length && $('#deal' + this.index, this.context).length > 0)
-	            $('#deal' + this.index, this.context).transition({x: '+='+(mult*($(window).width()+margin))});
+	    	console.log((parseInt(arr[4],10)+(mult*$(window).width())));
+	    	$('.front').transition({x:(parseInt(arr[4])+(mult*$(window).width()))});
+	        // var mult = 1;
+	        // var margin = 0;
+	        // if (toPage === 'next') {
+	        //     mult = -1;
+	        // }
+	        
+	        // var cacheIndex = this.index;
+	        // var obj = this;
+	        // $('#deal' + toIndex, this.context).show();
+	        
+	        // $('.pagenum', this.context).each(function () {
+	        //     $(this).removeClass('active');
+	        //     if (toIndex == 0 && $(this).index() == 0)
+	        //         $(this).addClass('active');
+	        //     else if (toIndex == obj.products.length-1 && $(this).index() == 2)
+	        //         $(this).addClass('active');
+	        //     else if (toIndex != 0 && toIndex != obj.products.length-1 && $(this).index() == 1)
+	        //         $(this).addClass('active');
+	        // });
+
+	        // if (toIndex >= 0 && toIndex < this.products.length && $('#deal' + toIndex, this.context).length > 0)
+	        //     $('#deal' + toIndex, this.context).transition({x: '+='+(mult*($(window).width()+margin))}, function () {
+	        //         $('#deal' + cacheIndex, this.context).hide();
+	        //     });
+	        // if (this.index >= 0 && this.index < this.products.length && $('#deal' + this.index, this.context).length > 0)
+	        //     $('#deal' + this.index, this.context).transition({x: '+='+(mult*($(window).width()+margin))});
 	        this.index = toIndex;
 	    }
 	},
