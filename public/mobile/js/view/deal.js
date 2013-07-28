@@ -149,7 +149,6 @@ console.log($('.imin'));
 	        var padding = $(window).width()*0.04;
 	        var dealWidth = $('.wrapper .container:first', this.context).width() - padding* 2;
 	        var margin = parseInt($('.wrapper .container:first', this.context).css('margin-left'),10)*2;
-	        //right:-'+$(window).width()+'px
 	        $('#deal-model', this.context).before('<div id="deal'+i+'" data-product="'+i+'" class="deal" style="width:'+dealWidth+'px;float:left;margin-right:'+margin+'px;padding:'+padding+'px">'+newpage+'</div>');
 	        this.parse($('#deal-model', this.context).prev(), i);
 	        // $('#deal-model').prev().trigger('resize-product', $('#deal-model'));
@@ -161,8 +160,6 @@ console.log($('.imin'));
 	    $('.flip-container .front', this.context).height($('#deal-container', this.context).height());
 	    $('#deal-model', this.context).hide();
 	    this.index = 0;
-	    // this.slide('next');
-	    // $(window).trigger('pageLoaded');
 	},
 	slide : function (toPage) {
 	    var toIndex = toPage === 'next' ? this.index+1 : this.index-1;
@@ -177,34 +174,7 @@ console.log($('.imin'));
 	    	if ($('.front').css('transform') != 'none')
 	    		arr = matrixToArray($('.front').css('transform'));
 
-	    	console.log((parseInt(arr[4],10)+(mult*$(window).width())));
 	    	$('.front').transition({x:(parseInt(arr[4])+(mult*$(window).width()))});
-	        // var mult = 1;
-	        // var margin = 0;
-	        // if (toPage === 'next') {
-	        //     mult = -1;
-	        // }
-	        
-	        // var cacheIndex = this.index;
-	        // var obj = this;
-	        // $('#deal' + toIndex, this.context).show();
-	        
-	        // $('.pagenum', this.context).each(function () {
-	        //     $(this).removeClass('active');
-	        //     if (toIndex == 0 && $(this).index() == 0)
-	        //         $(this).addClass('active');
-	        //     else if (toIndex == obj.products.length-1 && $(this).index() == 2)
-	        //         $(this).addClass('active');
-	        //     else if (toIndex != 0 && toIndex != obj.products.length-1 && $(this).index() == 1)
-	        //         $(this).addClass('active');
-	        // });
-
-	        // if (toIndex >= 0 && toIndex < this.products.length && $('#deal' + toIndex, this.context).length > 0)
-	        //     $('#deal' + toIndex, this.context).transition({x: '+='+(mult*($(window).width()+margin))}, function () {
-	        //         $('#deal' + cacheIndex, this.context).hide();
-	        //     });
-	        // if (this.index >= 0 && this.index < this.products.length && $('#deal' + this.index, this.context).length > 0)
-	        //     $('#deal' + this.index, this.context).transition({x: '+='+(mult*($(window).width()+margin))});
 	        this.index = toIndex;
 	    }
 	},

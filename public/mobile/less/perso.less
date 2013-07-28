@@ -754,6 +754,20 @@ body {overflow: hidden;margin:0;position:absolute;padding:0;left:0;right:0;top:0
 	padding-top: 17/16em;
 }
 
+.ensemble-pagenum-bottom-menu {
+	position: absolute;
+	left: 50%;
+	height: 7/16em;
+	top: 50%;
+	margin-top: -7/16/2em;
+	@bottom-menu-width: ceil((7/16)*3+15/16*2em);
+	width: @bottom-menu-width;
+	margin-left: @bottom-menu-width/(-2);
+	display: inline;
+	line-height: 30/16em;
+	vertical-align: middle;
+}
+
 .ensemble-pagenum {
 	width: 72/16em;
 	height: 14/16em;
@@ -1213,15 +1227,6 @@ body {overflow: hidden;margin:0;position:absolute;padding:0;left:0;right:0;top:0
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
-.ensemble-pagenum-bottom-menu {
-	position: absolute;
-	left: 50%;
-	height: 30/16em;
-	display: inline;
-	line-height: 30/16em;
-	vertical-align: middle;
-}
-
 .wrapper {
 	position: absolute;
 	z-index: 1;
@@ -1253,68 +1258,6 @@ body {overflow: hidden;margin:0;position:absolute;padding:0;left:0;right:0;top:0
 
 .iconmenu {
 	font-size: 1.2em;
-}
-
-
-
-/* Flip effect */ 
-
-.flip-container {
-	-webkit-perspective: 1000;
-	-moz-perspective: 1000;
-	perspective: 1000;
-}
-	/* flip the pane when hovered */
-	.flip-container.hover .flipper, #flip-toggle.flip .flipper {
-				-webkit-transform: rotateY(180deg);
-				-moz-transform: rotateY(180deg);
-				transform: rotateY(180deg);
-				filter: FlipH;
-    			-ms-filter: "FlipH";
-			}
-
-.flip-container, .front, .back {
-	// width: 320px;
-	// height: 480px;
-}
-
-/* flip speed goes here */
-.flipper {
-	-webkit-transition: 0.6s;
-	-webkit-transform-style: preserve-3d;
-	-moz-transition: 0.6s;
-	-moz-transform-style: preserve-3d;
-	transition: 0.6s;
-	transform-style: preserve-3d;
-	position: relative;
-}
-
-#page {
-	-webkit-backface-visibility: hidden;
-}
-
-/* hide back of pane during swap */
-.front, .back {
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	backface-visibility: hidden;
-
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-/* front pane, placed above back */
-.front {
-	z-index: 2;
-}
-
-/* back, initially hidden pane */
-.back {
-	z-index: 1;
-	-webkit-transform: rotateY(180deg);
-			-moz-transform: rotateY(180deg);
-			transform: rotateY(180deg);
 }
 
 // Profil User
