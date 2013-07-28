@@ -48,12 +48,13 @@ class CreateController extends Action
 		$files = files(getcwd()."/public/mobile/");
 		$str="CACHE MANIFEST\r\n# Version ".time()."\r\n";
 		foreach($files as $f){
-			if( (preg_match("#.js#", $f) && !preg_match("#mobile.min.js#", $f)) || 
-				(preg_match("#.less#", $f)) || 
-				(preg_match("#.appcache#", $f)) || 
-				(preg_match("#font#", $f))
+			if( (preg_match("#\.js#", $f) && !preg_match("#mobile\.min\.js#", $f)) || 
+				(preg_match("#\.less#", $f)) || 
+				(preg_match("#\.appcache#", $f)) || 
+				(preg_match("#font#", $f)) ||
+				(preg_match("#\.DS_Store#", $f))
 			  )
-				$str = $str;
+				continue;
 			else
 				$str .= "\r\n".$b.$f;
 		}

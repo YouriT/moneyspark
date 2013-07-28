@@ -150,7 +150,7 @@ var updateProfile = function (r){
     }
 };
 var updateInvestments = function (r){
-	if (r.current != undefined) {
+	if (r.current != undefined || r.notStarted != null || r.ended != null) {
 		i.insertAll(r);
 		updateLastRetrieving("investmentsGranted");
 	}
