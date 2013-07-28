@@ -6,8 +6,9 @@ var keyAt = function(obj, index) {
     return null;
 };
 
+var globalLocale = "fr_BE";
 var Register = Class.extend({
-    init: function () {
+    ready: function () {
         var $this = this;
         $('#signin-slider > div').width($('#signin-slider').parents('.container').width());
         $('#signin-slider > div:not(.active)').each(function () {

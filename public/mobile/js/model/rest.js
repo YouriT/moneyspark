@@ -216,6 +216,3 @@ var retrieve = function (event, force) {
         });
     }    
 };
-$(window).load(function () {
-    $(window).on('askRetrieve', retrieve);
-});
