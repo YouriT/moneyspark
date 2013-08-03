@@ -3,11 +3,7 @@ var Deal = Class.extend({
 	index:null,
 	context:null,
 	init: function () {
-		// console.log(this,arguments);
 		this.index = -1;
-		// $('#page').width($(window).width());
-  //       $('#page').height($(window).height());
-        // $('.ensemble-pagenum-bottom-menu').alignCenter();
 	},
 	ready: function (e, context) {
 		this.context = context;
@@ -21,6 +17,10 @@ var Deal = Class.extend({
             marginLeft: pad/2,
             marginRight: pad/2
         });
+        var $this = this;
+        $('.deal:visible .ana > .text', context).each(function () {
+        	$this.resize($(this));
+        });
 	},
 	addListeners: function () {
 		var obj = this;
@@ -32,17 +32,16 @@ var Deal = Class.extend({
 		});
 	},
 	resize : function (obj) {
-		var anaHeight = $(window).height() - $('.ana > .text', obj.target).offset().top - ($(window).height()*0.04+118+(0.62+0.75*16))/16*parseInt($('body').css('font-size'),10);
-		$(".ana .text", obj.target).height(anaHeight);
-		$(".ana .text", obj.target).niceScroll();
+		var anaHeight = $(window).height() - obj.offset().top - ($(window).height()*0.04+118+(0.62+0.75*16))/16*parseInt($('body').css('font-size'),10);
+		obj.height(anaHeight);
+		obj.niceScroll();
 	},
-	fee : function (obj, products) {
-
+	fee : function (obj) {
 	    $minFeeRate = 0.05;
 	    $maxFeeRate = 0.15;
 
 	    i = parseInt(obj.parents('.deal').attr('data-product'),10);
-	    prod = this.products[i];
+	    var prod = this.products[i].product;
 	    $ratioInvested = Math.round(prod.sumInvestedAmounts/prod.requiredAmount*100)/100;
 	    if($ratioInvested>1)$ratioInvested=1;
 	    $diff = $maxFeeRate - $minFeeRate;
@@ -79,32 +78,32 @@ var Deal = Class.extend({
                 $this = $(this);
                 amountInvest = parseInt(amountText);
                 if (TableConfiguration.findValueByKey('token') != false) {
-                    $back = $('.flip-container', context).find('.back');
-                    $back.height($(window).height() - $back.offset().top - $('.bottom-menu', context).outerHeight() - parseInt($back.css('padding-top'),10)*2);
+                	$(window).changePage('/confirmationdeal', 'left', {amount:amountInvest});
+                    // $back = $('.flip-container', context).find('.back');
+                    // $back.height($(window).height() - $back.offset().top - $('.bottom-menu', context).outerHeight() - parseInt($back.css('padding-top'),10)*2);
 
-                    prod = e.data.class.products[$('.front > .deal', context).index($this.parents('.deal'))];
-                    $('.resume-amount', context).text(amountInvest);
-                    $('.resume-product-name', context).text(prod.title);
-                    $('.resume-hedgefund', context).text(prod.hedgefundTitle);
-                    $('.resume-max-loss', context).text(prod.lossRateExpected*100);
-                    $('.resume-max-loss-amount', context).text(Math.round(prod.lossRateExpected*amountInvest*100)/100);
-                    $('.resume-max-gain', context).text(prod.profitsRateExpected*100);
-                    $('.resume-max-gain-amount', context).text(Math.round(prod.profitsRateExpected*amountInvest*100)/100);
-                    $('.resume-fee', context).text($this.parents('.buydeal').find('.fees:last').text());
-                    $('.resume-user-cash', context).text();
+                    // prod = e.data.class.products[$('.front > .deal', context).index($this.parents('.deal'))];
+                    // $('.resume-amount', context).text(amountInvest);
+                    // $('.resume-product-name', context).text(prod.title);
+                    // $('.resume-hedgefund', context).text(prod.hedgefundTitle);
+                    // $('.resume-max-loss', context).text(prod.lossRateExpected*100);
+                    // $('.resume-max-loss-amount', context).text(Math.round(prod.lossRateExpected*amountInvest*100)/100);
+                    // $('.resume-max-gain', context).text(prod.profitsRateExpected*100);
+                    // $('.resume-max-gain-amount', context).text(Math.round(prod.profitsRateExpected*amountInvest*100)/100);
+                    // $('.resume-fee', context).text($this.parents('.buydeal').find('.fees:last').text());
+                    // $('.resume-user-cash', context).text();
 
-                    $('.flip-container', context).toggleClass('hover');
+                    // $('.flip-container', context).toggleClass('hover');
                 } else {
                     $(window).changePage("/connexion", "left"); 
                 }
             }
 		});
-console.log($('.imin'));
 		$('.imin', context).click(function(){
-			if ($('.buydeal', context).is(':visible')) {
-				$('.buydeal', context).hide();
+			if ($('.buydeal', $(this).parents('.deal')).is(':visible')) {
+				$('.buydeal', $(this).parents('.deal')).hide();
 			} else {
-				$('.buydeal', context).show();
+				$('.buydeal', $(this).parents('.deal')).show();
 			}
 			// $('.buydeal', context).toggleClass('active');
 			// if (!$('.buydeal', context).hasClass('active')) {
@@ -153,7 +152,7 @@ console.log($('.imin'));
 	        this.parse($('#deal-model', this.context).prev(), i);
 	        // $('#deal-model').prev().trigger('resize-product', $('#deal-model'));
 	        $('input[name="amount"]', $('#deal-model', this.context).prev()).keyup(function (e) {
-	            $this.fee($(this), this.products);
+	            $this.fee($(this));
 	        });
 	    }
 	    $('#page').trigger('imin');
@@ -161,21 +160,46 @@ console.log($('.imin'));
 	    $('#deal-model', this.context).hide();
 	    this.index = 0;
 	},
+	animEnded: 0,
 	slide : function (toPage) {
+		if (this.animEnded !== 0)
+			return;
+		
+		var $this = this;
 	    var toIndex = toPage === 'next' ? this.index+1 : this.index-1;
+    	var mult = 1;
+    	if (toIndex > this.index)
+    		mult = -1;
+		var arr = [0,0,0,0,0,0];
+		if ($('.front').css('transform') != 'none')
+			arr = matrixToArray($('.front').css('transform'));
 
-		console.log($('#deal'+toIndex, this.context).length,toIndex);
-	    if ($('#deal'+toIndex, this.context).length != 0)
-	    {
-	    	var mult = 1;
-	    	if (toIndex > this.index)
-	    		mult = -1;
-	    	var arr = [0,0,0,0,0,0];
-	    	if ($('.front').css('transform') != 'none')
-	    		arr = matrixToArray($('.front').css('transform'));
-
-	    	$('.front').transition({x:(parseInt(arr[4])+(mult*$(window).width()))});
+	    if ($('#deal'+toIndex, this.context).length != 0) {
+	    	$('#deal'+toIndex, this.context).find('.buydeal:visible').hide();
+	    	this.animEnded++;
+	    	$('.front').transition({x:(parseInt(arr[4])+(mult*$(window).width()))}, function () {$this.animEnded--;});
 	        this.index = toIndex;
+	        $('.ensemble-pagenum-bottom-menu > a').each(function () {
+				if (toIndex == 0 && $(this).index('.ensemble-pagenum-bottom-menu > a') == 0 && !$(this).hasClass('active')) {
+					$(this).addClass('active');
+				} else if (toIndex == ($this.products.length-1) && $(this).index('.ensemble-pagenum-bottom-menu > a') == 2 && !$(this).hasClass('active')) {
+					$(this).addClass('active');
+				} else if ($(this).index('.ensemble-pagenum-bottom-menu > a') == 1 && !$(this).hasClass('active') && toIndex > 0 && toIndex < ($this.products.length-1)){
+					$(this).addClass('active');
+				} else {
+					$(this).removeClass('active');
+				}
+
+	        });
+	        // if (toIndex == 0)
+	        // 	$('.ensemble-pagenum-bottom-menu > a:eq(0)').addClass('active');
+	        // $('.ensemble-pagenum-bottom-menu > a').removeClass('active');
+	        // $('.ensemble-pagenum-bottom-menu > a:eq('+toIndex+')').addClass('active');
+	    } else {
+	    	this.animEnded++;
+	    	$('.front').transition({x:(parseInt(arr[4])+(mult*$(window).width()*0.3))}, 200, function () {
+	    		$('.front').transition({x:parseInt(arr[4])}, 200, function () { $this.animEnded--; });
+	    	});
 	    }
 	},
 	swipe : function (event, direction, distance, duration, fingerCount) {

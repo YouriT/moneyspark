@@ -105,9 +105,8 @@ var readyHandler = function (e, context) {
     firstPInstance.swiper();
 
     linkClick(context);
-
     // Menu click
-    $('#showLeftPush').click(function () {
+    var menuClick = function () {
         var val = [0,0,0,0,0,0];
         if ($('#page').css('transform') != 'none') {
             val = matrixToArray($('#page').css('transform'));
@@ -120,6 +119,18 @@ var readyHandler = function (e, context) {
         } else {
             $('#page,nav').transition({x: 0});
         }
+    };
+    $('#showLeftPush').click(menuClick);
+
+    $('#page').click(function () {
+        var val = [0,0,0,0,0,0];
+        if ($('#page').css('transform') != 'none') {
+            val = matrixToArray($('#page').css('transform'));
+        }
+        if (parseInt(val[4],10) != 0)
+            menuClick();
+        // if (parseInt(val[4],10) != 0)
+        //     $('#showLeftPush').trigger('click');
     });
 
     $(document).trigger("askRetrieve");
@@ -146,4 +157,7 @@ $(window).load(function () {
         menuCreate(false);
     }
     linkClick('nav');
+
+    $('body').attr('class',$('#page').attr('class'));
+    $('#page').attr('class','');
 });

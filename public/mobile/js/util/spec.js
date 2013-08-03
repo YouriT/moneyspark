@@ -50,12 +50,12 @@ var numberFormat = function (number, decimals, dec_point, thousands_sep) {
 };
 
 (function ($) {
-    $.fn.changePage = function (page, direction) {
+    $.fn.changePage = function (page, direction, data) {
         console.log('wanna change', page);
         var counter = 0;
         $('#page').unbind();
         $.ajaxSetup ({
-            cache: true
+            // cache: true
         });
 
 
@@ -106,6 +106,8 @@ var numberFormat = function (number, decimals, dec_point, thousands_sep) {
                         transform: '',
                         left: ''
                     });
+                    $('body').attr('class',$p2.attr('class'));
+                    $p2.attr('class','');
                     $(window).trigger('page-loaded', [$('#page')]);
                 });
             }
